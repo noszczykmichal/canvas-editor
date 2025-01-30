@@ -1,0 +1,6 @@
+@use "../sassStyles/variables" as vars;
+
+.arrow-icon {
+  margin-left: 8px;
+  fill: vars.$red-100;
+}

@@ -1,0 +1,71 @@
+@use "../../sassStyles/_variables.scss" as vars;
+
+.controls__wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.controls__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header__logo-wrapper {
+  display: flex;
+}
+
+.controls__wrapper h1 {
+  margin: 0 24px 0;
+  font-size: vars.$font-big;
+  color: vars.$black-75;
+  font-weight: 700;
+}
+
+.hr {
+  height: 2px;
+  width: 100%;
+  border: none;
+  background-color: vars.$white-98;
+  margin: 0;
+}
+
+.add-content {
+  height: 75px;
+  width: 100%;
+  background-color: vars.$white-97;
+  color: vars.$black-100;
+  font-weight: 700;
+  font-size: vars.$font-medium;
+  padding: 24px 0px 24px 16px;
+  margin: 0;
+  border-radius: vars.$big-radius;
+}
+
+.export-button {
+  width: 172px;
+  height: 40px;
+  border-radius: vars.$small-radius;
+  align-self: flex-end;
+  font-family: Poppins, sans-serif;
+  font-weight: 600;
+  font-size: vars.$font-small;
+  color: vars.$white;
+  background-color: vars.$primary-75;
+  border: 2px solid vars.$primary-75;
+  transition: all ease-in-out 250ms;
+}
+
+.export-button:hover {
+  background-color: vars.$primary-100;
+}
+
+.export-button:focus {
+  outline-color: vars.$primary-50;
+}
+
+.export-button:disabled {
+  background-color: vars.$black-25;
+  border-color: vars.$black-25;
+}

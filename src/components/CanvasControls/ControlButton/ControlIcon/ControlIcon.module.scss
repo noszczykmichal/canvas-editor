@@ -1,0 +1,8 @@
+@use "../../../../sassStyles/variables" as vars;
+
+.control-svg {
+  width: 96px;
+  height: 96px;
+  fill: vars.$black-75;
+  margin-bottom: 41px;
+}

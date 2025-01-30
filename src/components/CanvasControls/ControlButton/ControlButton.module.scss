@@ -1,0 +1,17 @@
+@use "../../../sassStyles//variables" as vars;
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-direction: column;
+  border: none;
+  background-color: vars.$white-97;
+  border-radius: vars.$big-radius;
+  font-family: Poppins, sans-serif;
+  font-weight: 500;
+  font-size: vars.$font-medium;
+  color: vars.$black-100;
+  max-width: 365px;
+  padding-bottom: 12px;
+  text-transform: capitalize;
+}
