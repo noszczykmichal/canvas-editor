@@ -8,7 +8,7 @@ interface CanvasContextProps {
 
 interface CanvasContextActions {
   setFileInputRef: (ref: RefObject<HTMLInputElement>) => void;
-  setCanvasContainerRef: (ref: RefObject<HTMLInputElement>) => void;
+  setCanvasContainerRef: (ref: RefObject<HTMLDivElement>) => void;
   setBackgroundImage: (txt: string) => void;
 }
 

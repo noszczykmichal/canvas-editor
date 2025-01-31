@@ -4,8 +4,12 @@ import CanvasContext from "../../store/context";
 import "./Canvas.scss";
 
 const Canvas = () => {
-  const { setFileInputRef, backgroundImage, setBackgroundImage } =
-    useContext(CanvasContext);
+  const {
+    setFileInputRef,
+    setCanvasContainerRef,
+    backgroundImage,
+    setBackgroundImage,
+  } = useContext(CanvasContext);
   const inputRef = useRef<HTMLInputElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const imageBoxRef = useRef<HTMLDivElement>(null);
@@ -32,6 +36,7 @@ const Canvas = () => {
   };
 
   useEffect(() => {
+    setCanvasContainerRef(containerRef);
     setFileInputRef(inputRef);
 
     if (!containerRef.current || !imageBoxRef.current) {
@@ -93,7 +98,13 @@ const Canvas = () => {
     };
 
     return () => cleanUp();
-  }, [coordinates, isClicked, setIsClicked, setFileInputRef]);
+  }, [
+    coordinates,
+    isClicked,
+    setIsClicked,
+    setFileInputRef,
+    setCanvasContainerRef,
+  ]);
 
   return (
     <>
