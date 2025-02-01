@@ -9,7 +9,7 @@ const Layout: FC<{ children: ReactNode }> = ({ children }) => {
   return (
     <>
       {createPortal(
-        [<Backdrop />, <Modal />],
+        [<Backdrop key={1} />, <Modal key={2} />],
         document.getElementById("modals-root") as HTMLDivElement
       )}
       <main>{children}</main>

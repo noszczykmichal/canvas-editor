@@ -1,5 +1,5 @@
-@use "../../sassStyles/_variables.scss" as vars;
-
+@use "../../sassStyles/variables" as vars;
+@use "../../sassStyles/mixins" as mixins;
 .controls__wrapper {
   height: 100%;
   width: 100%;
@@ -41,13 +41,13 @@
     font-size: vars.$font-medium;
     padding: 24px 0px 24px 16px;
     margin: 0;
-    border-radius: vars.$big-radius;
+    border-radius: vars.$radius-big;
   }
 
   .export-button {
     width: 172px;
     height: 40px;
-    border-radius: vars.$small-radius;
+    border-radius: vars.$radius-small;
     align-self: flex-end;
     font-family: Poppins, sans-serif;
     font-weight: 600;
@@ -56,19 +56,7 @@
     background-color: vars.$primary-75;
     border: 2px solid vars.$primary-75;
     transition: all ease-in-out 250ms;
-
-    &:hover {
-      background-color: vars.$primary-100;
-    }
-
-    &:focus {
-      outline-color: vars.$primary-50;
-    }
-
-    &:disabled {
-      background-color: vars.$black-25;
-      border-color: vars.$black-25;
-    }
+    cursor: pointer;
   }
 
   @media (min-width: 1600px) {
@@ -76,4 +64,6 @@
       gap: 32px;
     }
   }
+
+  @include mixins.primaryButtonTransitions;
 }

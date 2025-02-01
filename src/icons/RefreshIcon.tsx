@@ -1,9 +1,9 @@
-import classes from "./RefreshIcon.module.scss";
+import "./RefreshIcon.scss";
 
 const RefreshIcon = () => {
   return (
     <svg
-      className={classes["arrow-icon"]}
+      className="arrow-icon"
       width="24"
       height="22"
       viewBox="0 0 24 22"

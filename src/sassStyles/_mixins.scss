@@ -1,3 +1,5 @@
+@use "./variables" as vars;
+
 @mixin fade() {
   .fade-enter {
     opacity: 0;
@@ -33,5 +35,22 @@
     opacity: 0;
     transform: translateY(-3rem);
     transition: all 0.3s ease-in-out;
+  }
+}
+
+@mixin primaryButtonTransitions() {
+  .primary-button {
+    &:hover {
+      background-color: vars.$primary-100;
+    }
+
+    &:focus {
+      outline-color: vars.$primary-50;
+    }
+
+    &:disabled {
+      background-color: vars.$black-25;
+      border-color: vars.$black-25;
+    }
   }
 }

@@ -2,13 +2,82 @@
 @use "../../../sassStyles//mixins" as mixins;
 .modal {
   position: fixed;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 36px;
   top: 10%;
   left: 45%;
   z-index: 200;
-  height: 50%;
-  width: 50%;
+  height: 65%;
+  width: 45%;
   background-color: vars.$white;
-  border-radius: vars.$big-radius;
+  border-radius: vars.$radius-big;
+
+  &__header {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    width: 100%;
+
+    .header__close-button {
+      background-color: transparent;
+      border: none;
+      cursor: pointer;
+    }
+  }
+
+  &__wrapper {
+    display: flex;
+    width: 70%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+  }
+
+  .warning-icon {
+    height: 199px;
+    width: 217px;
+    fill: vars.$red-100;
+    margin-top: 30px;
+  }
+  &__title {
+    margin-top: 45px;
+    margin-bottom: 0;
+    font-size: vars.$font-big;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: vars.$black-100;
+  }
+
+  &__text {
+    font-size: vars.$font-medium;
+    font-weight: 500;
+    text-align: center;
+    color: vars.$black-75;
+    margin-top: 8px;
+  }
+
+  .modal-controls {
+    &__button {
+      height: 40px;
+      width: 109px;
+      background-color: transparent;
+      border: none;
+      font-family: Poppins, sans-serif;
+      color: vars.$black-100;
+      font-size: vars.$font-medium;
+      border-radius: vars.$radius-small;
+      cursor: pointer;
+    }
+
+    &__button--violette {
+      background-color: vars.$primary-75;
+      color: vars.$white;
+    }
+
+    @include mixins.primaryButtonTransitions;
+  }
 }
 
 @include mixins.fadeDown;

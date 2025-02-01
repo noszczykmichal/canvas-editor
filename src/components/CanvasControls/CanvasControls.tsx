@@ -79,7 +79,7 @@ const CanvasControls = () => {
       <p className="add-content">Add content</p>
       <Controls />
       <hr className="hr" />
-      <button className="export-button" onClick={handleDownload}>
+      <button className="export-button primary-button" onClick={handleDownload}>
         Export to PNG
       </button>
     </div>
