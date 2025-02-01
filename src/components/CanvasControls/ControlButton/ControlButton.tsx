@@ -3,26 +3,24 @@ import { FC, useContext } from "react";
 import { ControlData } from "../../../types/types";
 import ControlIcon from "./ControlIcon/ControlIcon";
 import CanvasContext from "../../../store/context";
-import classes from "./ControlButton.module.scss";
+import "./ControlButton.scss";
 
 const ControlButton: FC<ControlData> = ({ label, icon }) => {
-  const { fileInputRef } = useContext(CanvasContext);
+  const { fileInputRef, setIsBackdropOpen } = useContext(CanvasContext);
 
   const imagePickHandler = () => {
+    setIsBackdropOpen(true);
     fileInputRef?.current?.click();
-
-    // let canvas = document.createElement("canvas");
-
-    // canvasContainerRef?.current?.appendChild(canvas)
   };
 
   const textAreaHandler = () => {
+    setIsBackdropOpen(true);
     console.log("test");
   };
 
   return (
     <button
-      className={classes.button}
+      className="button"
       onClick={icon === "backgroundColour" ? imagePickHandler : textAreaHandler}
     >
       <ControlIcon iconType={icon} />

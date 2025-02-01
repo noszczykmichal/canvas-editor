@@ -17,17 +17,18 @@
   text-transform: capitalize;
   border: 4px solid transparent;
   transition: all ease-in-out 250ms;
-}
+  cursor: pointer;
 
-.button:hover {
-  background-color: vars.$black-25;
-}
+  &:hover {
+    background-color: vars.$black-25;
+  }
 
-.button:focus {
-  outline: none;
-  border: 4px solid vars.$primary-50;
-}
+  &:focus {
+    outline: none;
+    border: 4px solid vars.$primary-50;
+  }
 
-.button:disabled {
-  background-color: vars.$white-97;
+  &:disabled {
+    background-color: vars.$white-97;
+  }
 }

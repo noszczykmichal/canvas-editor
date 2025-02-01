@@ -1,0 +1,37 @@
+@mixin fade() {
+  .fade-enter {
+    opacity: 0;
+  }
+  .fade-enter-active {
+    opacity: 1;
+    transition: opacity 0.3s ease-in-out;
+  }
+  .fade-exit {
+    opacity: 1;
+  }
+  .fade-exit-active {
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+  }
+}
+
+@mixin fadeDown() {
+  .fade-down-enter {
+    opacity: 0.01;
+    transform: translateY(-3rem);
+  }
+  .fade-down-enter-active {
+    opacity: 1;
+    transform: translateY(0px);
+    transition: all 0.3s ease-in-out;
+  }
+  .fade-down-exit {
+    opacity: 1;
+    transform: translateY(0px);
+  }
+  .fade-down-exit-active {
+    opacity: 0;
+    transform: translateY(-3rem);
+    transition: all 0.3s ease-in-out;
+  }
+}

@@ -9,6 +9,7 @@ const Canvas = () => {
     setCanvasContainerRef,
     backgroundImage,
     setBackgroundImage,
+    setIsBackdropOpen,
   } = useContext(CanvasContext);
   const inputRef = useRef<HTMLInputElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -22,9 +23,24 @@ const Canvas = () => {
     lastY: 0,
   });
 
+  /* when the input is clicked programmatically, an event listener is added to the window object, as this is the only way to 
+  determine if the user aborted adding the image; thanks to this, it is possible to close the overlay when the window object 
+  regains focus  */
+
+  const handleFocusBack = () => {
+    setIsBackdropOpen(false);
+    window.removeEventListener("focus", handleFocusBack);
+  };
+
+  const onInputClick = () => {
+    window.addEventListener("focus", handleFocusBack);
+  };
+
   const handleInputFileChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setIsBackdropOpen(false);
+    window.removeEventListener("focus", handleFocusBack);
     const file = event.target.files?.[0];
-    console.log(file);
+    // console.log(file);
 
     if (file) {
       const reader = new FileReader();
@@ -36,6 +52,9 @@ const Canvas = () => {
   };
 
   useEffect(() => {
+    inputRef.current?.addEventListener("focusout", () =>
+      setIsBackdropOpen(false)
+    );
     setCanvasContainerRef(containerRef);
     setFileInputRef(inputRef);
 
@@ -47,8 +66,6 @@ const Canvas = () => {
     const imageBox = imageBoxRef.current;
 
     const onMouseDownHandler = (e: MouseEvent) => {
-      // const eventTarget = e.target as HTMLElement;
-
       console.log(imageBoxResizerRef);
 
       setIsClicked(true);
@@ -104,6 +121,7 @@ const Canvas = () => {
     setIsClicked,
     setFileInputRef,
     setCanvasContainerRef,
+    setIsBackdropOpen,
   ]);
 
   return (
@@ -111,14 +129,15 @@ const Canvas = () => {
       <input
         type="file"
         accept="image/*"
-        style={{ display: "none" }}
+        className="file-input"
         ref={inputRef}
         onChange={handleInputFileChange}
+        onClick={onInputClick}
       />
       <div className="canvas-container" ref={containerRef} style={{}}>
         {backgroundImage && (
           <div
-            className="customBackground"
+            className="custom-background"
             style={{
               backgroundImage: backgroundImage
                 ? `url(${backgroundImage})`

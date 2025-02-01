@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useContext } from "react";
 import html2canvas from "html2canvas";
 
@@ -5,10 +6,40 @@ import Logo from "../../icons/Logo";
 import ResetButton from "./ResetButton/ResetButton";
 import Controls from "./Controls/Controls";
 import CanvasContext from "../../store/context";
-import classes from "./CanvasControls.module.scss";
+import "./CanvasControls.scss";
 
 const CanvasControls = () => {
   const { canvasContainerRef } = useContext(CanvasContext);
+
+  const saveImage = async (blob: Blob) => {
+    try {
+      /* If the 'showSaveFilePicker' method on window object does not exist than fallback will download to the standard system location */
+      if (!(window as any).showSaveFilePicker) {
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement("a");
+        link.href = url;
+        link.download = "poster.png";
+        link.click();
+        return;
+      }
+
+      const handle = await (window as any).showSaveFilePicker({
+        suggestedName: "poster.png",
+        types: [
+          {
+            description: "PNG Image",
+            accept: { "image/png": [".png"] },
+          },
+        ],
+      });
+
+      const writable = await handle.createWritable();
+      await writable.write(blob);
+      await writable.close();
+    } catch (error) {
+      console.error("Error saving file:", error);
+    }
+  };
 
   const handleDownload = async () => {
     const SCALE_FACTOR = 2;
@@ -28,27 +59,27 @@ const CanvasControls = () => {
 
     ctx.drawImage(canvas, 0, 0, 1080, 1350);
 
-    // Export PNG
-    const link = document.createElement("a");
-    link.href = finalCanvas.toDataURL("image/png", 1.0);
-    link.download = "poster.png";
-    link.click();
+    finalCanvas.toBlob((blob) => {
+      if (blob) {
+        saveImage(blob);
+      }
+    }, "image/png");
   };
 
   return (
-    <div className={classes["controls__wrapper"]}>
-      <header className={classes["controls__header"]}>
-        <div className={classes["header__logo-wrapper"]}>
+    <div className="controls__wrapper">
+      <header className="controls__header">
+        <div className="header__logo-wrapper">
           <Logo />
           <h1>CanvasEditor</h1>
         </div>
         <ResetButton />
       </header>
-      <hr className={classes.hr} />
-      <p className={classes["add-content"]}>Add content</p>
+      <hr className="hr" />
+      <p className="add-content">Add content</p>
       <Controls />
-      <hr className={classes.hr} />
-      <button className={classes["export-button"]} onClick={handleDownload}>
+      <hr className="hr" />
+      <button className="export-button" onClick={handleDownload}>
         Export to PNG
       </button>
     </div>

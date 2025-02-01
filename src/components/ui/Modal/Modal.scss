@@ -1,0 +1,14 @@
+@use "../../../sassStyles/variables" as vars;
+@use "../../../sassStyles//mixins" as mixins;
+.modal {
+  position: fixed;
+  top: 10%;
+  left: 45%;
+  z-index: 200;
+  height: 50%;
+  width: 50%;
+  background-color: vars.$white;
+  border-radius: vars.$big-radius;
+}
+
+@include mixins.fadeDown;

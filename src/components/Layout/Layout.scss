@@ -8,11 +8,11 @@ main {
   column-gap: 10px;
   justify-content: center;
   align-content: center;
-}
 
-@media (min-width: 1600px) {
-  main {
-    padding: 66px 189px;
-    column-gap: 24px;
+  @media (min-width: 1600px) {
+    & {
+      padding: 66px 189px;
+      column-gap: 24px;
+    }
   }
 }
