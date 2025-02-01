@@ -4,8 +4,8 @@ import "./Controls.scss";
 
 const controlsConfig: ControlData[] = [
   { label: "text", icon: "textArea" },
-  { label: "image", icon: "backgroundImage" },
-  { label: "background", icon: "backgroundColour" },
+  { label: "image", icon: "image" },
+  { label: "background", icon: "background" },
 ];
 
 const Controls = () => {

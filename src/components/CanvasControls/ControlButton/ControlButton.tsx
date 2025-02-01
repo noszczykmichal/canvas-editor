@@ -6,22 +6,39 @@ import CanvasContext from "../../../store/context";
 import "./ControlButton.scss";
 
 const ControlButton: FC<ControlData> = ({ label, icon }) => {
-  const { fileInputRef, setIsBackdropOpen } = useContext(CanvasContext);
-
-  const imagePickHandler = () => {
-    setIsBackdropOpen(true);
-    fileInputRef?.current?.click();
-  };
+  const {
+    fileInputRef,
+    setIsBackdropOpen,
+    setIsTextFieldAdded,
+    // setIsImageBoxAdded,
+  } = useContext(CanvasContext);
 
   const textAreaHandler = () => {
+    setIsTextFieldAdded(true);
+  };
+
+  const imageHandler = () => {
     setIsBackdropOpen(true);
-    console.log("test");
+    fileInputRef?.current?.click();
+    fileInputRef?.current?.setAttribute("data-source", "imageBox");
+  };
+
+  const backgroundHandler = () => {
+    setIsBackdropOpen(true);
+    fileInputRef?.current?.click();
+    fileInputRef?.current?.setAttribute("data-source", "background");
   };
 
   return (
     <button
       className="button"
-      onClick={icon === "backgroundColour" ? imagePickHandler : textAreaHandler}
+      onClick={
+        icon === "textArea"
+          ? textAreaHandler
+          : icon === "image"
+            ? imageHandler
+            : backgroundHandler
+      }
     >
       <ControlIcon iconType={icon} />
       {label}

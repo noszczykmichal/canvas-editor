@@ -2,8 +2,8 @@ import { FC } from "react";
 
 import { ControlsIcons } from "../../../../types/types";
 import TextArea from "../../../../icons/TextArea";
+import ImageField from "../../../../icons/ImageField";
 import BackgroundImage from "../../../../icons/BackgroundImage";
-import BackgroundColour from "../../../../icons/BackgroundColour";
 import "./ControlIcon.scss";
 
 interface ControlIconProps {
@@ -17,11 +17,11 @@ const ControlIcon: FC<ControlIconProps> = ({ iconType }) => {
     case "textArea":
       content = <TextArea classNames="control-svg" />;
       break;
-    case "backgroundImage":
-      content = <BackgroundImage classNames="control-svg" />;
+    case "image":
+      content = <ImageField classNames="control-svg" />;
       break;
-    case "backgroundColour":
-      content = <BackgroundColour classNames="control-svg" />;
+    case "background":
+      content = <BackgroundImage classNames="control-svg" />;
       break;
     default:
       content = null;

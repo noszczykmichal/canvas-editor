@@ -10,10 +10,13 @@ const Canvas = () => {
     backgroundImage,
     setBackgroundImage,
     setIsBackdropOpen,
+    isTextFieldAdded,
+    isImageBoxAdded,
+    // setIsImageBoxAdded,
   } = useContext(CanvasContext);
   const inputRef = useRef<HTMLInputElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
-  const imageBoxRef = useRef<HTMLDivElement>(null);
+  const imageBoxRef = useRef<HTMLImageElement>(null);
   const imageBoxResizerRef = useRef<HTMLDivElement>(null);
   const [isClicked, setIsClicked] = useState(false);
   const [coordinates, setCoordinates] = useState({
@@ -22,6 +25,7 @@ const Canvas = () => {
     lastX: 0,
     lastY: 0,
   });
+  const [imageBoxBackground, setIsImageBoxBackground] = useState("");
 
   /* when the input is clicked programmatically, an event listener is added to the window object, as this is the only way to 
   determine if the user aborted adding the image; thanks to this, it is possible to close the overlay when the window object 
@@ -40,11 +44,19 @@ const Canvas = () => {
     setIsBackdropOpen(false);
     window.removeEventListener("focus", handleFocusBack);
     const file = event.target.files?.[0];
-    // console.log(file);
+    const clickSource = inputRef.current?.getAttribute("data-source");
+    console.log(clickSource);
 
     if (file) {
       const reader = new FileReader();
       reader.onload = (e) => {
+        console.log(e.target?.result);
+        if (clickSource === "imageBox") {
+          // setIsImageBoxAdded(true);
+          setIsImageBoxBackground(e.target?.result as string);
+          return;
+        }
+
         setBackgroundImage(e.target?.result as string);
       };
       reader.readAsDataURL(file);
@@ -135,6 +147,7 @@ const Canvas = () => {
         onClick={onInputClick}
       />
       <div className="canvas-container" ref={containerRef} style={{}}>
+        {isTextFieldAdded && <div className="text-field-background" />}
         {backgroundImage && (
           <div
             className="custom-background"
@@ -145,9 +158,15 @@ const Canvas = () => {
             }}
           />
         )}
-        <div className="image-box" ref={imageBoxRef}>
-          <div className="resizer" ref={imageBoxResizerRef} />
-        </div>
+        {isTextFieldAdded && <div className="text-field" />}
+
+        {isImageBoxAdded && (
+          <img
+            className="image-box"
+            ref={imageBoxRef}
+            src={`${imageBoxBackground}`}
+          />
+        )}
       </div>
     </>
   );

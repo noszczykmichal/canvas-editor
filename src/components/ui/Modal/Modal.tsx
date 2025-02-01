@@ -7,8 +7,14 @@ import CloseIcon from "../../../icons/CloseIcon";
 import "./Modal.scss";
 
 const Modal = () => {
-  const { isModalOpen, setIsBackdropOpen, setIsModalOpen, setBackgroundImage } =
-    useContext(CanvasContext);
+  const {
+    isModalOpen,
+    setIsBackdropOpen,
+    setIsModalOpen,
+    setBackgroundImage,
+    setIsTextFieldAdded,
+    setIsImageBoxAdded,
+  } = useContext(CanvasContext);
   const nodeRef = useRef(null);
 
   const onCancelHandler = () => {
@@ -17,6 +23,8 @@ const Modal = () => {
   };
 
   const onResetHandler = () => {
+    setIsTextFieldAdded(false);
+    setIsImageBoxAdded(false);
     setBackgroundImage("");
     onCancelHandler();
   };

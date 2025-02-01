@@ -1,4 +1,4 @@
-export type ControlsIcons = "textArea" | "backgroundImage" | "backgroundColour";
+export type ControlsIcons = "textArea" | "image" | "background";
 export interface ControlData {
   label: string;
   icon: ControlsIcons;
