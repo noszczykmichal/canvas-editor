@@ -6,7 +6,7 @@
   flex-direction: column;
   border: none;
   background-color: vars.$white-97;
-  border-radius: vars.$big-radius;
+  border-radius: vars.$radius-big;
   font-family: Poppins, sans-serif;
   font-weight: 500;
   font-size: vars.$font-medium;
@@ -15,4 +15,20 @@
   max-height: 256px;
   padding-bottom: 12px;
   text-transform: capitalize;
+  border: 4px solid transparent;
+  transition: all ease-in-out 250ms;
+  cursor: pointer;
+
+  &:hover {
+    background-color: vars.$black-25;
+  }
+
+  &:focus {
+    outline: none;
+    border: 4px solid vars.$primary-50;
+  }
+
+  &:disabled {
+    background-color: vars.$white-97;
+  }
 }

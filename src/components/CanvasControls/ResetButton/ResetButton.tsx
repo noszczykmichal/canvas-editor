@@ -1,9 +1,18 @@
+import { useContext } from "react";
+
+import CanvasContext from "../../../store/context";
 import RefreshIcon from "../../../icons/RefreshIcon";
-import classes from "./ResetButton.module.scss";
+import "./ResetButton.scss";
 
 const ResetButton = () => {
+  const { setIsBackdropOpen, setIsModalOpen } = useContext(CanvasContext);
+
+  const onResetButtonClick = () => {
+    setIsBackdropOpen(true);
+    setIsModalOpen(true);
+  };
   return (
-    <button className={classes["refresh-button"]}>
+    <button className="reset-button" onClick={onResetButtonClick}>
       Reset
       <RefreshIcon />
     </button>

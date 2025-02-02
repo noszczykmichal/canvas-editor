@@ -1,6 +1,6 @@
 @use "../../../sassStyles/variables" as vars;
 
-.refresh-button {
+.reset-button {
   color: vars.$red-100;
   font-size: vars.$font-medium;
   font-weight: 500;
@@ -9,4 +9,5 @@
   border: none;
   border-bottom: solid 1px vars.$red-100;
   white-space: nowrap;
+  cursor: pointer;
 }

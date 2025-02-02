@@ -1,8 +1,69 @@
+@use "../../sassStyles/variables" as vars;
+
+.file-input {
+  display: none;
+}
+
 .canvas-container {
+  position: relative;
   height: 100%;
   width: 100%;
   background-image: url("../../assets/start.png");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+  overflow: hidden;
+
+  .text-field-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    z-index: 100;
+    background-color: vars.$black-50;
+  }
+
+  .custom-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 200;
+    height: 100%;
+    width: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+
+  .image-box {
+    position: absolute;
+    top: 45%;
+    left: 25%;
+    height: auto;
+    width: 50%;
+    background-color: blue;
+    z-index: 300;
+    cursor: pointer;
+
+    .resizer {
+      width: 10px;
+      height: 10px;
+      background: red;
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      cursor: nwse-resize;
+    }
+  }
+
+  .text-field {
+    position: absolute;
+    top: 45%;
+    left: 25%;
+    height: 120px;
+    width: 350px;
+    z-index: 300;
+    border: 2px solid vars.$primary-75;
+  }
 }

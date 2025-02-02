@@ -1,16 +1,16 @@
 import { ControlData } from "../../../types/types";
 import ControlButton from "../ControlButton/ControlButton";
-import classes from "./Controls.module.scss";
+import "./Controls.scss";
 
 const controlsConfig: ControlData[] = [
   { label: "text", icon: "textArea" },
-  { label: "image", icon: "backgroundImage" },
-  { label: "background", icon: "backgroundColour" },
+  { label: "image", icon: "image" },
+  { label: "background", icon: "background" },
 ];
 
 const Controls = () => {
   return (
-    <div className={classes["controls__buttons"]}>
+    <div className="controls">
       {controlsConfig.map((button) => (
         <ControlButton
           key={button.label}
