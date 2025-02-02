@@ -13,7 +13,7 @@ const Modal = () => {
     setIsModalOpen,
     setBackgroundImage,
     setIsTextFieldAdded,
-    setIsImageBoxAdded,
+    setImageBoxBackground,
   } = useContext(CanvasContext);
   const nodeRef = useRef(null);
 
@@ -24,7 +24,7 @@ const Modal = () => {
 
   const onResetHandler = () => {
     setIsTextFieldAdded(false);
-    setIsImageBoxAdded(false);
+    setImageBoxBackground("");
     setBackgroundImage("");
     onCancelHandler();
   };

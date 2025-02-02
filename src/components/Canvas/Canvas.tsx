@@ -1,6 +1,8 @@
-import { useRef, useEffect, useState, useContext, ChangeEvent } from "react";
+import { useRef, useEffect, useContext, ChangeEvent } from "react";
 
 import CanvasContext from "../../store/context";
+import ImageBox from "./ImageBox/ImageBox";
+import TextArea from "./TextArea/TextArea";
 import "./Canvas.scss";
 
 const Canvas = () => {
@@ -11,21 +13,20 @@ const Canvas = () => {
     setBackgroundImage,
     setIsBackdropOpen,
     isTextFieldAdded,
-    isImageBoxAdded,
-    // setIsImageBoxAdded,
+    setImageBoxBackground,
+    imageBoxBackground,
   } = useContext(CanvasContext);
   const inputRef = useRef<HTMLInputElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const imageBoxRef = useRef<HTMLImageElement>(null);
-  const imageBoxResizerRef = useRef<HTMLDivElement>(null);
-  const [isClicked, setIsClicked] = useState(false);
-  const [coordinates, setCoordinates] = useState({
+  // const imageBoxResizerRef = useRef<HTMLDivElement>(null);
+  const isClicked = useRef(false);
+  const coordinates = useRef({
     startX: 0,
     startY: 0,
     lastX: 0,
     lastY: 0,
   });
-  const [imageBoxBackground, setIsImageBoxBackground] = useState("");
 
   /* when the input is clicked programmatically, an event listener is added to the window object, as this is the only way to 
   determine if the user aborted adding the image; thanks to this, it is possible to close the overlay when the window object 
@@ -50,10 +51,8 @@ const Canvas = () => {
     if (file) {
       const reader = new FileReader();
       reader.onload = (e) => {
-        console.log(e.target?.result);
         if (clickSource === "imageBox") {
-          // setIsImageBoxAdded(true);
-          setIsImageBoxBackground(e.target?.result as string);
+          setImageBoxBackground(e.target?.result as string);
           return;
         }
 
@@ -64,9 +63,11 @@ const Canvas = () => {
   };
 
   useEffect(() => {
-    inputRef.current?.addEventListener("focusout", () =>
-      setIsBackdropOpen(false)
-    );
+    if (inputRef.current) {
+      inputRef.current?.addEventListener("focusout", () =>
+        setIsBackdropOpen(false)
+      );
+    }
     setCanvasContainerRef(containerRef);
     setFileInputRef(inputRef);
 
@@ -78,35 +79,32 @@ const Canvas = () => {
     const imageBox = imageBoxRef.current;
 
     const onMouseDownHandler = (e: MouseEvent) => {
-      console.log(imageBoxResizerRef);
+      // console.log(imageBoxResizerRef);
 
-      setIsClicked(true);
+      isClicked.current = true;
 
-      setCoordinates((prevState) => ({
-        ...prevState,
-        startX: e.clientX,
-        startY: e.clientY,
-      }));
+      coordinates.current.startX = e.clientX;
+      coordinates.current.startY = e.clientY;
 
-      console.log("clicked");
+      // console.log("clicked");
     };
 
     const onMouseUpHandler = (_e: MouseEvent) => {
-      setIsClicked(false);
-      setCoordinates((prevState) => ({
-        ...prevState,
-        lastX: imageBox.offsetLeft,
-        lastY: imageBox.offsetTop,
-      }));
+      isClicked.current = false;
+
+      coordinates.current.lastX = imageBox.offsetLeft;
+      coordinates.current.lastY = imageBox.offsetTop;
     };
 
     const onMouseMoveHandler = (e: MouseEvent) => {
-      if (!isClicked) {
+      if (!isClicked.current) {
         return;
       }
 
-      const nextX = e.clientX - coordinates.startX + coordinates.lastX;
-      const nextY = e.clientY - coordinates.startY + coordinates.lastY;
+      const nextX =
+        e.clientX - coordinates.current.startX + coordinates.current.lastX;
+      const nextY =
+        e.clientY - coordinates.current.startY + coordinates.current.lastY;
 
       if (imageBoxRef.current) {
         imageBoxRef.current.style.top = `${nextY}px`;
@@ -116,6 +114,7 @@ const Canvas = () => {
 
     imageBox.addEventListener("mousedown", onMouseDownHandler);
     imageBox.addEventListener("mouseup", onMouseUpHandler);
+
     container.addEventListener("mousemove", onMouseMoveHandler);
     container.addEventListener("mouseleave", onMouseUpHandler);
 
@@ -126,15 +125,8 @@ const Canvas = () => {
       container.removeEventListener("mouseleave", onMouseUpHandler);
     };
 
-    return () => cleanUp();
-  }, [
-    coordinates,
-    isClicked,
-    setIsClicked,
-    setFileInputRef,
-    setCanvasContainerRef,
-    setIsBackdropOpen,
-  ]);
+    return cleanUp;
+  }, [setCanvasContainerRef, setFileInputRef, setIsBackdropOpen]);
 
   return (
     <>
@@ -146,8 +138,9 @@ const Canvas = () => {
         onChange={handleInputFileChange}
         onClick={onInputClick}
       />
-      <div className="canvas-container" ref={containerRef} style={{}}>
+      <div className="canvas-container" ref={containerRef}>
         {isTextFieldAdded && <div className="text-field-background" />}
+        {isTextFieldAdded && <TextArea />}
         {backgroundImage && (
           <div
             className="custom-background"
@@ -158,15 +151,8 @@ const Canvas = () => {
             }}
           />
         )}
-        {isTextFieldAdded && <div className="text-field" />}
 
-        {isImageBoxAdded && (
-          <img
-            className="image-box"
-            ref={imageBoxRef}
-            src={`${imageBoxBackground}`}
-          />
-        )}
+        {imageBoxBackground && <ImageBox />}
       </div>
     </>
   );
