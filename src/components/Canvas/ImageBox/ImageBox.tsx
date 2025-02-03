@@ -10,7 +10,7 @@ import "./ImageBox.scss";
 const ImageBox = () => {
   const { imageBoxBackground, canvasContainerRef } = useContext(CanvasContext);
   const resizeHandle = useRef<SVGSVGElement>(null);
-  const size = useResize(resizeHandle, canvasContainerRef);
+  const size = useResize(resizeHandle, canvasContainerRef, "image");
   const wrapperRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {

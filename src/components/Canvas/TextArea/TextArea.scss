@@ -71,4 +71,27 @@
     fill: vars.$primary-75;
     cursor: nwse-resize;
   }
+
+  .color__palette {
+    position: absolute;
+    bottom: -25px;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+    margin-top: 10px;
+
+    .color__button {
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      border: none;
+      cursor: pointer;
+    }
+
+    .color__button--focused {
+      outline: 2px solid white;
+      outline-offset: 2px;
+    }
+  }
 }
