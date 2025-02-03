@@ -1,16 +1,29 @@
-import { useEffect, useRef } from "react";
+import { useContext, useEffect, useRef } from "react";
 
-import ElementWrapper from "../ElementWrapper/ElementWrapper";
+import TrashIcon from "../../../icons/TrashIcon";
+import Atom from "../../../icons/Atom";
+import Move from "../../../icons/Move";
+import CanvasContext from "../../../store/context";
 import "./ImageBox.scss";
 
 const ImageBox = () => {
-  const imageBoxRef = useRef<HTMLDivElement>(null);
+  const { imageBoxBackground } = useContext(CanvasContext);
+
+  const wrapperRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    imageBoxRef.current!.focus();
+    wrapperRef.current?.focus();
   }, []);
 
-  return <ElementWrapper ref={imageBoxRef} contentType="image" />;
+  return (
+    <div className="wrapper" tabIndex={-1} ref={wrapperRef}>
+      <TrashIcon className="icon  delete-icon" />
+      <Move className="icon move-icon" />
+      <Atom className="icon resize-icon" />
+
+      <img src={imageBoxBackground} className="image-content" />
+    </div>
+  );
 };
 
 export default ImageBox;

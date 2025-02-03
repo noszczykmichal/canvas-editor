@@ -1,0 +1,72 @@
+@use "../../../sassStyles/variables" as vars;
+
+.text-area {
+  position: relative;
+  top: 30%;
+  left: 30%;
+  height: 40%;
+  width: 40%;
+  z-index: 300;
+  font-family: Poppins, sans-serif;
+
+  .icon {
+    display: none;
+  }
+
+  .content {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    outline: none;
+    font-size: 32px;
+    text-align: center;
+    resize: none;
+
+    &:focus {
+      outline: 2px solid vars.$primary-75;
+    }
+  }
+
+  &:focus-within {
+    .icon {
+      display: flex;
+    }
+  }
+}
+
+.icon {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: white;
+  border-radius: 50%;
+  z-index: 300;
+}
+
+.move-icon {
+  height: 28px;
+  width: 28px;
+  top: -12px;
+  left: -12px;
+  fill: vars.$primary-75;
+}
+
+.delete-icon {
+  height: 24px;
+  width: 24px;
+  padding: 2px;
+  top: -12px;
+  right: -12px;
+  svg {
+    fill: vars.$red-100;
+  }
+}
+
+.resize-icon {
+  bottom: -8px;
+  right: -10px;
+  fill: vars.$primary-75;
+}

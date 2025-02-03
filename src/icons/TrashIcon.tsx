@@ -7,10 +7,12 @@ interface TrashIconProps {
 }
 
 const TrashIcon: FC<TrashIconProps> = ({ className }) => {
-  const { setImageBoxBackground } = useContext(CanvasContext);
+  const { setImageBoxBackground, setIsTextFieldAdded } =
+    useContext(CanvasContext);
 
   const onTrashIconClick = () => {
     setImageBoxBackground("");
+    setIsTextFieldAdded(false);
   };
 
   return (
