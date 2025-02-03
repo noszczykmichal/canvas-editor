@@ -7,3 +7,5 @@ export interface ControlData {
 export interface SVGPropsInterface {
   classNames: string;
 }
+
+export type WrapperContentType = "text" | "image";

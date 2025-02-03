@@ -7,7 +7,7 @@ interface CanvasContextProps {
   isBackdropOpen: boolean;
   isModalOpen: boolean;
   isTextFieldAdded: boolean;
-  isImageBoxAdded: boolean;
+  imageBoxBackground: string;
 }
 
 interface CanvasContextActions {
@@ -17,7 +17,7 @@ interface CanvasContextActions {
   setIsBackdropOpen: (val: boolean) => void;
   setIsModalOpen: (val: boolean) => void;
   setIsTextFieldAdded: (val: boolean) => void;
-  setIsImageBoxAdded: (val: boolean) => void;
+  setImageBoxBackground: (val: string) => void;
 }
 
 const CanvasContext = createContext<CanvasContextProps & CanvasContextActions>({
@@ -27,14 +27,14 @@ const CanvasContext = createContext<CanvasContextProps & CanvasContextActions>({
   isBackdropOpen: false,
   isModalOpen: false,
   isTextFieldAdded: false,
-  isImageBoxAdded: false,
+  imageBoxBackground: "",
   setFileInputRef: (_ref: RefObject<HTMLInputElement>) => {},
   setCanvasContainerRef: (_ref: RefObject<HTMLDivElement>) => {},
   setBackgroundImage: (_txt: string) => {},
   setIsBackdropOpen: () => {},
   setIsModalOpen: () => {},
   setIsTextFieldAdded: () => {},
-  setIsImageBoxAdded: () => {},
+  setImageBoxBackground: () => {},
 });
 
 interface CanvasContextProviderProps {
@@ -52,7 +52,7 @@ export const CanvasContextProvider: FC<CanvasContextProviderProps> = ({
   const [isBackdropOpen, setIsBackdropOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isTextFieldAdded, setIsTextFieldAdded] = useState(false);
-  const [isImageBoxAdded, setIsImageBoxAdded] = useState(false);
+  const [imageBoxBackground, setImageBoxBackground] = useState("");
 
   const context = {
     fileInputRef,
@@ -61,14 +61,14 @@ export const CanvasContextProvider: FC<CanvasContextProviderProps> = ({
     isBackdropOpen,
     isModalOpen,
     isTextFieldAdded,
-    isImageBoxAdded,
+    imageBoxBackground,
     setFileInputRef,
     setCanvasContainerRef,
     setBackgroundImage,
     setIsBackdropOpen,
     setIsModalOpen,
     setIsTextFieldAdded,
-    setIsImageBoxAdded,
+    setImageBoxBackground,
   };
 
   return (
