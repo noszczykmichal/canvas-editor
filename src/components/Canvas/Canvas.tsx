@@ -1,4 +1,4 @@
-import { useRef, useEffect, useContext, ChangeEvent } from "react";
+import { useEffect, useContext, ChangeEvent } from "react";
 
 import CanvasContext from "../../store/context";
 import ImageBox from "./ImageBox/ImageBox";
@@ -7,8 +7,10 @@ import "./Canvas.scss";
 
 const Canvas = () => {
   const {
-    setFileInputRef,
-    setCanvasContainerRef,
+    fileInputRef,
+    canvasContainerRef,
+    // setFileInputRef,
+    // setCanvasContainerRef,
     backgroundImage,
     setBackgroundImage,
     setIsBackdropOpen,
@@ -16,9 +18,8 @@ const Canvas = () => {
     setImageBoxBackground,
     imageBoxBackground,
   } = useContext(CanvasContext);
-  const inputRef = useRef<HTMLInputElement>(null);
-  const containerRef = useRef<HTMLDivElement>(null);
-  const imageBoxRef = useRef<HTMLImageElement>(null);
+  // const inputRef = useRef<HTMLInputElement>(null);
+  // const containerRef = useRef<HTMLDivElement>(null);
 
   /* when the input is clicked programmatically, an event listener is added to the window object, as this is the only way to 
   determine if the user aborted adding the image; thanks to this, it is possible to close the overlay when the window object 
@@ -37,8 +38,7 @@ const Canvas = () => {
     setIsBackdropOpen(false);
     window.removeEventListener("focus", handleFocusBack);
     const file = event.target.files?.[0];
-    const clickSource = inputRef.current?.getAttribute("data-source");
-    console.log(clickSource);
+    const clickSource = fileInputRef.current?.getAttribute("data-source");
 
     if (file) {
       const reader = new FileReader();
@@ -55,18 +55,14 @@ const Canvas = () => {
   };
 
   useEffect(() => {
-    if (inputRef.current) {
-      inputRef.current?.addEventListener("focusout", () =>
-        setIsBackdropOpen(false)
+    if (fileInputRef.current) {
+      fileInputRef.current?.addEventListener("focusout", () =>
+        setIsBackdropOpen(false),
       );
     }
-    setCanvasContainerRef(containerRef);
-    setFileInputRef(inputRef);
-
-    if (!containerRef.current || !imageBoxRef.current) {
-      return;
-    }
-  }, [setCanvasContainerRef, setFileInputRef, setIsBackdropOpen]);
+    // setCanvasContainerRef(containerRef);
+    // setFileInputRef(inputRef);
+  }, [setIsBackdropOpen, fileInputRef]);
 
   return (
     <>
@@ -74,11 +70,11 @@ const Canvas = () => {
         type="file"
         accept="image/*"
         className="file-input"
-        ref={inputRef}
+        ref={fileInputRef}
         onChange={handleInputFileChange}
         onClick={onInputClick}
       />
-      <div className="canvas-container" ref={containerRef}>
+      <div className="canvas-container" ref={canvasContainerRef}>
         {isTextFieldAdded && <div className="text-field-background" />}
         {isTextFieldAdded && <TextArea />}
         {backgroundImage && (

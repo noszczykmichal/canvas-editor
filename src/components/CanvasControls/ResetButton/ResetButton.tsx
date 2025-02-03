@@ -12,7 +12,7 @@ const ResetButton = () => {
     setIsModalOpen(true);
   };
   return (
-    <button className="reset-button" onClick={onResetButtonClick}>
+    <button type="button" className="reset-button" onClick={onResetButtonClick}>
       Reset
       <RefreshIcon />
     </button>

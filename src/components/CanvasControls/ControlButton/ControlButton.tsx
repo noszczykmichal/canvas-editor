@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 import { FC, useContext } from "react";
 
 import { ControlData } from "../../../types/types";
@@ -31,13 +32,14 @@ const ControlButton: FC<ControlData> = ({ label, icon }) => {
 
   return (
     <button
+      type="button"
       className="button"
       onClick={
         icon === "textArea"
           ? textAreaHandler
           : icon === "image"
-            ? imageHandler
-            : backgroundHandler
+          ? imageHandler
+          : backgroundHandler
       }
     >
       <ControlIcon iconType={icon} />

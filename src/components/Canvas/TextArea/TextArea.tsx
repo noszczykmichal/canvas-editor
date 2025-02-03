@@ -10,9 +10,13 @@ import useMove from "../../../hooks/useMove";
 import "./TextArea.scss";
 import ColorPalette from "./ColorPalette/ColorPalette";
 
+// interface TextAreaProps {
+//   parentRef: RefObject<HTMLDivElement | null>;
+// }
+
 const TextArea = () => {
   const [isFocused, setIsFocused] = useState(true);
-  const { canvasContainerRef, setIsTextFieldAdded, textColor } =
+  const { setIsTextFieldAdded, textColor, canvasContainerRef } =
     useContext(CanvasContext);
   const resizeHandle = useRef<SVGSVGElement>(null);
   const wrapperRef = useRef<HTMLDivElement>(null);
@@ -32,9 +36,9 @@ const TextArea = () => {
   };
 
   useEffect(() => {
-    canvasContainerRef?.current?.addEventListener(
+    canvasContainerRef.current?.addEventListener(
       "mousedown",
-      handleBlurAndFocus
+      handleBlurAndFocus,
     );
   }, [canvasContainerRef]);
 
@@ -53,7 +57,9 @@ const TextArea = () => {
       }}
     >
       <TrashIcon
-        className={`${isFocused === true ? "icon--focused" : "icon"} delete-icon`}
+        className={`${
+          isFocused === true ? "icon--focused" : "icon"
+        } delete-icon`}
         onClick={onTrashIconClick}
       />
       <Move
@@ -61,7 +67,9 @@ const TextArea = () => {
         ref={moveHandleRef}
       />
       <Atom
-        className={`${isFocused === true ? "icon--focused" : "icon"} resize-icon`}
+        className={`${
+          isFocused === true ? "icon--focused" : "icon"
+        } resize-icon`}
         ref={resizeHandle}
       />
       <textarea
@@ -71,7 +79,7 @@ const TextArea = () => {
           fontSize: `${Math.max(32, size.height * 0.25)}px`,
         }}
         placeholder="Type your text here"
-      ></textarea>
+      />
       {isFocused && <ColorPalette />}
     </div>
   );

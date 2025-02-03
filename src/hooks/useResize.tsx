@@ -1,9 +1,9 @@
 import { useEffect, useState, useRef, RefObject } from "react";
 
 const useResize = (
-  resizeHandle: RefObject<SVGSVGElement>,
-  wrappingContainer: RefObject<HTMLDivElement> | null,
-  resizedElementType: "image" | "textarea"
+  resizeHandle: RefObject<SVGSVGElement | null>,
+  wrappingContainer: RefObject<HTMLDivElement | null> | null,
+  resizedElementType: "image" | "textarea",
 ) => {
   const initialState =
     resizedElementType === "image"
@@ -15,7 +15,7 @@ const useResize = (
 
   useEffect(() => {
     if (!resizeHandle.current || !wrappingContainer?.current) {
-      return;
+      return undefined;
     }
 
     const resizeHandleEl = resizeHandle.current;

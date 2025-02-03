@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useContext } from "react";
 import html2canvas from "html2canvas";
 
@@ -37,6 +36,7 @@ const CanvasControls = () => {
       await writable.write(blob);
       await writable.close();
     } catch (error) {
+      // eslint-disable-next-line prettier/prettier, no-console
       console.error("Error saving file:", error);
     }
   };
@@ -79,7 +79,11 @@ const CanvasControls = () => {
       <p className="add-content">Add content</p>
       <Controls />
       <hr className="hr" />
-      <button className="export-button primary-button" onClick={handleDownload}>
+      <button
+        type="button"
+        className="export-button primary-button"
+        onClick={handleDownload}
+      >
         Export to PNG
       </button>
     </div>
