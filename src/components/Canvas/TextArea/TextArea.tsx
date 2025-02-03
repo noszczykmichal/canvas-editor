@@ -11,7 +11,7 @@ const TextArea = () => {
   const [size, setSize] = useState({ width: 320, height: 120 });
   const wrapperRef = useRef<HTMLDivElement>(null);
   const { canvasContainerRef } = useContext(CanvasContext);
-  const isResizing = useRef(false);
+  // const isResizing = useRef(false);
 
   const handleBlurAndFocus = (event: MouseEvent) => {
     if (
@@ -31,44 +31,44 @@ const TextArea = () => {
     );
   }, [canvasContainerRef]);
 
-  const handleMouseDown = (event: React.MouseEvent) => {
-    event.preventDefault();
-    isResizing.current = true;
+  // const handleMouseDown = (event: React.MouseEvent) => {
+  //   event.preventDefault();
+  //   isResizing.current = true;
 
-    const startX = event.clientX;
-    const startY = event.clientY;
-    const startWidth = size.width;
-    const startHeight = size.height;
+  //   const startX = event.clientX;
+  //   const startY = event.clientY;
+  //   const startWidth = size.width;
+  //   const startHeight = size.height;
 
-    // Mouse move handler
-    const handleMouseMove = (moveEvent: MouseEvent) => {
-      if (!isResizing.current) return;
+  //   // Mouse move handler
+  //   const handleMouseMove = (moveEvent: MouseEvent) => {
+  //     if (!isResizing.current) return;
 
-      const newWidth = startWidth + (moveEvent.clientX - startX);
-      const newHeight = startHeight + (moveEvent.clientY - startY);
+  //     const newWidth = startWidth + (moveEvent.clientX - startX);
+  //     const newHeight = startHeight + (moveEvent.clientY - startY);
 
-      setSize({
-        width: Math.max(100, newWidth), // Minimum width 100px
-        height: Math.max(50, newHeight), // Minimum height 50px
-      });
-    };
+  //     setSize({
+  //       width: Math.max(100, newWidth), // Minimum width 100px
+  //       height: Math.max(50, newHeight), // Minimum height 50px
+  //     });
+  //   };
 
-    // Stop Resizing
-    const handleMouseUp = () => {
-      isResizing.current = false;
-      canvasContainerRef?.current?.removeEventListener(
-        "mousemove",
-        handleMouseMove
-      );
-      canvasContainerRef?.current?.removeEventListener(
-        "mouseup",
-        handleMouseUp
-      );
-    };
+  //   // Stop Resizing
+  //   const handleMouseUp = () => {
+  //     isResizing.current = false;
+  //     canvasContainerRef?.current?.removeEventListener(
+  //       "mousemove",
+  //       handleMouseMove
+  //     );
+  //     canvasContainerRef?.current?.removeEventListener(
+  //       "mouseup",
+  //       handleMouseUp
+  //     );
+  //   };
 
-    canvasContainerRef?.current?.addEventListener("mousemove", handleMouseMove);
-    canvasContainerRef?.current?.addEventListener("mouseup", handleMouseUp);
-  };
+  //   canvasContainerRef?.current?.addEventListener("mousemove", handleMouseMove);
+  //   canvasContainerRef?.current?.addEventListener("mouseup", handleMouseUp);
+  // };
 
   return (
     <div
@@ -84,7 +84,7 @@ const TextArea = () => {
       />
       <Atom
         className={`${isFocused === true ? "icon--focused" : "icon"} resize-icon`}
-        onMouseDown={handleMouseDown}
+        // onMouseDown={handleMouseDown}
       />
       <textarea
         className={`text-area ${isFocused && "text-area--focused"}`}
