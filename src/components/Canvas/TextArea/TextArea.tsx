@@ -4,14 +4,21 @@ import TrashIcon from "../../../icons/TrashIcon";
 import Atom from "../../../icons/Atom";
 import Move from "../../../icons/Move";
 import CanvasContext from "../../../store/context";
+
+import useResize from "../../../hooks/useResize";
+import useMove from "../../../hooks/useMove";
 import "./TextArea.scss";
+import ColorPalette from "./ColorPalette/ColorPalette";
 
 const TextArea = () => {
   const [isFocused, setIsFocused] = useState(true);
-  const [size, setSize] = useState({ width: 320, height: 120 });
+  const { canvasContainerRef, setIsTextFieldAdded, textColor } =
+    useContext(CanvasContext);
+  const resizeHandle = useRef<SVGSVGElement>(null);
   const wrapperRef = useRef<HTMLDivElement>(null);
-  const { canvasContainerRef } = useContext(CanvasContext);
-  // const isResizing = useRef(false);
+  const moveHandleRef = useRef<SVGSVGElement>(null);
+  const position = useMove(moveHandleRef, canvasContainerRef);
+  const size = useResize(resizeHandle, canvasContainerRef, "textarea");
 
   const handleBlurAndFocus = (event: MouseEvent) => {
     if (
@@ -31,65 +38,41 @@ const TextArea = () => {
     );
   }, [canvasContainerRef]);
 
-  // const handleMouseDown = (event: React.MouseEvent) => {
-  //   event.preventDefault();
-  //   isResizing.current = true;
-
-  //   const startX = event.clientX;
-  //   const startY = event.clientY;
-  //   const startWidth = size.width;
-  //   const startHeight = size.height;
-
-  //   // Mouse move handler
-  //   const handleMouseMove = (moveEvent: MouseEvent) => {
-  //     if (!isResizing.current) return;
-
-  //     const newWidth = startWidth + (moveEvent.clientX - startX);
-  //     const newHeight = startHeight + (moveEvent.clientY - startY);
-
-  //     setSize({
-  //       width: Math.max(100, newWidth), // Minimum width 100px
-  //       height: Math.max(50, newHeight), // Minimum height 50px
-  //     });
-  //   };
-
-  //   // Stop Resizing
-  //   const handleMouseUp = () => {
-  //     isResizing.current = false;
-  //     canvasContainerRef?.current?.removeEventListener(
-  //       "mousemove",
-  //       handleMouseMove
-  //     );
-  //     canvasContainerRef?.current?.removeEventListener(
-  //       "mouseup",
-  //       handleMouseUp
-  //     );
-  //   };
-
-  //   canvasContainerRef?.current?.addEventListener("mousemove", handleMouseMove);
-  //   canvasContainerRef?.current?.addEventListener("mouseup", handleMouseUp);
-  // };
+  const onTrashIconClick = () => {
+    setIsTextFieldAdded(false);
+  };
 
   return (
     <div
       className="wrapper"
       ref={wrapperRef}
-      style={{ width: size.width, height: size.height }}
+      style={{
+        width: size.width,
+        height: size.height,
+        transform: `translate(${position.x}px, ${position.y}px)`,
+      }}
     >
       <TrashIcon
         className={`${isFocused === true ? "icon--focused" : "icon"} delete-icon`}
+        onClick={onTrashIconClick}
       />
       <Move
         className={`${isFocused === true ? "icon--focused" : "icon"} move-icon`}
+        ref={moveHandleRef}
       />
       <Atom
         className={`${isFocused === true ? "icon--focused" : "icon"} resize-icon`}
-        // onMouseDown={handleMouseDown}
+        ref={resizeHandle}
       />
       <textarea
         className={`text-area ${isFocused && "text-area--focused"}`}
+        style={{
+          color: `${textColor}`,
+          fontSize: `${Math.max(32, size.height * 0.25)}px`,
+        }}
         placeholder="Type your text here"
       ></textarea>
+      {isFocused && <ColorPalette />}
     </div>
   );
 };

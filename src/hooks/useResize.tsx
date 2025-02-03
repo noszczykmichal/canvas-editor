@@ -1,15 +1,16 @@
 import { useEffect, useState, useRef, RefObject } from "react";
 
-// interface UseResizeProps {
-//   resizeHandle: MutableRefObject<SVGSVGElement>;
-//   wrappingContainer: MutableRefObject<HTMLDivElement>;
-// }
-
 const useResize = (
   resizeHandle: RefObject<SVGSVGElement>,
-  wrappingContainer: RefObject<HTMLDivElement> | null
+  wrappingContainer: RefObject<HTMLDivElement> | null,
+  resizedElementType: "image" | "textarea"
 ) => {
-  const [size, setSize] = useState({ width: 100, height: 100 });
+  const initialState =
+    resizedElementType === "image"
+      ? { width: 100, height: 100 }
+      : { width: 320, height: 120 };
+
+  const [size, setSize] = useState(initialState);
   const isResizing = useRef(false);
 
   useEffect(() => {

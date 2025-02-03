@@ -1,7 +1,7 @@
 @use "../../../sassStyles/variables" as vars;
 
 .wrapper {
-  position: relative;
+  position: absolute;
   top: 40%;
   left: 20%;
   z-index: 300;
@@ -17,14 +17,15 @@
     background-color: transparent;
     border: none;
     resize: none;
-    font-size: 32px;
     font-weight: 700;
     font-family: Poppins, sans-serif;
     color: vars.$white;
     text-align: center;
+    overflow: hidden;
 
     &::placeholder {
       color: vars.$black-100;
+      opacity: 25%;
     }
   }
 
@@ -70,5 +71,28 @@
     right: -10px;
     fill: vars.$primary-75;
     cursor: nwse-resize;
+  }
+
+  .color__palette {
+    position: absolute;
+    bottom: -25px;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+    margin-top: 10px;
+
+    .color__button {
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      border: none;
+      cursor: pointer;
+    }
+
+    .color__button--focused {
+      outline: 2px solid white;
+      outline-offset: 2px;
+    }
   }
 }

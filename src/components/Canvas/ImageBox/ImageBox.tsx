@@ -5,27 +5,39 @@ import Atom from "../../../icons/Atom";
 import Move from "../../../icons/Move";
 import CanvasContext from "../../../store/context";
 import useResize from "../../../hooks/useResize";
+import useMove from "../../../hooks/useMove";
 import "./ImageBox.scss";
 
 const ImageBox = () => {
-  const { imageBoxBackground, canvasContainerRef } = useContext(CanvasContext);
+  const { imageBoxBackground, canvasContainerRef, setImageBoxBackground } =
+    useContext(CanvasContext);
   const resizeHandle = useRef<SVGSVGElement>(null);
-  const size = useResize(resizeHandle, canvasContainerRef);
+  const size = useResize(resizeHandle, canvasContainerRef, "image");
   const wrapperRef = useRef<HTMLDivElement>(null);
+  const moveHandleRef = useRef<SVGSVGElement>(null);
+  const position = useMove(moveHandleRef, canvasContainerRef);
 
   useEffect(() => {
     wrapperRef.current?.focus();
   }, []);
+
+  const onTrashIconClick = () => {
+    setImageBoxBackground("");
+  };
 
   return (
     <div
       className="wrapper"
       tabIndex={-1}
       ref={wrapperRef}
-      style={{ width: size.width, height: size.height }}
+      style={{
+        width: size.width,
+        height: size.height,
+        transform: `translate(${position.x}px, ${position.y}px)`,
+      }}
     >
-      <TrashIcon className="icon delete-icon" />
-      <Move className="icon move-icon" />
+      <TrashIcon className="icon delete-icon" onClick={onTrashIconClick} />
+      <Move className="icon move-icon" ref={moveHandleRef} />
       <Atom className="icon resize-icon" ref={resizeHandle} />
 
       <img
