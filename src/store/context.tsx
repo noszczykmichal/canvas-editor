@@ -8,6 +8,7 @@ interface CanvasContextProps {
   isModalOpen: boolean;
   isTextFieldAdded: boolean;
   imageBoxBackground: string;
+  textColor: string;
 }
 
 interface CanvasContextActions {
@@ -18,6 +19,7 @@ interface CanvasContextActions {
   setIsModalOpen: (val: boolean) => void;
   setIsTextFieldAdded: (val: boolean) => void;
   setImageBoxBackground: (val: string) => void;
+  setTextColor: (val: string) => void;
 }
 
 const CanvasContext = createContext<CanvasContextProps & CanvasContextActions>({
@@ -28,6 +30,7 @@ const CanvasContext = createContext<CanvasContextProps & CanvasContextActions>({
   isModalOpen: false,
   isTextFieldAdded: false,
   imageBoxBackground: "",
+  textColor: "#000000",
   setFileInputRef: (_ref: RefObject<HTMLInputElement>) => {},
   setCanvasContainerRef: (_ref: RefObject<HTMLDivElement>) => {},
   setBackgroundImage: (_txt: string) => {},
@@ -35,6 +38,7 @@ const CanvasContext = createContext<CanvasContextProps & CanvasContextActions>({
   setIsModalOpen: () => {},
   setIsTextFieldAdded: () => {},
   setImageBoxBackground: () => {},
+  setTextColor: (_val: string) => {},
 });
 
 interface CanvasContextProviderProps {
@@ -53,6 +57,7 @@ export const CanvasContextProvider: FC<CanvasContextProviderProps> = ({
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isTextFieldAdded, setIsTextFieldAdded] = useState(false);
   const [imageBoxBackground, setImageBoxBackground] = useState("");
+  const [textColor, setTextColor] = useState("#000000");
 
   const context = {
     fileInputRef,
@@ -62,6 +67,7 @@ export const CanvasContextProvider: FC<CanvasContextProviderProps> = ({
     isModalOpen,
     isTextFieldAdded,
     imageBoxBackground,
+    textColor,
     setFileInputRef,
     setCanvasContainerRef,
     setBackgroundImage,
@@ -69,6 +75,7 @@ export const CanvasContextProvider: FC<CanvasContextProviderProps> = ({
     setIsModalOpen,
     setIsTextFieldAdded,
     setImageBoxBackground,
+    setTextColor,
   };
 
   return (

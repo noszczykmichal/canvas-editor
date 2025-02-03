@@ -4,15 +4,16 @@ import TrashIcon from "../../../icons/TrashIcon";
 import Atom from "../../../icons/Atom";
 import Move from "../../../icons/Move";
 import CanvasContext from "../../../store/context";
-import { textAreaFontColors } from "../../../utils/config";
+
 import useResize from "../../../hooks/useResize";
 import useMove from "../../../hooks/useMove";
 import "./TextArea.scss";
+import ColorPalette from "./ColorPalette/ColorPalette";
 
 const TextArea = () => {
   const [isFocused, setIsFocused] = useState(true);
-  const [textColor, setTextColor] = useState("#000000");
-  const { canvasContainerRef, setIsTextFieldAdded } = useContext(CanvasContext);
+  const { canvasContainerRef, setIsTextFieldAdded, textColor } =
+    useContext(CanvasContext);
   const resizeHandle = useRef<SVGSVGElement>(null);
   const wrapperRef = useRef<HTMLDivElement>(null);
   const moveHandleRef = useRef<SVGSVGElement>(null);
@@ -36,10 +37,6 @@ const TextArea = () => {
       handleBlurAndFocus
     );
   }, [canvasContainerRef]);
-
-  const handleColorChange = (color: string) => {
-    setTextColor(color);
-  };
 
   const onTrashIconClick = () => {
     setIsTextFieldAdded(false);
@@ -75,18 +72,7 @@ const TextArea = () => {
         }}
         placeholder="Type your text here"
       ></textarea>
-      {isFocused && (
-        <div className="color__palette">
-          {textAreaFontColors.map((color) => (
-            <button
-              key={color}
-              className={`${textColor === color && "color__button--focused"} color__button`}
-              onClick={() => handleColorChange(color)}
-              style={{ backgroundColor: color }}
-            />
-          ))}
-        </div>
-      )}
+      {isFocused && <ColorPalette />}
     </div>
   );
 };
