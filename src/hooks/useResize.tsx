@@ -1,10 +1,5 @@
 import { useEffect, useState, useRef, RefObject } from "react";
 
-// interface UseResizeProps {
-//   resizeHandle: MutableRefObject<SVGSVGElement>;
-//   wrappingContainer: MutableRefObject<HTMLDivElement>;
-// }
-
 const useResize = (
   resizeHandle: RefObject<SVGSVGElement>,
   wrappingContainer: RefObject<HTMLDivElement> | null,

@@ -4,22 +4,20 @@ import TrashIcon from "../../../icons/TrashIcon";
 import Atom from "../../../icons/Atom";
 import Move from "../../../icons/Move";
 import CanvasContext from "../../../store/context";
-import useResize from "../../../hooks/useResize";
 import { textAreaFontColors } from "../../../utils/config";
+import useResize from "../../../hooks/useResize";
+import useMove from "../../../hooks/useMove";
 import "./TextArea.scss";
 
 const TextArea = () => {
   const [isFocused, setIsFocused] = useState(true);
   const [textColor, setTextColor] = useState("#000000");
-  const [position, setPosition] = useState({ x: 100, y: 100 });
-  const { canvasContainerRef } = useContext(CanvasContext);
+  const { canvasContainerRef, setIsTextFieldAdded } = useContext(CanvasContext);
   const resizeHandle = useRef<SVGSVGElement>(null);
   const wrapperRef = useRef<HTMLDivElement>(null);
   const moveHandleRef = useRef<SVGSVGElement>(null);
+  const position = useMove(moveHandleRef, canvasContainerRef);
   const size = useResize(resizeHandle, canvasContainerRef, "textarea");
-
-  const isDragging = useRef(false);
-  const offset = useRef({ x: 0, y: 0 });
 
   const handleBlurAndFocus = (event: MouseEvent) => {
     if (
@@ -43,29 +41,8 @@ const TextArea = () => {
     setTextColor(color);
   };
 
-  const handleMouseDown = (event: React.MouseEvent) => {
-    if (!wrapperRef.current) return;
-    isDragging.current = true;
-    offset.current = {
-      x: event.clientX - position.x,
-      y: event.clientY - position.y,
-    };
-    document.addEventListener("mousemove", handleMouseMove);
-    document.addEventListener("mouseup", handleMouseUp);
-  };
-
-  const handleMouseMove = (event: MouseEvent) => {
-    if (!isDragging.current) return;
-    setPosition({
-      x: event.clientX - offset.current.x,
-      y: event.clientY - offset.current.y,
-    });
-  };
-
-  const handleMouseUp = () => {
-    isDragging.current = false;
-    document.removeEventListener("mousemove", handleMouseMove);
-    document.removeEventListener("mouseup", handleMouseUp);
+  const onTrashIconClick = () => {
+    setIsTextFieldAdded(false);
   };
 
   return (
@@ -80,10 +57,10 @@ const TextArea = () => {
     >
       <TrashIcon
         className={`${isFocused === true ? "icon--focused" : "icon"} delete-icon`}
+        onClick={onTrashIconClick}
       />
       <Move
         className={`${isFocused === true ? "icon--focused" : "icon"} move-icon`}
-        onMouseDown={handleMouseDown}
         ref={moveHandleRef}
       />
       <Atom
@@ -92,7 +69,10 @@ const TextArea = () => {
       />
       <textarea
         className={`text-area ${isFocused && "text-area--focused"}`}
-        style={{ color: `${textColor}` }}
+        style={{
+          color: `${textColor}`,
+          fontSize: `${Math.max(32, size.height * 0.25)}px`,
+        }}
         placeholder="Type your text here"
       ></textarea>
       {isFocused && (
