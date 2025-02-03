@@ -4,11 +4,11 @@
   position: relative;
   top: 40%;
   left: 35%;
-  height: auto;
-  width: 30%;
+  // height: auto;
+  // width: 30%;
   z-index: 300;
   cursor: pointer;
-  object-fit: contain;
+  object-fit: cover;
 
   .icon {
     display: none;
@@ -21,11 +21,10 @@
     }
 
     .icon {
-      position: fixed;
+      position: absolute;
       display: flex;
       align-items: center;
       justify-content: center;
-      position: absolute;
       background: white;
       border-radius: 50%;
     }
@@ -44,12 +43,13 @@
       padding: 2px;
       top: -12px;
       right: -12px;
-      svg {
-        fill: vars.$red-100;
-      }
+      fill: vars.$red-100;
     }
 
     .resize-icon {
+      position: absolute;
+      height: 24px;
+      width: 24px;
       bottom: -8px;
       right: -10px;
       fill: vars.$primary-75;
@@ -57,7 +57,9 @@
   }
 
   .image-content {
-    width: 100%;
-    height: auto;
+    // width: 100px;
+    // height: 100px;
+    object-fit: contain;
+    object-position: center;
   }
 }
