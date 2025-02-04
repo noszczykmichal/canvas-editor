@@ -9,8 +9,6 @@ const Canvas = () => {
   const {
     fileInputRef,
     canvasContainerRef,
-    // setFileInputRef,
-    // setCanvasContainerRef,
     backgroundImage,
     setBackgroundImage,
     setIsBackdropOpen,
@@ -18,8 +16,6 @@ const Canvas = () => {
     setImageBoxBackground,
     imageBoxBackground,
   } = useContext(CanvasContext);
-  // const inputRef = useRef<HTMLInputElement>(null);
-  // const containerRef = useRef<HTMLDivElement>(null);
 
   /* when the input is clicked programmatically, an event listener is added to the window object, as this is the only way to 
   determine if the user aborted adding the image; thanks to this, it is possible to close the overlay when the window object 
@@ -60,8 +56,6 @@ const Canvas = () => {
         setIsBackdropOpen(false),
       );
     }
-    // setCanvasContainerRef(containerRef);
-    // setFileInputRef(inputRef);
   }, [setIsBackdropOpen, fileInputRef]);
 
   return (

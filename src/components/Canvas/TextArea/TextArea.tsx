@@ -10,10 +10,6 @@ import useMove from "../../../hooks/useMove";
 import "./TextArea.scss";
 import ColorPalette from "./ColorPalette/ColorPalette";
 
-// interface TextAreaProps {
-//   parentRef: RefObject<HTMLDivElement | null>;
-// }
-
 const TextArea = () => {
   const [isFocused, setIsFocused] = useState(true);
   const { setIsTextFieldAdded, textColor, canvasContainerRef } =

@@ -7,12 +7,8 @@ import CanvasContext from "../../../store/context";
 import "./ControlButton.scss";
 
 const ControlButton: FC<ControlData> = ({ label, icon }) => {
-  const {
-    fileInputRef,
-    setIsBackdropOpen,
-    setIsTextFieldAdded,
-    // setIsImageBoxAdded,
-  } = useContext(CanvasContext);
+  const { fileInputRef, setIsBackdropOpen, setIsTextFieldAdded } =
+    useContext(CanvasContext);
 
   const textAreaHandler = () => {
     setIsTextFieldAdded(true);
