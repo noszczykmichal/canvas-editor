@@ -1,5 +1,3 @@
-import "./RefreshIcon.scss";
-
 const RefreshIcon = () => {
   return (
     <svg

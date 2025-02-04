@@ -29,7 +29,7 @@ const ControlButton: FC<ControlData> = ({ label, icon }) => {
   return (
     <button
       type="button"
-      className="button"
+      className="control-button"
       onClick={
         icon === "textArea"
           ? textAreaHandler

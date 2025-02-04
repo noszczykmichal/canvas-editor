@@ -71,7 +71,7 @@ const CanvasControls = () => {
       <header className="controls__header">
         <div className="header__logo-wrapper">
           <Logo />
-          <h1>CanvasEditor</h1>
+          <h1 className="logo-wrapper__title">CanvasEditor</h1>
         </div>
         <ResetButton />
       </header>
