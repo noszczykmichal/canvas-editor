@@ -4,8 +4,6 @@
   position: absolute;
   top: 40%;
   left: 35%;
-  // height: auto;
-  // width: 30%;
   z-index: 300;
   cursor: pointer;
   object-fit: cover;
@@ -57,8 +55,6 @@
   }
 
   .image-content {
-    // width: 100px;
-    // height: 100px;
     object-fit: contain;
     object-position: center;
   }
