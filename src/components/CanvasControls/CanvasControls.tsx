@@ -9,9 +9,19 @@ import useFocusBack from "../../hooks/useFocusBack";
 import "./CanvasControls.scss";
 
 const CanvasControls = () => {
-  const { canvasContainerRef, textAreaRef, textAreaDivCloneRef } =
-    useContext(CanvasContext);
-
+  const {
+    isTextFieldAdded,
+    imageBoxBackground,
+    backgroundImage,
+    canvasContainerRef,
+    textAreaRef,
+    textAreaDivCloneRef,
+  } = useContext(CanvasContext);
+  const isExportDisabled = !(
+    isTextFieldAdded ||
+    !!imageBoxBackground ||
+    !!backgroundImage
+  );
   const { addWindowListener, handleFocusBack } = useFocusBack();
 
   const saveImage = async (blob: Blob) => {
@@ -120,6 +130,7 @@ const CanvasControls = () => {
         type="button"
         className="export-button primary-button"
         onClick={handleDownload}
+        disabled={isExportDisabled}
       >
         Export to PNG
       </button>

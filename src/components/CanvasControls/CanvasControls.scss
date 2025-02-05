@@ -67,8 +67,8 @@
     color: vars.$white;
     background-color: vars.$primary-75;
     border: 2px solid vars.$primary-75;
-    transition: all ease-in-out 250ms;
     cursor: pointer;
+    transition: all ease-in-out 250ms;
   }
 
   @media (min-width: 475px) {

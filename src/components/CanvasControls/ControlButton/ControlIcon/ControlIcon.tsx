@@ -1,7 +1,7 @@
 import { FC } from "react";
 
 import { ControlsIcons } from "../../../../types/types";
-import TextArea from "../../../../icons/TextArea";
+import TextIcon from "../../../../icons/TextIcon";
 import ImageField from "../../../../icons/ImageField";
 import BackgroundImage from "../../../../icons/BackgroundImage";
 import "./ControlIcon.scss";
@@ -15,7 +15,7 @@ const ControlIcon: FC<ControlIconProps> = ({ iconType }) => {
 
   switch (iconType) {
     case "textArea":
-      content = <TextArea classNames="control-svg" />;
+      content = <TextIcon classNames="control-svg" />;
       break;
     case "image":
       content = <ImageField classNames="control-svg" />;

@@ -12,6 +12,16 @@
   border-bottom: solid 1px vars.$red-100;
   white-space: nowrap;
   cursor: pointer;
+  transition: all ease-in-out 250ms;
+
+  &:disabled {
+    color: vars.$black-25;
+    border-color: vars.$black-25;
+    cursor: not-allowed;
+    .arrow-icon {
+      fill: vars.$black-25;
+    }
+  }
 
   .arrow-icon {
     margin-left: 8px;

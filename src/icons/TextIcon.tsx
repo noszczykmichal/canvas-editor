@@ -2,7 +2,7 @@ import { FC } from "react";
 
 import { SVGPropsInterface } from "../types/types";
 
-const TextArea: FC<SVGPropsInterface> = ({ classNames }) => {
+const TextIcon: FC<SVGPropsInterface> = ({ classNames }) => {
   return (
     <svg
       width="24"
@@ -17,4 +17,4 @@ const TextArea: FC<SVGPropsInterface> = ({ classNames }) => {
   );
 };
 
-export default TextArea;
+export default TextIcon;
