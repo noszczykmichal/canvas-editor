@@ -22,7 +22,7 @@ Canvas Editor
 
 ## General Information
 
-- This app allows generating banners with background graphics and text. The size of the text and graphics can be adjusted to best fit the need and desired effect. Additionally, the colour of the text can be adjusted (currently supported colours: black, white, red, blue, and green).
+- This app allows generating banners with background, graphics and text. The size of the text and graphics can be adjusted to best fit the need and desired effect. Additionally, the colour of the text can be adjusted (currently supported colours: black, white, red, blue, and green).
 - The graphics generated from the app have a fixed size of 1080px × 1350px and are in PNG format.
 
 ## Setup
@@ -42,18 +42,18 @@ Canvas Editor
 3. Install dependencies
 
    ```sh
-   $npm install
+   $pnpm install
    ```
 
 4. Start the development server
 
    ```sh
-   $npm start
+   $pnpm run dev
    ```
 
 ## Credits
 
-This project was based on a design prepared by<a href="https://bytefine.pl/" target="_blank">ByteFine</a>.
+This project was based on a design prepared by <a href="https://bytefine.pl/" target="_blank">ByteFine</a>.
 
 ## Contact
 
