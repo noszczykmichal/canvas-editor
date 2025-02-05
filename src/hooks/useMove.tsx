@@ -26,8 +26,8 @@ const useMove = (
 
     const handleMouseUp = () => {
       isDragging.current = false;
-      wrappingEl.removeEventListener("mousemove", handleMouseMove);
-      wrappingEl.removeEventListener("mouseup", handleMouseUp);
+      wrappingEl.removeEventListener("pointermove", handleMouseMove);
+      wrappingEl.removeEventListener("pointerup", handleMouseUp);
     };
 
     const handleMouseDown = (event: MouseEvent) => {
@@ -36,14 +36,14 @@ const useMove = (
         x: event.clientX - position.x,
         y: event.clientY - position.y,
       };
-      wrappingEl.addEventListener("mousemove", handleMouseMove);
-      wrappingEl.addEventListener("mouseup", handleMouseUp);
+      wrappingEl.addEventListener("pointermove", handleMouseMove);
+      wrappingEl.addEventListener("pointerup", handleMouseUp);
     };
 
-    moveHandleEl.addEventListener("mousedown", handleMouseDown);
+    moveHandleEl.addEventListener("pointerdown", handleMouseDown);
 
     return () => {
-      moveHandleEl.removeEventListener("mousedown", handleMouseDown);
+      moveHandleEl.removeEventListener("pointerdown", handleMouseDown);
     };
   }, [moveHandle, wrappingContainer, position]);
 

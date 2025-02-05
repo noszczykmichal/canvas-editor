@@ -1,50 +1,60 @@
-# React + TypeScript + Vite
+<div align="center">
+  <img alt="Logo" src="https://raw.githubusercontent.com/noszczykmichal/canvas-editor/main/public/web-app-manifest-192x192.png" width="100" />
+</div>
+<h1 align="center">
+Canvas Editor
+</h1>
+<p align="center">
+  A small, yet powerful app for creating posters built with <a href="https://react.dev/" target="_blank">React</a> and <a href="https://www.typescriptlang.org/" target="_blank">Typescript</a>, animated with <a href="https://reactcommunity.org/react-transition-group/" target="_blank">React Transition Group</a>, and hosted on <a href="https://firebase.google.com/" target="_blank">Firebase</a>.
+</p>
+<p align="center">
+  <a href="https://canvas-editor-44294.web.app/" target="_blank">Live demo</a>
+</p>
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+![demo](https://raw.githubusercontent.com/noszczykmichal/canvas-editor/main/images/demo.png)
 
-Currently, two official plugins are available:
+## Table of Contents
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- [General Info](#general-information)
+- [Setup](#setup)
+- [Credits](#credits)
+- [Contact](#contact)
 
-## Expanding the ESLint configuration
+## General Information
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- This app allows generating banners with background graphics and text. The size of the text and graphics can be adjusted to best fit the need and desired effect. Additionally, the colour of the text can be adjusted (currently supported colours: black, white, red, blue, and green).
+- The graphics generated from the app have a fixed size of 1080px × 1350px and are in PNG format.
 
-- Configure the top-level `parserOptions` property like this:
+## Setup
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+1. Clone this repository
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+   ```sh
+   $git clone https://github.com/noszczykmichal/canvas-editor
+   ```
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+2. Go into the repository
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+   ```sh
+   $cd canvas-editor
+   ```
+
+3. Install dependencies
+
+   ```sh
+   $npm install
+   ```
+
+4. Start the development server
+
+   ```sh
+   $npm start
+   ```
+
+## Credits
+
+This project was based on a design prepared by<a href="https://bytefine.pl/" target="_blank">ByteFine</a>.
+
+## Contact
+
+Created by [@noszczykmichal](https://michalnoszczyk.com/) - feel free to contact me!
