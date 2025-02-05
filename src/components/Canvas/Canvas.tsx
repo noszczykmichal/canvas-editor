@@ -69,7 +69,7 @@ const Canvas = () => {
         onClick={onInputClick}
       />
       <div className="canvas-container" ref={canvasContainerRef}>
-        {/* {isTextFieldAdded && <div className="text-field-background" />} */}
+        {isTextFieldAdded && <div className="text-field-background" />}
         {isTextFieldAdded && <TextArea />}
         {backgroundImage && (
           <div

@@ -10,11 +10,20 @@ main {
 
   @media (min-width: 768px) {
     display: grid;
-    grid-template-columns: calc(50% - 15px) calc(50% - 15px);
+    grid-template-columns: calc(50% - 45px) calc(50% - 45px);
     grid-template-rows: 100%;
     column-gap: 10px;
     justify-content: center;
     align-content: center;
     padding: 40px;
+  }
+
+  @media (min-width: 1024px) {
+    gap: 24px;
+    grid-template-columns: calc(50% - 15px) calc(50% - 15px);
+  }
+
+  @media (min-width: 1440px) {
+    padding: 66px 189px;
   }
 }

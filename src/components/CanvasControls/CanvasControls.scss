@@ -87,6 +87,12 @@
     .export-button {
       width: 45%;
     }
+    .add-content {
+      font-size: vars.$font-medium;
+      padding: 24px 0px 24px 16px;
+      display: flex;
+      align-items: center;
+    }
   }
 
   @include mixins.primaryButtonTransitions;

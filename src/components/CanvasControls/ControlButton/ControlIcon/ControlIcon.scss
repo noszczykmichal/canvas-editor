@@ -5,4 +5,9 @@
   height: 50px;
   fill: vars.$black-75;
   margin-bottom: 14px;
+
+  @media (min-width: 1024px) {
+    width: 70px;
+    height: 70px;
+  }
 }

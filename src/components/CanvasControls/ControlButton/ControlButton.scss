@@ -36,4 +36,9 @@
   @media (min-width: 768px) {
     width: 45%;
   }
+
+  @media (min-width: 1024px) {
+    padding-top: 45px;
+    font-size: vars.$font-medium;
+  }
 }
