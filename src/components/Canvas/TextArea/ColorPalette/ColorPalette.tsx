@@ -1,7 +1,7 @@
 import { useContext } from "react";
 
 import CanvasContext from "../../../../store/context";
-import textAreaFontColors from "../../../../utils/config";
+import { textAreaFontColors } from "../../../../utils/config";
 
 const ColorPalette = () => {
   const { textColor, setTextColor } = useContext(CanvasContext);

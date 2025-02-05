@@ -12,8 +12,13 @@ import ColorPalette from "./ColorPalette/ColorPalette";
 
 const TextArea = () => {
   const [isFocused, setIsFocused] = useState(true);
-  const { setIsTextFieldAdded, textColor, canvasContainerRef } =
-    useContext(CanvasContext);
+  const {
+    setIsTextFieldAdded,
+    textColor,
+    canvasContainerRef,
+    textAreaRef,
+    textAreaDivCloneRef,
+  } = useContext(CanvasContext);
   const resizeHandle = useRef<SVGSVGElement>(null);
   const wrapperRef = useRef<HTMLDivElement>(null);
   const moveHandleRef = useRef<SVGSVGElement>(null);
@@ -72,9 +77,20 @@ const TextArea = () => {
         className={`text-area ${isFocused && "text-area--focused"}`}
         style={{
           color: `${textColor}`,
-          fontSize: `${Math.max(32, size.height * 0.25)}px`,
+          fontSize: `${Math.max(32, size.height * 0.2)}px`,
         }}
         placeholder="Type your text here"
+        ref={textAreaRef}
+      />
+
+      <div
+        className={`text-area ${isFocused && "text-area--focused"}`}
+        style={{
+          color: `${textColor}`,
+          fontSize: `${Math.max(32, size.height * 0.2)}px`,
+          display: "none",
+        }}
+        ref={textAreaDivCloneRef}
       />
       {isFocused && <ColorPalette />}
     </div>

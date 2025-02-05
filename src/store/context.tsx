@@ -11,6 +11,8 @@ import {
 interface CanvasContextProps {
   fileInputRef: RefObject<HTMLInputElement | null>;
   canvasContainerRef: RefObject<HTMLDivElement | null>;
+  textAreaRef: RefObject<HTMLTextAreaElement | null>;
+  textAreaDivCloneRef: RefObject<HTMLDivElement | null>;
   backgroundImage: string;
   isBackdropOpen: boolean;
   isModalOpen: boolean;
@@ -31,6 +33,8 @@ interface CanvasContextActions {
 const CanvasContext = createContext<CanvasContextProps & CanvasContextActions>({
   fileInputRef: { current: null } as RefObject<HTMLInputElement | null>,
   canvasContainerRef: { current: null } as RefObject<HTMLDivElement | null>,
+  textAreaRef: { current: null } as RefObject<HTMLTextAreaElement | null>,
+  textAreaDivCloneRef: { current: null } as RefObject<HTMLDivElement | null>,
   backgroundImage: "",
   isBackdropOpen: false,
   isModalOpen: false,
@@ -54,6 +58,8 @@ export const CanvasContextProvider: FC<CanvasContextProviderProps> = ({
 }) => {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const canvasContainerRef = useRef<HTMLDivElement>(null);
+  const textAreaRef = useRef<HTMLTextAreaElement>(null);
+  const textAreaDivCloneRef = useRef<HTMLDivElement>(null);
   const [backgroundImage, setBackgroundImage] = useState("");
   const [isBackdropOpen, setIsBackdropOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -65,6 +71,8 @@ export const CanvasContextProvider: FC<CanvasContextProviderProps> = ({
     () => ({
       fileInputRef,
       canvasContainerRef,
+      textAreaRef,
+      textAreaDivCloneRef,
       backgroundImage,
       isBackdropOpen,
       isModalOpen,

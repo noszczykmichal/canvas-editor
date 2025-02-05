@@ -31,6 +31,11 @@
 
   &:disabled {
     background-color: vars.$white-97;
+    .control-svg {
+      fill: vars.$black-75;
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
   }
 
   @media (min-width: 768px) {

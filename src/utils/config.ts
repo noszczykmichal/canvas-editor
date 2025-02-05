@@ -1,4 +1,6 @@
-const textAreaFontColors = [
+import { ControlData } from "../types/types";
+
+export const textAreaFontColors = [
   "#000000",
   "#FFFFFF",
   "#FF0000",
@@ -6,4 +8,8 @@ const textAreaFontColors = [
   "#00FF00",
 ];
 
-export default textAreaFontColors;
+export const controlsConfig: ControlData[] = [
+  { label: "text", icon: "textArea" },
+  { label: "image", icon: "image" },
+  { label: "background", icon: "background" },
+];

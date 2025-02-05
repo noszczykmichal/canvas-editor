@@ -1,12 +1,6 @@
-import { ControlData } from "../../../types/types";
+import { controlsConfig } from "../../../utils/config";
 import ControlButton from "../ControlButton/ControlButton";
 import "./Controls.scss";
-
-const controlsConfig: ControlData[] = [
-  { label: "text", icon: "textArea" },
-  { label: "image", icon: "image" },
-  { label: "background", icon: "background" },
-];
 
 const Controls = () => {
   return (
