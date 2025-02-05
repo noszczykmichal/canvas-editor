@@ -1,8 +1,10 @@
 @use "../../../sassStyles/variables" as vars;
 
 .reset-button {
+  display: flex;
+  align-items: center;
   color: vars.$red-100;
-  font-size: vars.$font-medium;
+  font-size: vars.$font-small;
   font-weight: 500;
   font-family: Poppins, sans-serif;
   background-color: transparent;
@@ -10,4 +12,17 @@
   border-bottom: solid 1px vars.$red-100;
   white-space: nowrap;
   cursor: pointer;
+
+  .arrow-icon {
+    margin-left: 8px;
+    fill: vars.$red-100;
+    height: 14px;
+  }
+
+  @media (min-width: 1024px) {
+    font-size: vars.$font-medium;
+    .arrow-icon {
+      height: 24px;
+    }
+  }
 }

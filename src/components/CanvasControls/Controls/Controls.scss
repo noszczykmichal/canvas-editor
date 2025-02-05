@@ -1,7 +1,6 @@
 .controls {
-  display: grid;
-  grid-template-columns: calc(50% - 14.5px) calc(50% - 14.5px);
-  column-gap: 29px;
-  row-gap: 32px;
-  flex-grow: 1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: space-between;
 }

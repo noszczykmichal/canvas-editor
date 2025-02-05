@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState, RefObject } from "react";
 
 const useMove = (
-  moveHandle: RefObject<SVGSVGElement>,
-  wrappingContainer: RefObject<HTMLDivElement> | null
+  moveHandle: RefObject<SVGSVGElement | null>,
+  wrappingContainer: RefObject<HTMLDivElement | null> | null,
 ) => {
   const [position, setPosition] = useState({ x: 100, y: 100 });
   const isDragging = useRef(false);
@@ -10,21 +10,11 @@ const useMove = (
 
   useEffect(() => {
     if (!moveHandle.current || !wrappingContainer?.current) {
-      return;
+      return undefined;
     }
 
     const moveHandleEl = moveHandle.current;
     const wrappingEl = wrappingContainer?.current;
-
-    const handleMouseDown = (event: MouseEvent) => {
-      isDragging.current = true;
-      offset.current = {
-        x: event.clientX - position.x,
-        y: event.clientY - position.y,
-      };
-      wrappingEl.addEventListener("mousemove", handleMouseMove);
-      wrappingEl.addEventListener("mouseup", handleMouseUp);
-    };
 
     const handleMouseMove = (event: MouseEvent) => {
       if (!isDragging.current) return;
@@ -38,6 +28,16 @@ const useMove = (
       isDragging.current = false;
       wrappingEl.removeEventListener("mousemove", handleMouseMove);
       wrappingEl.removeEventListener("mouseup", handleMouseUp);
+    };
+
+    const handleMouseDown = (event: MouseEvent) => {
+      isDragging.current = true;
+      offset.current = {
+        x: event.clientX - position.x,
+        y: event.clientY - position.y,
+      };
+      wrappingEl.addEventListener("mousemove", handleMouseMove);
+      wrappingEl.addEventListener("mouseup", handleMouseUp);
     };
 
     moveHandleEl.addEventListener("mousedown", handleMouseDown);

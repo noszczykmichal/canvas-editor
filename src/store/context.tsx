@@ -1,8 +1,18 @@
-import { createContext, FC, ReactNode, useState, RefObject } from "react";
+import {
+  createContext,
+  FC,
+  ReactNode,
+  useState,
+  RefObject,
+  useMemo,
+  useRef,
+} from "react";
 
 interface CanvasContextProps {
-  fileInputRef: RefObject<HTMLInputElement> | null;
-  canvasContainerRef: RefObject<HTMLDivElement> | null;
+  fileInputRef: RefObject<HTMLInputElement | null>;
+  canvasContainerRef: RefObject<HTMLDivElement | null>;
+  textAreaRef: RefObject<HTMLTextAreaElement | null>;
+  textAreaDivCloneRef: RefObject<HTMLDivElement | null>;
   backgroundImage: string;
   isBackdropOpen: boolean;
   isModalOpen: boolean;
@@ -12,8 +22,6 @@ interface CanvasContextProps {
 }
 
 interface CanvasContextActions {
-  setFileInputRef: (ref: RefObject<HTMLInputElement>) => void;
-  setCanvasContainerRef: (ref: RefObject<HTMLDivElement>) => void;
   setBackgroundImage: (url: string) => void;
   setIsBackdropOpen: (val: boolean) => void;
   setIsModalOpen: (val: boolean) => void;
@@ -23,16 +31,16 @@ interface CanvasContextActions {
 }
 
 const CanvasContext = createContext<CanvasContextProps & CanvasContextActions>({
-  fileInputRef: null,
-  canvasContainerRef: null,
+  fileInputRef: { current: null } as RefObject<HTMLInputElement | null>,
+  canvasContainerRef: { current: null } as RefObject<HTMLDivElement | null>,
+  textAreaRef: { current: null } as RefObject<HTMLTextAreaElement | null>,
+  textAreaDivCloneRef: { current: null } as RefObject<HTMLDivElement | null>,
   backgroundImage: "",
   isBackdropOpen: false,
   isModalOpen: false,
   isTextFieldAdded: false,
   imageBoxBackground: "",
   textColor: "#000000",
-  setFileInputRef: (_ref: RefObject<HTMLInputElement>) => {},
-  setCanvasContainerRef: (_ref: RefObject<HTMLDivElement>) => {},
   setBackgroundImage: (_txt: string) => {},
   setIsBackdropOpen: () => {},
   setIsModalOpen: () => {},
@@ -48,10 +56,10 @@ interface CanvasContextProviderProps {
 export const CanvasContextProvider: FC<CanvasContextProviderProps> = ({
   children,
 }) => {
-  const [fileInputRef, setFileInputRef] =
-    useState<RefObject<HTMLInputElement> | null>(null);
-  const [canvasContainerRef, setCanvasContainerRef] =
-    useState<RefObject<HTMLDivElement> | null>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
+  const canvasContainerRef = useRef<HTMLDivElement>(null);
+  const textAreaRef = useRef<HTMLTextAreaElement>(null);
+  const textAreaDivCloneRef = useRef<HTMLDivElement>(null);
   const [backgroundImage, setBackgroundImage] = useState("");
   const [isBackdropOpen, setIsBackdropOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -59,24 +67,36 @@ export const CanvasContextProvider: FC<CanvasContextProviderProps> = ({
   const [imageBoxBackground, setImageBoxBackground] = useState("");
   const [textColor, setTextColor] = useState("#000000");
 
-  const context = {
-    fileInputRef,
-    canvasContainerRef,
-    backgroundImage,
-    isBackdropOpen,
-    isModalOpen,
-    isTextFieldAdded,
-    imageBoxBackground,
-    textColor,
-    setFileInputRef,
-    setCanvasContainerRef,
-    setBackgroundImage,
-    setIsBackdropOpen,
-    setIsModalOpen,
-    setIsTextFieldAdded,
-    setImageBoxBackground,
-    setTextColor,
-  };
+  const context = useMemo(
+    () => ({
+      fileInputRef,
+      canvasContainerRef,
+      textAreaRef,
+      textAreaDivCloneRef,
+      backgroundImage,
+      isBackdropOpen,
+      isModalOpen,
+      isTextFieldAdded,
+      imageBoxBackground,
+      textColor,
+      setBackgroundImage,
+      setIsBackdropOpen,
+      setIsModalOpen,
+      setIsTextFieldAdded,
+      setImageBoxBackground,
+      setTextColor,
+    }),
+    [
+      backgroundImage,
+      canvasContainerRef,
+      fileInputRef,
+      imageBoxBackground,
+      isBackdropOpen,
+      isModalOpen,
+      isTextFieldAdded,
+      textColor,
+    ],
+  );
 
   return (
     <CanvasContext.Provider value={context}>{children}</CanvasContext.Provider>

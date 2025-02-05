@@ -24,3 +24,8 @@ dist-ssr
 *.sw?
 
 *.scss.d.ts
+
+# firebase
+.firebase
+
+*.build

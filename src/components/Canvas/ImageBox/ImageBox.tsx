@@ -8,10 +8,14 @@ import useResize from "../../../hooks/useResize";
 import useMove from "../../../hooks/useMove";
 import "./ImageBox.scss";
 
+// interface ImageBoxProps {
+//   parentRef: RefObject<HTMLDivElement | null>;
+// }
+
 const ImageBox = () => {
-  const { imageBoxBackground, canvasContainerRef, setImageBoxBackground } =
+  const { imageBoxBackground, setImageBoxBackground, canvasContainerRef } =
     useContext(CanvasContext);
-  const resizeHandle = useRef<SVGSVGElement>(null);
+  const resizeHandle = useRef<SVGSVGElement | null>(null);
   const size = useResize(resizeHandle, canvasContainerRef, "image");
   const wrapperRef = useRef<HTMLDivElement>(null);
   const moveHandleRef = useRef<SVGSVGElement>(null);
@@ -44,6 +48,7 @@ const ImageBox = () => {
         src={imageBoxBackground}
         className="image-content"
         style={{ width: size.width, height: size.height }}
+        alt=""
       />
     </div>
   );

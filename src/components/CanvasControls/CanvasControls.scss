@@ -1,11 +1,12 @@
 @use "../../sassStyles/variables" as vars;
 @use "../../sassStyles/mixins" as mixins;
 .controls__wrapper {
-  height: 100%;
+  height: 50%;
   width: 100%;
   display: flex;
   flex-direction: column;
   gap: 10px;
+  justify-content: space-between;
 
   .controls__header {
     display: flex;
@@ -14,13 +15,25 @@
 
     .header__logo-wrapper {
       display: flex;
-    }
+      align-items: center;
 
-    .controls__wrapper h1 {
-      margin: 0 24px 0;
-      font-size: vars.$font-big;
-      color: vars.$black-75;
-      font-weight: 700;
+      .logo {
+        height: 32px;
+        @media (min-width: 768px) {
+          height: 48px;
+        }
+      }
+
+      .logo-wrapper__title {
+        margin: 0 24px 0;
+        font-size: vars.$font-medium;
+        color: vars.$black-75;
+        font-weight: 700;
+
+        @media (min-width: 1024px) {
+          font-size: vars.$font-big;
+        }
+      }
     }
   }
 
@@ -33,20 +46,19 @@
   }
 
   .add-content {
-    height: 75px;
+    height: 50px;
     width: 100%;
     background-color: vars.$white-97;
     color: vars.$black-100;
     font-weight: 700;
-    font-size: vars.$font-medium;
-    padding: 24px 0px 24px 16px;
+    font-size: vars.$font-small;
+    padding: 10px 0px 10px 16px;
     margin: 0;
     border-radius: vars.$radius-big;
   }
 
   .export-button {
-    width: 172px;
-    height: 40px;
+    width: 45%;
     border-radius: vars.$radius-small;
     align-self: flex-end;
     font-family: Poppins, sans-serif;
@@ -59,9 +71,32 @@
     cursor: pointer;
   }
 
-  @media (min-width: 1600px) {
-    & {
-      gap: 32px;
+  @media (min-width: 475px) {
+    height: 30%;
+    .export-button {
+      width: 30%;
+    }
+  }
+
+  @media (min-width: 768px) {
+    order: 2;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 0.8/1;
+
+    .export-button {
+      width: 45%;
+    }
+    .add-content {
+      font-size: vars.$font-medium;
+      padding: 24px 0px 24px 16px;
+      display: flex;
+      align-items: center;
+    }
+
+    @media (min-width: 1200px) {
+      width: auto;
+      max-height: 100%;
     }
   }
 

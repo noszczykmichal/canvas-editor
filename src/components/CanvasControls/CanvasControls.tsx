@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useContext } from "react";
 import html2canvas from "html2canvas";
 
@@ -6,10 +5,14 @@ import Logo from "../../icons/Logo";
 import ResetButton from "./ResetButton/ResetButton";
 import Controls from "./Controls/Controls";
 import CanvasContext from "../../store/context";
+import useFocusBack from "../../hooks/useFocusBack";
 import "./CanvasControls.scss";
 
 const CanvasControls = () => {
-  const { canvasContainerRef } = useContext(CanvasContext);
+  const { canvasContainerRef, textAreaRef, textAreaDivCloneRef } =
+    useContext(CanvasContext);
+
+  const { addWindowListener, handleFocusBack } = useFocusBack();
 
   const saveImage = async (blob: Blob) => {
     try {
@@ -37,11 +40,34 @@ const CanvasControls = () => {
       await writable.write(blob);
       await writable.close();
     } catch (error) {
+      handleFocusBack();
+      // eslint-disable-next-line prettier/prettier, no-console
       console.error("Error saving file:", error);
     }
   };
 
   const handleDownload = async () => {
+    if (!canvasContainerRef.current) {
+      return;
+    }
+    addWindowListener();
+
+    /* setting a fixed height and width for canvas- turns out html2canvas needs that to generate clear and unblurred images */
+    const canvasEl = canvasContainerRef.current;
+    const canvasRealHight = canvasEl.clientHeight;
+    const canvasRealWidth = canvasEl?.clientWidth;
+    canvasEl.style.height = `${canvasRealHight}px`;
+    canvasEl.style.width = `${canvasRealWidth}px`;
+    /* if textArea is added, replacing it with div because text inside text area seems to be cut of in some unexpected places  */
+    if (textAreaRef.current && textAreaDivCloneRef) {
+      const textAreaEl = textAreaRef.current;
+      const textAreaDivEl = textAreaDivCloneRef.current as HTMLDivElement;
+
+      textAreaDivEl.innerText = textAreaEl.value;
+      textAreaEl.style.display = "none";
+      textAreaDivEl.style.display = "block";
+    }
+
     const SCALE_FACTOR = 2;
 
     const canvas = await html2canvas(canvasContainerRef!.current!, {
@@ -64,6 +90,17 @@ const CanvasControls = () => {
         saveImage(blob);
       }
     }, "image/png");
+
+    canvasEl.style.height = "unset";
+    canvasEl.style.width = "unset";
+
+    if (textAreaRef.current && textAreaDivCloneRef) {
+      const textAreaEl = textAreaRef.current;
+      const textAreaDivEl = textAreaDivCloneRef.current as HTMLDivElement;
+
+      textAreaEl.style.display = "unset";
+      textAreaDivEl.style.display = "none";
+    }
   };
 
   return (
@@ -71,7 +108,7 @@ const CanvasControls = () => {
       <header className="controls__header">
         <div className="header__logo-wrapper">
           <Logo />
-          <h1>CanvasEditor</h1>
+          <h1 className="logo-wrapper__title">CanvasEditor</h1>
         </div>
         <ResetButton />
       </header>
@@ -79,7 +116,11 @@ const CanvasControls = () => {
       <p className="add-content">Add content</p>
       <Controls />
       <hr className="hr" />
-      <button className="export-button primary-button" onClick={handleDownload}>
+      <button
+        type="button"
+        className="export-button primary-button"
+        onClick={handleDownload}
+      >
         Export to PNG
       </button>
     </div>

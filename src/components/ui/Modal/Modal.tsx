@@ -40,7 +40,11 @@ const Modal = () => {
     >
       <div className="modal" ref={nodeRef}>
         <header className="modal__header">
-          <button className="header__close-button" onClick={onCancelHandler}>
+          <button
+            type="button"
+            className="header__close-button"
+            onClick={onCancelHandler}
+          >
             <CloseIcon />
           </button>
         </header>
@@ -52,10 +56,15 @@ const Modal = () => {
           </p>
         </div>
         <div className="modal-controls">
-          <button onClick={onCancelHandler} className="modal-controls__button">
+          <button
+            type="button"
+            onClick={onCancelHandler}
+            className="modal-controls__button"
+          >
             Cancel
           </button>
           <button
+            type="button"
             className="modal-controls__button modal-controls__button--violette primary-button"
             onClick={onResetHandler}
           >

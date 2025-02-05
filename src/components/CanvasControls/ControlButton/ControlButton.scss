@@ -1,15 +1,16 @@
 @use "../../../sassStyles//variables" as vars;
-.button {
+.control-button {
   display: flex;
   align-items: center;
   justify-content: flex-end;
   flex-direction: column;
+  width: 30%;
   border: none;
   background-color: vars.$white-97;
   border-radius: vars.$radius-big;
   font-family: Poppins, sans-serif;
   font-weight: 500;
-  font-size: vars.$font-medium;
+  font-size: vars.$font-small;
   color: vars.$black-100;
   max-width: 365px;
   max-height: 256px;
@@ -30,5 +31,19 @@
 
   &:disabled {
     background-color: vars.$white-97;
+    .control-svg {
+      fill: vars.$black-75;
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+  }
+
+  @media (min-width: 768px) {
+    width: 45%;
+  }
+
+  @media (min-width: 1024px) {
+    padding-top: 45px;
+    font-size: vars.$font-medium;
   }
 }

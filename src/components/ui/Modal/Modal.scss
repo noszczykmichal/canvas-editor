@@ -7,12 +7,10 @@
   align-items: center;
   padding: 25px;
   top: 25%;
-  left: 35%;
+  left: 5%;
   z-index: 600;
-  height: 50%;
-  width: 30%;
-  min-width: 490px;
-  min-height: 455px;
+  height: 45%;
+  width: 90%;
   background-color: vars.$white;
   border-radius: vars.$radius-big;
 
@@ -46,14 +44,14 @@
   &__title {
     margin-top: 20px;
     margin-bottom: 0;
-    font-size: vars.$font-big;
+    font-size: vars.$font-medium;
     font-weight: 700;
     text-transform: uppercase;
     color: vars.$black-100;
   }
 
   &__text {
-    font-size: vars.$font-medium;
+    font-size: vars.$font-small;
     font-weight: 500;
     text-align: center;
     color: vars.$black-75;
@@ -68,7 +66,7 @@
       border: none;
       font-family: Poppins, sans-serif;
       color: vars.$black-100;
-      font-size: vars.$font-medium;
+      font-size: vars.$font-small;
       border-radius: vars.$radius-small;
       cursor: pointer;
     }
@@ -79,6 +77,29 @@
     }
 
     @include mixins.primaryButtonTransitions;
+  }
+
+  @media (min-width: 375px) {
+    min-height: 400px;
+    max-width: 380px;
+  }
+
+  @media (min-width: 425px) {
+    left: calc((100vw - 380px) / 2);
+  }
+
+  @media (min-width: 768px) {
+    min-width: 490px;
+    min-height: 455px;
+    left: calc((100vw - 455px) / 2);
+
+    &__title {
+      font-size: vars.$font-big;
+    }
+
+    &__text {
+      font-size: vars.$font-medium;
+    }
   }
 }
 

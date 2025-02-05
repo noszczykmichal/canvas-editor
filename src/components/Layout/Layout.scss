@@ -1,18 +1,40 @@
 main {
   height: 100vh;
   width: 100vw;
-  padding: 40px;
-  display: grid;
-  grid-template-columns: 50% 50%;
-  grid-template-rows: 100%;
-  column-gap: 10px;
-  justify-content: center;
-  align-content: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  gap: 10px;
 
-  @media (min-width: 1600px) {
-    & {
-      padding: 66px 189px;
-      column-gap: 24px;
-    }
+  @media (min-width: 768px) {
+    display: grid;
+    grid-template-columns: calc(50% - 15px) calc(50% - 15px);
+    grid-template-rows: 100%;
+    column-gap: 10px;
+    justify-content: center;
+    align-content: center;
+  }
+
+  @media (min-width: 1024px) {
+    gap: 24px;
+    padding: 40px;
+    grid-template-columns: calc(50% - 52px) calc(50% - 52px);
+  }
+
+  @media (min-width: 1200px) {
+    padding: 40px 80px;
+    column-gap: 24px;
+  }
+
+  @media (min-width: 1200px) {
+    padding: 40px 80px;
+    column-gap: 24px;
+  }
+
+  @media (min-width: 1400px) {
+    padding: 40px 160px;
+    column-gap: 24px;
   }
 }

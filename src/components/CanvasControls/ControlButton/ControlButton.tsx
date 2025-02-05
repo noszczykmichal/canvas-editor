@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 import { FC, useContext } from "react";
 
 import { ControlData } from "../../../types/types";
@@ -8,9 +9,11 @@ import "./ControlButton.scss";
 const ControlButton: FC<ControlData> = ({ label, icon }) => {
   const {
     fileInputRef,
+    isTextFieldAdded,
+    imageBoxBackground,
+    backgroundImage,
     setIsBackdropOpen,
     setIsTextFieldAdded,
-    // setIsImageBoxAdded,
   } = useContext(CanvasContext);
 
   const textAreaHandler = () => {
@@ -29,16 +32,26 @@ const ControlButton: FC<ControlData> = ({ label, icon }) => {
     fileInputRef?.current?.setAttribute("data-source", "background");
   };
 
+  const onClickHandler =
+    icon === "textArea"
+      ? textAreaHandler
+      : icon === "image"
+      ? imageHandler
+      : backgroundHandler;
+
+  const isDisabled =
+    icon === "textArea"
+      ? isTextFieldAdded
+      : icon === "image"
+      ? !!imageBoxBackground
+      : !!backgroundImage;
+
   return (
     <button
-      className="button"
-      onClick={
-        icon === "textArea"
-          ? textAreaHandler
-          : icon === "image"
-            ? imageHandler
-            : backgroundHandler
-      }
+      type="button"
+      className="control-button"
+      onClick={onClickHandler}
+      disabled={isDisabled}
     >
       <ControlIcon iconType={icon} />
       {label}

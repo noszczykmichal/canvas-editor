@@ -10,7 +10,7 @@ const Layout: FC<{ children: ReactNode }> = ({ children }) => {
     <>
       {createPortal(
         [<Backdrop key={1} />, <Modal key={2} />],
-        document.getElementById("modals-root") as HTMLDivElement
+        document.getElementById("modals-root") as HTMLDivElement,
       )}
       <main>{children}</main>
     </>

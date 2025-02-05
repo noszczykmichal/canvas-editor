@@ -12,8 +12,13 @@ import ColorPalette from "./ColorPalette/ColorPalette";
 
 const TextArea = () => {
   const [isFocused, setIsFocused] = useState(true);
-  const { canvasContainerRef, setIsTextFieldAdded, textColor } =
-    useContext(CanvasContext);
+  const {
+    setIsTextFieldAdded,
+    textColor,
+    canvasContainerRef,
+    textAreaRef,
+    textAreaDivCloneRef,
+  } = useContext(CanvasContext);
   const resizeHandle = useRef<SVGSVGElement>(null);
   const wrapperRef = useRef<HTMLDivElement>(null);
   const moveHandleRef = useRef<SVGSVGElement>(null);
@@ -32,9 +37,9 @@ const TextArea = () => {
   };
 
   useEffect(() => {
-    canvasContainerRef?.current?.addEventListener(
+    canvasContainerRef.current?.addEventListener(
       "mousedown",
-      handleBlurAndFocus
+      handleBlurAndFocus,
     );
   }, [canvasContainerRef]);
 
@@ -53,7 +58,9 @@ const TextArea = () => {
       }}
     >
       <TrashIcon
-        className={`${isFocused === true ? "icon--focused" : "icon"} delete-icon`}
+        className={`${
+          isFocused === true ? "icon--focused" : "icon"
+        } delete-icon`}
         onClick={onTrashIconClick}
       />
       <Move
@@ -61,17 +68,30 @@ const TextArea = () => {
         ref={moveHandleRef}
       />
       <Atom
-        className={`${isFocused === true ? "icon--focused" : "icon"} resize-icon`}
+        className={`${
+          isFocused === true ? "icon--focused" : "icon"
+        } resize-icon`}
         ref={resizeHandle}
       />
       <textarea
         className={`text-area ${isFocused && "text-area--focused"}`}
         style={{
           color: `${textColor}`,
-          fontSize: `${Math.max(32, size.height * 0.25)}px`,
+          fontSize: `${Math.max(32, size.height * 0.2)}px`,
         }}
         placeholder="Type your text here"
-      ></textarea>
+        ref={textAreaRef}
+      />
+
+      <div
+        className={`text-area ${isFocused && "text-area--focused"}`}
+        style={{
+          color: `${textColor}`,
+          fontSize: `${Math.max(32, size.height * 0.2)}px`,
+          display: "none",
+        }}
+        ref={textAreaDivCloneRef}
+      />
       {isFocused && <ColorPalette />}
     </div>
   );

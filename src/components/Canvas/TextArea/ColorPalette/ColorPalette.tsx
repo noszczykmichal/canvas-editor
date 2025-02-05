@@ -14,8 +14,12 @@ const ColorPalette = () => {
     <div className="color__palette">
       {textAreaFontColors.map((color) => (
         <button
+          aria-label={`text ${color}`}
+          type="button"
           key={color}
-          className={`${textColor === color && "color__button--focused"} color__button`}
+          className={`${
+            textColor === color && "color__button--focused"
+          } color__button`}
           onClick={() => handleColorChange(color)}
           style={{ backgroundColor: color }}
         />
