@@ -4,7 +4,7 @@ const useMove = (
   moveHandle: RefObject<SVGSVGElement | null>,
   wrappingContainer: RefObject<HTMLDivElement | null> | null,
 ) => {
-  const [position, setPosition] = useState({ x: 100, y: 100 });
+  const [position, setPosition] = useState({ x: 0, y: 0 });
   const isDragging = useRef(false);
   const offset = useRef({ x: 0, y: 0 });
 

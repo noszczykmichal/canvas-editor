@@ -55,6 +55,10 @@
     padding: 10px 0px 10px 16px;
     margin: 0;
     border-radius: vars.$radius-big;
+
+    @media (min-width: 1200px) {
+      height: 75px;
+    }
   }
 
   .export-button {
@@ -69,6 +73,10 @@
     border: 2px solid vars.$primary-75;
     cursor: pointer;
     transition: all ease-in-out 250ms;
+
+    @media (min-width: 768px) {
+      height: 40px;
+    }
   }
 
   @media (min-width: 475px) {

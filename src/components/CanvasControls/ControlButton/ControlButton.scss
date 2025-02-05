@@ -43,7 +43,11 @@
   }
 
   @media (min-width: 1024px) {
-    padding-top: 45px;
+    padding-top: 25px;
     font-size: vars.$font-medium;
+  }
+
+  @media (min-width: 1200px) {
+    padding-top: 45px;
   }
 }

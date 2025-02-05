@@ -8,10 +8,6 @@ import useResize from "../../../hooks/useResize";
 import useMove from "../../../hooks/useMove";
 import "./ImageBox.scss";
 
-// interface ImageBoxProps {
-//   parentRef: RefObject<HTMLDivElement | null>;
-// }
-
 const ImageBox = () => {
   const { imageBoxBackground, setImageBoxBackground, canvasContainerRef } =
     useContext(CanvasContext);
