@@ -6,49 +6,60 @@
 
 .canvas-container {
   position: relative;
-  // height: 100%;
-  width: 324px;
+  height: 100%;
   aspect-ratio: 0.8/1;
   background-image: url("../../assets/start.png");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   overflow: hidden;
-  order: 1;
+  order: 2;
 
-  // .text-field-background {
-  //   position: absolute;
-  //   top: 0;
-  //   left: 0;
-  //   height: 100%;
-  //   width: 100%;
-  //   z-index: 100;
-  //   background-color: vars.$black-50;
-  // }
+  .text-field-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    z-index: 100;
+    background-color: vars.$black-50;
+  }
 
-  // .custom-background {
-  //   position: absolute;
-  //   top: 0;
-  //   left: 0;
-  //   z-index: 200;
-  //   height: 100%;
-  //   width: 100%;
-  //   background-size: cover;
-  //   background-position: center;
-  //   background-repeat: no-repeat;
-  // }
+  .custom-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 200;
+    height: 100%;
+    width: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
 
-  // .text-field {
-  //   position: absolute;
-  //   top: 45%;
-  //   left: 25%;
-  //   height: 120px;
-  //   width: 350px;
-  //   z-index: 300;
-  // }
+  .text-field {
+    position: absolute;
+    top: 45%;
+    left: 25%;
+    height: 120px;
+    width: 350px;
+    z-index: 300;
+  }
+
+  @media (min-width: 375px) {
+    // height: 100%;
+    width: unset;
+  }
 
   @media (min-width: 475px) {
     width: 90%;
     max-width: 425px;
+  }
+
+  @media (min-width: 768px) {
+    order: 1;
+    max-width: unset;
+    width: 100%;
+    height: auto;
   }
 }

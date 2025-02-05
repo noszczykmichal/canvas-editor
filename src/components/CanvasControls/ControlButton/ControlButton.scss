@@ -4,7 +4,7 @@
   align-items: center;
   justify-content: flex-end;
   flex-direction: column;
-  width: 45%;
+  width: 30%;
   border: none;
   background-color: vars.$white-97;
   border-radius: vars.$radius-big;
@@ -33,7 +33,7 @@
     background-color: vars.$white-97;
   }
 
-  @media (min-width: 475px) {
-    width: 30%;
+  @media (min-width: 768px) {
+    width: 45%;
   }
 }
