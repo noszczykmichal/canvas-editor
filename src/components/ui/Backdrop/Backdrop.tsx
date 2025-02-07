@@ -3,7 +3,7 @@
 import { useContext, useRef } from "react";
 import { CSSTransition } from "react-transition-group";
 
-import CanvasContext from "../../../store/context";
+import CanvasContext from "@store/context";
 import "./Backdrop.scss";
 
 const Backdrop = () => {

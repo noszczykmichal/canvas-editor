@@ -5,6 +5,15 @@
     "lib": ["ESNext", "DOM", "DOM.Iterable"],
     "module": "ESNext",
     "skipLibCheck": true,
+    "baseUrl": "./src",
+    "paths": {
+      "@components/*": ["components/*"],
+      "@hooks/*": ["hooks/*"],
+      "@icons/*": ["icons/*"],
+      "@sassStyles/*": ["sassStyles/*"],
+      "@store/*": ["store/*"],
+      "@utils/*": ["utils/*"]
+    },
 
     /* Bundler mode */
     "moduleResolution": "bundler",

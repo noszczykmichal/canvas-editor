@@ -1,6 +1,6 @@
 import { useContext } from "react";
 
-import CanvasContext from "../store/context";
+import CanvasContext from "@store/context";
 
 const useFocusBack = () => {
   const { setIsBackdropOpen } = useContext(CanvasContext);

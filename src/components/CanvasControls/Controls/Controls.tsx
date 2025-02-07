@@ -1,5 +1,5 @@
-import { controlsConfig } from "../../../utils/config";
-import ControlButton from "../ControlButton/ControlButton";
+import { controlsConfig } from "@utils/config";
+import ControlButton from "@components/CanvasControls/ControlButton/ControlButton";
 import "./Controls.scss";
 
 const Controls = () => {

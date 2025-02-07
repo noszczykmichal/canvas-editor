@@ -1,9 +1,9 @@
 import { useContext, useRef } from "react";
 import { CSSTransition } from "react-transition-group";
 
-import CanvasContext from "../../../store/context";
-import Warning from "../../../icons/Warning";
-import CloseIcon from "../../../icons/CloseIcon";
+import CanvasContext from "@store/context";
+import Warning from "@icons/Warning";
+import CloseIcon from "@icons/CloseIcon";
 import "./Modal.scss";
 
 const Modal = () => {

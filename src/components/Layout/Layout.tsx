@@ -1,8 +1,8 @@
 import { FC, ReactNode } from "react";
 import { createPortal } from "react-dom";
 
-import Backdrop from "../ui/Backdrop/Backdrop";
-import Modal from "../ui/Modal/Modal";
+import Backdrop from "@components/ui/Backdrop/Backdrop";
+import Modal from "@components/ui/Modal/Modal";
 import "./Layout.scss";
 
 const Layout: FC<{ children: ReactNode }> = ({ children }) => {

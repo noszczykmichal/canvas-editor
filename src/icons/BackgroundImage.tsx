@@ -1,6 +1,6 @@
 import { FC } from "react";
 
-import { SVGPropsInterface } from "../types/types";
+import { SVGPropsInterface } from "@utils/types";
 
 const BackgroundImage: FC<SVGPropsInterface> = ({ classNames }) => {
   return (

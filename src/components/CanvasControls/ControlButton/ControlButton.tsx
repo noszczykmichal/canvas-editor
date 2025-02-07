@@ -1,9 +1,9 @@
 /* eslint-disable no-nested-ternary */
 import { FC, useContext } from "react";
 
-import { ControlData } from "../../../types/types";
-import ControlIcon from "./ControlIcon/ControlIcon";
-import CanvasContext from "../../../store/context";
+import { ControlData } from "@utils/types";
+import ControlIcon from "@components/CanvasControls/ControlButton/ControlIcon/ControlIcon";
+import CanvasContext from "@store/context";
 import "./ControlButton.scss";
 
 const ControlButton: FC<ControlData> = ({ label, icon }) => {
