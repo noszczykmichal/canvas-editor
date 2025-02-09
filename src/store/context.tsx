@@ -40,7 +40,7 @@ const CanvasContext = createContext<CanvasContextProps & CanvasContextActions>({
   isModalOpen: false,
   isTextFieldAdded: false,
   imageBoxBackground: "",
-  textColor: "#000000",
+  textColor: "#353535",
   setBackgroundImage: (_txt: string) => {},
   setIsBackdropOpen: () => {},
   setIsModalOpen: () => {},
@@ -65,7 +65,7 @@ export const CanvasContextProvider: FC<CanvasContextProviderProps> = ({
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isTextFieldAdded, setIsTextFieldAdded] = useState(false);
   const [imageBoxBackground, setImageBoxBackground] = useState("");
-  const [textColor, setTextColor] = useState("#000000");
+  const [textColor, setTextColor] = useState("#353535");
 
   const context = useMemo(
     () => ({

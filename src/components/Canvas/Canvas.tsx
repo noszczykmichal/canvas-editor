@@ -1,9 +1,9 @@
 import { useEffect, useContext, ChangeEvent } from "react";
 
-import CanvasContext from "../../store/context";
-import ImageBox from "./ImageBox/ImageBox";
-import TextArea from "./TextArea/TextArea";
-import useFocusBack from "../../hooks/useFocusBack";
+import useFocusBack from "@hooks/useFocusBack";
+import CanvasContext from "@store/context";
+import ImageBox from "@components/Canvas/ImageBox/ImageBox";
+import TextArea from "@components/Canvas/TextArea/TextArea";
 import "./Canvas.scss";
 
 const Canvas = () => {

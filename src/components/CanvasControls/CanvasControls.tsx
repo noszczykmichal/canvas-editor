@@ -1,11 +1,11 @@
 import { useContext } from "react";
 import html2canvas from "html2canvas";
 
-import Logo from "../../icons/Logo";
-import ResetButton from "./ResetButton/ResetButton";
-import Controls from "./Controls/Controls";
-import CanvasContext from "../../store/context";
-import useFocusBack from "../../hooks/useFocusBack";
+import Logo from "@icons/Logo";
+import ResetButton from "@components/CanvasControls/ResetButton/ResetButton";
+import Controls from "@components/CanvasControls/Controls/Controls";
+import CanvasContext from "@store/context";
+import useFocusBack from "@hooks/useFocusBack";
 import "./CanvasControls.scss";
 
 const CanvasControls = () => {

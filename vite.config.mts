@@ -3,6 +3,7 @@ import react from "@vitejs/plugin-react";
 import eslint from "vite-plugin-eslint";
 import sassDts from "vite-plugin-sass-dts";
 import checker from "vite-plugin-checker";
+import tsconfigPaths from "vite-tsconfig-paths";
 
 export default defineConfig(() => {
   return {
@@ -12,6 +13,7 @@ export default defineConfig(() => {
     plugins: [
       react(),
       eslint(),
+      tsconfigPaths(),
       checker({
         eslint: {
           // for example, lint .ts and .tsx

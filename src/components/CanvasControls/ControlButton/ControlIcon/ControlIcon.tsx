@@ -1,9 +1,9 @@
 import { FC } from "react";
 
-import { ControlsIcons } from "../../../../types/types";
-import TextIcon from "../../../../icons/TextIcon";
-import ImageField from "../../../../icons/ImageField";
-import BackgroundImage from "../../../../icons/BackgroundImage";
+import { ControlsIcons } from "@utils/types";
+import TextIcon from "@icons/TextIcon";
+import ImageField from "@icons/ImageField";
+import BackgroundImage from "@icons/BackgroundImage";
 import "./ControlIcon.scss";
 
 interface ControlIconProps {

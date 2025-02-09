@@ -1,7 +1,7 @@
 import { useContext } from "react";
 
-import CanvasContext from "../../../store/context";
-import RefreshIcon from "../../../icons/RefreshIcon";
+import CanvasContext from "@store/context";
+import RefreshIcon from "@icons/RefreshIcon";
 import "./ResetButton.scss";
 
 const ResetButton = () => {
