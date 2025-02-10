@@ -21,8 +21,8 @@ const TextArea = () => {
   const resizeHandle = useRef<SVGSVGElement>(null);
   const wrapperRef = useRef<HTMLDivElement>(null);
   const moveHandleRef = useRef<SVGSVGElement>(null);
-  const position = useMove(moveHandleRef, canvasContainerRef);
-  const size = useResize(resizeHandle, canvasContainerRef, "textarea");
+  const position = useMove(moveHandleRef);
+  const size = useResize(resizeHandle, "textarea");
 
   const handleBlurAndFocus = (event: MouseEvent) => {
     if (

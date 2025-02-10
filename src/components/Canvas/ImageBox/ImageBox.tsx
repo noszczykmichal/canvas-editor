@@ -9,13 +9,13 @@ import useMove from "@hooks/useMove";
 import "./ImageBox.scss";
 
 const ImageBox = () => {
-  const { imageBoxBackground, setImageBoxBackground, canvasContainerRef } =
+  const { imageBoxBackground, setImageBoxBackground } =
     useContext(CanvasContext);
   const resizeHandle = useRef<SVGSVGElement | null>(null);
-  const size = useResize(resizeHandle, canvasContainerRef, "image");
+  const size = useResize(resizeHandle, "image");
   const wrapperRef = useRef<HTMLDivElement>(null);
   const moveHandleRef = useRef<SVGSVGElement>(null);
-  const position = useMove(moveHandleRef, canvasContainerRef);
+  const position = useMove(moveHandleRef);
 
   useEffect(() => {
     wrapperRef.current?.focus();
