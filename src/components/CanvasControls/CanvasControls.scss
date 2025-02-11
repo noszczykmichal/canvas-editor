@@ -37,7 +37,7 @@
     }
   }
 
-  .hr {
+  .controls__hr {
     height: 2px;
     width: 100%;
     border: none;
@@ -45,7 +45,7 @@
     margin: 0;
   }
 
-  .add-content {
+  .controls__add-content {
     height: 50px;
     width: 100%;
     background-color: vars.$white-97;
@@ -61,7 +61,7 @@
     }
   }
 
-  .export-button {
+  .controls__export-button {
     width: 45%;
     border-radius: vars.$radius-small;
     align-self: flex-end;
@@ -81,7 +81,7 @@
 
   @media (min-width: 475px) {
     height: 30%;
-    .export-button {
+    .controls__export-button {
       width: 30%;
     }
   }
@@ -92,10 +92,10 @@
     height: auto;
     aspect-ratio: 0.8/1;
 
-    .export-button {
+    .controls__export-button {
       width: 45%;
     }
-    .add-content {
+    .controls__add-content {
       font-size: vars.$font-medium;
       padding: 24px 0px 24px 16px;
       display: flex;

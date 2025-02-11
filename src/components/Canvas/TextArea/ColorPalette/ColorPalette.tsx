@@ -6,7 +6,7 @@ import { textAreaFontColors } from "@utils/config";
 const ColorPalette = () => {
   const { textColor, setTextColor } = useContext(CanvasContext);
 
-  const handleColorChange = (color: string) => {
+  const handleColorChange = (color: string) => () => {
     setTextColor(color);
   };
 
@@ -20,7 +20,7 @@ const ColorPalette = () => {
           className={`${
             textColor === color && "color__button--focused"
           } color__button`}
-          onClick={() => handleColorChange(color)}
+          onClick={handleColorChange(color)}
           style={{ backgroundColor: color }}
         />
       ))}

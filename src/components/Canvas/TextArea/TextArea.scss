@@ -7,6 +7,45 @@
   z-index: 300;
   font-family: Poppins, sans-serif;
 
+  .icon {
+    display: none;
+  }
+
+  .icon--focused {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    background: white;
+    border-radius: 50%;
+    z-index: 300;
+  }
+
+  .delete-icon {
+    height: 24px;
+    width: 24px;
+    padding: 2px;
+    top: -12px;
+    right: -12px;
+    fill: vars.$red-100;
+  }
+
+  .move-icon {
+    height: 28px;
+    width: 28px;
+    top: -12px;
+    left: -12px;
+    fill: vars.$primary-75;
+  }
+
+  .resize-icon {
+    bottom: -8px;
+    right: -10px;
+    fill: vars.$primary-75;
+    cursor: nwse-resize;
+  }
+
   .text-area {
     position: absolute;
     top: 0;
@@ -31,46 +70,6 @@
 
   .text-area--focused {
     outline: 2px solid vars.$primary-75;
-  }
-
-  .icon {
-    display: none;
-  }
-
-  .icon--focused {
-    position: absolute;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: absolute;
-    background: white;
-    border-radius: 50%;
-    z-index: 300;
-  }
-
-  .delete-icon {
-    height: 24px;
-    width: 24px;
-    padding: 2px;
-    top: -12px;
-    right: -12px;
-
-    fill: vars.$red-100;
-  }
-
-  .move-icon {
-    height: 28px;
-    width: 28px;
-    top: -12px;
-    left: -12px;
-    fill: vars.$primary-75;
-  }
-
-  .resize-icon {
-    bottom: -8px;
-    right: -10px;
-    fill: vars.$primary-75;
-    cursor: nwse-resize;
   }
 
   .color__palette {
