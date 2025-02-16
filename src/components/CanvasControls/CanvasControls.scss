@@ -12,28 +12,21 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+  }
 
-    .header__logo-wrapper {
-      display: flex;
-      align-items: center;
+  .header__logo-wrapper {
+    display: flex;
+    align-items: center;
 
-      .logo {
-        height: 32px;
-        @media (min-width: 768px) {
-          height: 48px;
-        }
-      }
+    .logo {
+      height: 32px;
+    }
 
-      .logo-wrapper__title {
-        margin: 0 24px 0;
-        font-size: vars.$font-medium;
-        color: vars.$black-75;
-        font-weight: 700;
-
-        @media (min-width: 1024px) {
-          font-size: vars.$font-big;
-        }
-      }
+    .logo-wrapper__title {
+      margin: 0 24px 0;
+      font-size: vars.$font-medium;
+      color: vars.$black-75;
+      font-weight: 700;
     }
   }
 
@@ -55,10 +48,6 @@
     padding: 10px 0px 10px 16px;
     margin: 0;
     border-radius: vars.$radius-big;
-
-    @media (min-width: 1200px) {
-      height: 75px;
-    }
   }
 
   .controls__export-button {
@@ -73,10 +62,6 @@
     border: 2px solid vars.$primary-75;
     cursor: pointer;
     transition: all ease-in-out 250ms;
-
-    @media (min-width: 768px) {
-      height: 40px;
-    }
   }
 
   @media (min-width: 475px) {
@@ -90,10 +75,11 @@
     order: 2;
     width: 100%;
     height: auto;
-    aspect-ratio: 0.8/1;
-
-    .controls__export-button {
-      width: 45%;
+    aspect-ratio: 0.8;
+    .header__logo-wrapper {
+      .logo {
+        height: 48px;
+      }
     }
     .controls__add-content {
       font-size: vars.$font-medium;
@@ -102,9 +88,25 @@
       align-items: center;
     }
 
-    @media (min-width: 1200px) {
-      width: auto;
-      max-height: 100%;
+    .controls__export-button {
+      width: 45%;
+      height: 40px;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .header__logo-wrapper {
+      .logo-wrapper__title {
+        font-size: vars.$font-big;
+      }
+    }
+  }
+
+  @media (min-width: 1200px) {
+    width: auto;
+    max-height: 100%;
+    .controls__add-content {
+      height: 75px;
     }
   }
 

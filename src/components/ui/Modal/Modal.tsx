@@ -50,22 +50,22 @@ const Modal = () => {
         </header>
         <div className="modal__wrapper">
           <Warning />
-          <h2 className="modal__title">Warning</h2>
-          <p className="modal__text">
+          <h2 className="wrapper__title">Warning</h2>
+          <p className="wrapper__text">
             You’re about to reset whole process. Are you sure you want to do it?
           </p>
         </div>
-        <div className="modal-controls">
+        <div className="modal__controls">
           <button
             type="button"
             onClick={onCancelHandler}
-            className="modal-controls__button"
+            className="controls__button"
           >
             Cancel
           </button>
           <button
             type="button"
-            className="modal-controls__button modal-controls__button--violette primary-button"
+            className="controls__button controls__button--violette primary-button"
             onClick={onResetHandler}
           >
             Reset
