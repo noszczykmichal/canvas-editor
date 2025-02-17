@@ -7,7 +7,7 @@
 .canvas-container {
   position: relative;
   height: 50%;
-  aspect-ratio: 0.8/1;
+  aspect-ratio: 0.8;
   background-image: url("../../assets/start.png");
   background-size: cover;
   background-position: center;
@@ -35,15 +35,6 @@
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-  }
-
-  .text-field {
-    position: absolute;
-    top: 45%;
-    left: 25%;
-    height: 120px;
-    width: 350px;
-    z-index: 300;
   }
 
   @media (min-width: 475px) {

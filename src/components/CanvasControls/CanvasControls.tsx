@@ -122,13 +122,13 @@ const CanvasControls = () => {
         </div>
         <ResetButton />
       </header>
-      <hr className="hr" />
-      <p className="add-content">Add content</p>
+      <hr className="controls__hr" />
+      <p className="controls__add-content">Add content</p>
       <Controls />
-      <hr className="hr" />
+      <hr className="controls__hr" />
       <button
         type="button"
-        className="export-button primary-button"
+        className="controls__export-button primary-button"
         onClick={handleDownload}
         disabled={isExportDisabled}
       >

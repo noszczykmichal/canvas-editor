@@ -1,4 +1,3 @@
-/* eslint-disable no-nested-ternary */
 import { FC, useContext } from "react";
 
 import { ControlData } from "@utils/types";
@@ -32,19 +31,24 @@ const ControlButton: FC<ControlData> = ({ label, icon }) => {
     fileInputRef?.current?.setAttribute("data-source", "background");
   };
 
-  const onClickHandler =
-    icon === "textArea"
-      ? textAreaHandler
-      : icon === "image"
-      ? imageHandler
-      : backgroundHandler;
+  let onClickHandler;
+  if (icon === "textArea") {
+    onClickHandler = textAreaHandler;
+  } else if (icon === "image") {
+    onClickHandler = imageHandler;
+  } else {
+    onClickHandler = backgroundHandler;
+  }
 
-  const isDisabled =
-    icon === "textArea"
-      ? isTextFieldAdded
-      : icon === "image"
-      ? !!imageBoxBackground
-      : !!backgroundImage;
+  let isDisabled;
+
+  if (icon === "textArea") {
+    isDisabled = isTextFieldAdded;
+  } else if (icon === "image") {
+    isDisabled = !!imageBoxBackground;
+  } else {
+    isDisabled = !!backgroundImage;
+  }
 
   return (
     <button

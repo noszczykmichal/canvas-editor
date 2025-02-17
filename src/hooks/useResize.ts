@@ -24,13 +24,6 @@ const useResize = (
       const touchStart = event.targetTouches[0];
       const startX = touchStart.pageX;
       const startY = touchStart.pageY;
-      // offset.current = {
-      //   x: touchStart.pageX - position.x,
-      //   y: touchStart.pageY - position.y,
-      // };
-
-      // moveHandleEl.addEventListener("touchmove", handleTouchMove);
-      // moveHandleEl.addEventListener("touchend", handleTouchEnd);
       const startWidth = size.width;
       const startHeight = size.height;
 

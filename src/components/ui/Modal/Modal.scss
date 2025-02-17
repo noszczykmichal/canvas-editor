@@ -33,33 +33,33 @@
     flex-direction: column;
     align-items: center;
     justify-content: space-around;
+    .warning-icon {
+      height: 46%;
+      width: 46%;
+      fill: vars.$red-100;
+      margin-top: 20px;
+    }
+
+    .wrapper__title {
+      margin-top: 20px;
+      margin-bottom: 0;
+      font-size: vars.$font-medium;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: vars.$black-100;
+    }
+
+    .wrapper__text {
+      font-size: vars.$font-small;
+      font-weight: 500;
+      text-align: center;
+      color: vars.$black-75;
+      margin-top: 8px;
+    }
   }
 
-  .warning-icon {
-    height: 46%;
-    width: 46%;
-    fill: vars.$red-100;
-    margin-top: 20px;
-  }
-  &__title {
-    margin-top: 20px;
-    margin-bottom: 0;
-    font-size: vars.$font-medium;
-    font-weight: 700;
-    text-transform: uppercase;
-    color: vars.$black-100;
-  }
-
-  &__text {
-    font-size: vars.$font-small;
-    font-weight: 500;
-    text-align: center;
-    color: vars.$black-75;
-    margin-top: 8px;
-  }
-
-  .modal-controls {
-    &__button {
+  .modal__controls {
+    .controls__button {
       height: 40px;
       width: 109px;
       background-color: transparent;
@@ -71,7 +71,7 @@
       cursor: pointer;
     }
 
-    &__button--violette {
+    .controls__button--violette {
       background-color: vars.$primary-75;
       color: vars.$white;
     }
@@ -93,11 +93,11 @@
     min-height: 455px;
     left: calc((100vw - 455px) / 2);
 
-    &__title {
+    .wrapper__title {
       font-size: vars.$font-big;
     }
 
-    &__text {
+    .wrapper__text {
       font-size: vars.$font-medium;
     }
   }

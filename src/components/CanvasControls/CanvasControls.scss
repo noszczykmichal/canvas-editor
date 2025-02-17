@@ -12,32 +12,25 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+  }
 
-    .header__logo-wrapper {
-      display: flex;
-      align-items: center;
+  .header__logo-wrapper {
+    display: flex;
+    align-items: center;
 
-      .logo {
-        height: 32px;
-        @media (min-width: 768px) {
-          height: 48px;
-        }
-      }
+    .logo {
+      height: 32px;
+    }
 
-      .logo-wrapper__title {
-        margin: 0 24px 0;
-        font-size: vars.$font-medium;
-        color: vars.$black-75;
-        font-weight: 700;
-
-        @media (min-width: 1024px) {
-          font-size: vars.$font-big;
-        }
-      }
+    .logo-wrapper__title {
+      margin: 0 24px 0;
+      font-size: vars.$font-medium;
+      color: vars.$black-75;
+      font-weight: 700;
     }
   }
 
-  .hr {
+  .controls__hr {
     height: 2px;
     width: 100%;
     border: none;
@@ -45,7 +38,7 @@
     margin: 0;
   }
 
-  .add-content {
+  .controls__add-content {
     height: 50px;
     width: 100%;
     background-color: vars.$white-97;
@@ -55,13 +48,9 @@
     padding: 10px 0px 10px 16px;
     margin: 0;
     border-radius: vars.$radius-big;
-
-    @media (min-width: 1200px) {
-      height: 75px;
-    }
   }
 
-  .export-button {
+  .controls__export-button {
     width: 45%;
     border-radius: vars.$radius-small;
     align-self: flex-end;
@@ -73,15 +62,11 @@
     border: 2px solid vars.$primary-75;
     cursor: pointer;
     transition: all ease-in-out 250ms;
-
-    @media (min-width: 768px) {
-      height: 40px;
-    }
   }
 
   @media (min-width: 475px) {
     height: 30%;
-    .export-button {
+    .controls__export-button {
       width: 30%;
     }
   }
@@ -90,21 +75,38 @@
     order: 2;
     width: 100%;
     height: auto;
-    aspect-ratio: 0.8/1;
-
-    .export-button {
-      width: 45%;
+    aspect-ratio: 0.8;
+    .header__logo-wrapper {
+      .logo {
+        height: 48px;
+      }
     }
-    .add-content {
+    .controls__add-content {
       font-size: vars.$font-medium;
       padding: 24px 0px 24px 16px;
       display: flex;
       align-items: center;
     }
 
-    @media (min-width: 1200px) {
-      width: auto;
-      max-height: 100%;
+    .controls__export-button {
+      width: 45%;
+      height: 40px;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .header__logo-wrapper {
+      .logo-wrapper__title {
+        font-size: vars.$font-big;
+      }
+    }
+  }
+
+  @media (min-width: 1200px) {
+    width: auto;
+    max-height: 100%;
+    .controls__add-content {
+      height: 75px;
     }
   }
 
