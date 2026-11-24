@@ -1,12 +1,12 @@
 import { useState, useRef, useContext, useEffect } from "react";
 
-import TrashIcon from "@icons/TrashIcon";
-import Atom from "@icons/Atom";
-import Move from "@icons/Move";
-import CanvasContext from "@store/context";
-import useResize from "@hooks/useResize";
-import useMove from "@hooks/useMove";
-import ColorPalette from "@components/Canvas/TextArea/ColorPalette/ColorPalette";
+import TrashIcon from "@/icons/TrashIcon";
+import Atom from "@/icons/Atom";
+import Move from "@/icons/Move";
+import CanvasContext from "@/store/context";
+import useResize from "@/hooks/useResize";
+import useMove from "@/hooks/useMove";
+import ColorPalette from "@/components/Canvas/TextArea/ColorPalette/ColorPalette";
 import "./TextArea.scss";
 
 const TextArea = () => {
@@ -36,10 +36,14 @@ const TextArea = () => {
   };
 
   useEffect(() => {
-    canvasContainerRef.current?.addEventListener(
-      "mousedown",
-      handleBlurAndFocus,
-    );
+    const canvasContainer = canvasContainerRef?.current;
+
+    if (!canvasContainer) return undefined;
+
+    canvasContainer.addEventListener("mousedown", handleBlurAndFocus);
+
+    return () =>
+      canvasContainer?.removeEventListener("mousedown", handleBlurAndFocus);
   }, [canvasContainerRef]);
 
   const onTrashIconClick = () => {
@@ -73,7 +77,7 @@ const TextArea = () => {
         ref={resizeHandle}
       />
       <textarea
-        className={`text-area ${isFocused && "text-area--focused"}`}
+        className={`text-area${isFocused ? " text-area--focused" : ""}`}
         style={{
           color: `${textColor}`,
           fontSize: `${Math.max(32, size.height * 0.2)}px`,
@@ -83,7 +87,7 @@ const TextArea = () => {
       />
 
       <div
-        className={`text-area ${isFocused && "text-area--focused"}`}
+        className={`text-area${isFocused ? " text-area--focused" : ""}`}
         style={{
           color: `${textColor}`,
           fontSize: `${Math.max(32, size.height * 0.2)}px`,

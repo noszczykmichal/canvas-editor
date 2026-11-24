@@ -1,7 +1,7 @@
 import { useContext } from "react";
 
-import CanvasContext from "@store/context";
-import { textAreaFontColors } from "@utils/config";
+import CanvasContext from "@/store/context";
+import { textAreaFontColors } from "@/utils/config";
 
 const ColorPalette = () => {
   const { textColor, setTextColor } = useContext(CanvasContext);
@@ -17,9 +17,9 @@ const ColorPalette = () => {
           aria-label={`text ${color}`}
           type="button"
           key={color}
-          className={`${
-            textColor === color && "color__button--focused"
-          } color__button`}
+          className={`color__button${
+            textColor === color ? " color__button--focused" : ""
+          }`}
           onClick={handleColorChange(color)}
           style={{ backgroundColor: color }}
         />
