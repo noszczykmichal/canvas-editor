@@ -17,9 +17,9 @@ const ColorPalette = () => {
           aria-label={`text ${color}`}
           type="button"
           key={color}
-          className={`${
-            textColor === color && "color__button--focused"
-          } color__button`}
+          className={`color__button${
+            textColor === color ? " color__button--focused" : ""
+          }`}
           onClick={handleColorChange(color)}
           style={{ backgroundColor: color }}
         />

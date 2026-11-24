@@ -36,10 +36,14 @@ const TextArea = () => {
   };
 
   useEffect(() => {
-    canvasContainerRef.current?.addEventListener(
-      "mousedown",
-      handleBlurAndFocus,
-    );
+    const canvasContainer = canvasContainerRef?.current;
+
+    if (!canvasContainer) return undefined;
+
+    canvasContainer.addEventListener("mousedown", handleBlurAndFocus);
+
+    return () =>
+      canvasContainer?.removeEventListener("mousedown", handleBlurAndFocus);
   }, [canvasContainerRef]);
 
   const onTrashIconClick = () => {
@@ -73,7 +77,7 @@ const TextArea = () => {
         ref={resizeHandle}
       />
       <textarea
-        className={`text-area ${isFocused && "text-area--focused"}`}
+        className={`text-area${isFocused ? " text-area--focused" : ""}`}
         style={{
           color: `${textColor}`,
           fontSize: `${Math.max(32, size.height * 0.2)}px`,
@@ -83,7 +87,7 @@ const TextArea = () => {
       />
 
       <div
-        className={`text-area ${isFocused && "text-area--focused"}`}
+        className={`text-area${isFocused ? " text-area--focused" : ""}`}
         style={{
           color: `${textColor}`,
           fontSize: `${Math.max(32, size.height * 0.2)}px`,
