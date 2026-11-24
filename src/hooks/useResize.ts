@@ -1,6 +1,6 @@
 import { RefObject } from "react";
 
-import useDrag from "@hooks/useDrag";
+import useDrag from "@/hooks/useDrag";
 
 type Size = { width: number; height: number };
 

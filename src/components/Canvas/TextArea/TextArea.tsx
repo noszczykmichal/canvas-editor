@@ -1,12 +1,12 @@
 import { useState, useRef, useContext, useEffect } from "react";
 
-import TrashIcon from "@icons/TrashIcon";
-import Atom from "@icons/Atom";
-import Move from "@icons/Move";
-import CanvasContext from "@store/context";
-import useResize from "@hooks/useResize";
-import useMove from "@hooks/useMove";
-import ColorPalette from "@components/Canvas/TextArea/ColorPalette/ColorPalette";
+import TrashIcon from "@/icons/TrashIcon";
+import Atom from "@/icons/Atom";
+import Move from "@/icons/Move";
+import CanvasContext from "@/store/context";
+import useResize from "@/hooks/useResize";
+import useMove from "@/hooks/useMove";
+import ColorPalette from "@/components/Canvas/TextArea/ColorPalette/ColorPalette";
 import "./TextArea.scss";
 
 const TextArea = () => {

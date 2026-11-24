@@ -1,8 +1,8 @@
 import { describe, expect, it } from "vitest";
 import { act, fireEvent, renderHook } from "@testing-library/react";
 
-import useMove from "@hooks/useMove";
-import useResize from "@hooks/useResize";
+import useMove from "@/hooks/useMove";
+import useResize from "@/hooks/useResize";
 
 const createHandle = () => {
   const handle = document.createElementNS("http://www.w3.org/2000/svg", "svg");

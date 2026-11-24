@@ -1,6 +1,6 @@
 import { FC } from "react";
 
-import { SVGPropsInterface } from "@utils/types";
+import { SVGPropsInterface } from "@/utils/types";
 
 const TextIcon: FC<SVGPropsInterface> = ({ classNames }) => {
   return (

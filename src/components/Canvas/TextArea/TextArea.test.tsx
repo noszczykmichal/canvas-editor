@@ -2,8 +2,8 @@ import { describe, expect, it, vi } from "vitest";
 import { act, fireEvent, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
-import { CanvasContextProvider } from "@store/context";
-import App from "../../../App";
+import { CanvasContextProvider } from "@/store/context";
+import App from "@/App";
 
 // TextArea relies on the canvas container ref and the "text" control, so it
 // is tested through the whole app.

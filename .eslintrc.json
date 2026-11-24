@@ -119,5 +119,13 @@
       }
     ],
     "eslint-plugin-import/no-extraneous-dependencies": "off"
+  },
+  "settings": {
+    "import/resolver": {
+      "typescript": {
+        "project": "./tsconfig.json"
+      },
+      "node": true
+    }
   }
 }

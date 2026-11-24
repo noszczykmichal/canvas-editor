@@ -1,4 +1,4 @@
-import { ControlData } from "@utils/types";
+import { ControlData } from "@/utils/types";
 
 export const textAreaFontColors = [
   "#353535",

@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { render, screen } from "@testing-library/react";
 
-import { CanvasContextProvider } from "@store/context";
+import { CanvasContextProvider } from "@/store/context";
 import App from "./App";
 
 describe("App", () => {
