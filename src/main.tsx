@@ -1,6 +1,6 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import "./index.scss";
+import "@/index.scss";
 import { CanvasContextProvider } from "@/store/context";
 import App from "./App";
 
