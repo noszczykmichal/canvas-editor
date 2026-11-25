@@ -1,14 +1,15 @@
-import { useContext } from "react";
 import clsx from "clsx";
 
-import CanvasContext from "@/store/context";
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
+import { selectTextColor, setTextColor } from "@/store/textColorSlice";
 import { textAreaFontColors } from "@/utils/config";
 
 const ColorPalette = () => {
-  const { textColor, setTextColor } = useContext(CanvasContext);
+  const textColor = useAppSelector(selectTextColor);
+  const dispatch = useAppDispatch();
 
   const handleColorChange = (color: string) => () => {
-    setTextColor(color);
+    dispatch(setTextColor(color));
   };
 
   return (

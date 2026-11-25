@@ -26,7 +26,7 @@ ESLint and type-checking also run inside Vite (`vite-plugin-eslint`, `vite-plugi
 ## Code style
 
 - Prettier: double quotes, semicolons, trailing commas everywhere, 2-space indent, 80 cols. ESLint enforces double quotes and prettier formatting as errors.
-- Components are arrow functions with a default export; unused args must be prefixed with `_`.
+- Components are function declarations exported inline: `export default function Name() {}`. Unused args must be prefixed with `_`.
 - All imports from `src/` use the `@/*` alias, never relative paths, including same-folder files and stylesheets (e.g. `@/App`, `@/components/Canvas/TextArea/TextArea.scss`). ESLint resolves it through `eslint-import-resolver-typescript`. SCSS files use relative `@use "../../sassStyles/variables" as vars;` (and `mixins`).
 - Each component lives in its own folder with a co-located `.scss` file imported as a plain side-effect import (`import "./X.scss"`) using BEM-ish global class names. `vite-plugin-sass-dts` generates `*.scss.d.ts` files (gitignored) — don't edit or commit them.
 
@@ -36,7 +36,8 @@ ESLint and type-checking also run inside Vite (`vite-plugin-eslint`, `vite-plugi
 
 ## Architecture
 
-- **Global state**: a single React context, [src/store/context.tsx](src/store/context.tsx) (`CanvasContext` / `CanvasContextProvider`, wrapped around `App` in `main.tsx`). It holds both state (background image data URL, image box data URL, `isTextFieldAdded`, `textColor`, backdrop/modal flags) and shared DOM refs (`fileInputRef`, `canvasContainerRef`, `textAreaRef`, `textAreaDivCloneRef`). Components across the tree reach into these refs directly, so adding new cross-component behavior usually means adding a field/ref here.
+- **Redux (in progress)**: state is moving from context into a Redux Toolkit store. `src/store/store.ts` exports `makeStore()` (a factory, so tests get a fresh store via `<Provider store={makeStore()}>`) plus `RootState`/`AppDispatch`; slices are added to `combineSlices(...)` there. Use the typed `useAppSelector`/`useAppDispatch` from `src/store/hooks.ts`. So far only `textColorSlice` has moved. Only serializable data goes in Redux; DOM refs stay in context.
+- **Global state**: a single React context, [src/store/context.tsx](src/store/context.tsx) (`CanvasContext` / `CanvasContextProvider`, wrapped around `App` in `main.tsx`). It holds both state (background image data URL, image box data URL, `isTextFieldAdded`, backdrop/modal flags) and shared DOM refs (`fileInputRef`, `canvasContainerRef`, `textAreaRef`, `textAreaDivCloneRef`). Components across the tree reach into these refs directly, so adding new cross-component behavior usually means adding a field/ref here.
 - **Layout**: `App` renders `Canvas` (the poster preview) and `CanvasControls` (sidebar) inside `Layout`, which also renders the `ui/Backdrop` + `ui/Modal` overlays (Modal is used for the reset confirmation, animated with react-transition-group).
 - **Single shared file input**: `Canvas` owns one hidden `<input type="file">`. `ControlButton` triggers it programmatically and sets a `data-source` attribute (`"imageBox"` or `"background"`); `Canvas`'s change handler reads that attribute to decide which context field receives the FileReader data URL. Control buttons are driven by `controlsConfig` in [src/utils/config.ts](src/utils/config.ts).
 - **Backdrop while a native dialog is open**: `useFocusBack` shows the backdrop and adds a one-shot window `focus` listener to hide it, because there is no event when the user cancels the file picker / save dialog.

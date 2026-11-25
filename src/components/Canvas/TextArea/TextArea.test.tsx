@@ -1,8 +1,10 @@
 import { describe, expect, it, vi } from "vitest";
 import { act, fireEvent, render, screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+import { Provider } from "react-redux";
 
 import { CanvasContextProvider } from "@/store/context";
+import { makeStore } from "@/store/store";
 import App from "@/App";
 
 // Swatches live in a "Text color" group and are named by color, e.g. "black".
@@ -18,9 +20,11 @@ const swatch = (name: string) =>
 const setup = async () => {
   const user = userEvent.setup();
   const { container } = render(
-    <CanvasContextProvider>
-      <App />
-    </CanvasContextProvider>,
+    <Provider store={makeStore()}>
+      <CanvasContextProvider>
+        <App />
+      </CanvasContextProvider>
+    </Provider>,
   );
   const canvas = container.querySelector(".canvas-container") as HTMLElement;
   const addTextButton = screen.getByRole("button", { name: "text" });
