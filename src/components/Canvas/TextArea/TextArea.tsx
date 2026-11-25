@@ -7,7 +7,9 @@ import CanvasContext from "@/store/context";
 import useResize from "@/hooks/useResize";
 import useMove from "@/hooks/useMove";
 import ColorPalette from "@/components/Canvas/TextArea/ColorPalette/ColorPalette";
-import "./TextArea.scss";
+import Button from "@/components/ui/Button/Button";
+import clsx from "clsx";
+import "@/components/Canvas/TextArea/TextArea.scss";
 
 const TextArea = () => {
   const [isFocused, setIsFocused] = useState(true);
@@ -18,9 +20,9 @@ const TextArea = () => {
     textAreaRef,
     textAreaDivCloneRef,
   } = useContext(CanvasContext);
-  const resizeHandle = useRef<SVGSVGElement>(null);
+  const resizeHandle = useRef<HTMLButtonElement>(null);
   const wrapperRef = useRef<HTMLDivElement>(null);
-  const moveHandleRef = useRef<SVGSVGElement>(null);
+  const moveHandleRef = useRef<HTMLButtonElement>(null);
   const position = useMove(moveHandleRef);
   const size = useResize(resizeHandle, "textarea");
 
@@ -60,22 +62,38 @@ const TextArea = () => {
         transform: `translate(${position.x}px, ${position.y}px)`,
       }}
     >
-      <TrashIcon
-        className={`${
-          isFocused === true ? "icon--focused" : "icon"
-        } delete-icon`}
+      <Button
+        className={clsx(
+          isFocused === true ? "action-button--focused" : "action-button",
+          "delete-icon",
+        )}
         onClick={onTrashIconClick}
-      />
-      <Move
-        className={`${isFocused === true ? "icon--focused" : "icon"} move-icon`}
+        ariaLabel="delete textarea"
+      >
+        <TrashIcon />
+      </Button>
+      <Button
+        className={clsx(
+          isFocused === true ? "action-button--focused" : "action-button",
+          "move-icon",
+        )}
         ref={moveHandleRef}
-      />
-      <Atom
-        className={`${
-          isFocused === true ? "icon--focused" : "icon"
-        } resize-icon`}
+        ariaLabel="move textarea"
+      >
+        <Move />
+      </Button>
+
+      <Button
+        className={clsx(
+          isFocused === true ? "action-button--focused" : "action-button",
+          "resize-icon",
+        )}
         ref={resizeHandle}
-      />
+        ariaLabel="resize textarea"
+      >
+        <Atom />
+      </Button>
+
       <textarea
         className={`text-area${isFocused ? " text-area--focused" : ""}`}
         style={{
@@ -84,6 +102,7 @@ const TextArea = () => {
         }}
         placeholder="Type your text here"
         ref={textAreaRef}
+        aria-label="Type your text here"
       />
 
       <div

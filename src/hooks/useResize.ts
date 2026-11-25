@@ -18,7 +18,7 @@ const resize = (start: Size, dx: number, dy: number): Size => ({
 });
 
 const useResize = (
-  resizeHandle: RefObject<SVGSVGElement | null>,
+  resizeHandle: RefObject<HTMLButtonElement | null>,
   resizedElementType: "image" | "textarea",
 ) => useDrag(resizeHandle, INITIAL_SIZE[resizedElementType], resize);
 

@@ -1,10 +1,4 @@
-import { forwardRef } from "react";
-
-interface AtomProps {
-  className: string;
-}
-
-const Atom = forwardRef<SVGSVGElement, AtomProps>((props, ref) => {
+export default function Atom() {
   return (
     <svg
       width="24"
@@ -12,12 +6,9 @@ const Atom = forwardRef<SVGSVGElement, AtomProps>((props, ref) => {
       viewBox="0 0 24 24"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      className={props.className}
-      ref={ref}
+      aria-hidden="true"
     >
       <circle cx="12" cy="12" r="8" />
     </svg>
   );
-});
-
-export default Atom;
+}

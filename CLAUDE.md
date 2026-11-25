@@ -27,7 +27,7 @@ ESLint and type-checking also run inside Vite (`vite-plugin-eslint`, `vite-plugi
 
 - Prettier: double quotes, semicolons, trailing commas everywhere, 2-space indent, 80 cols. ESLint enforces double quotes and prettier formatting as errors.
 - Components are arrow functions with a default export; unused args must be prefixed with `_`.
-- Import from `src/` via the single `@/*` alias (e.g. `@/store/context`, `@/App`) rather than relative paths in TS; only same-folder `./` imports stay relative. ESLint resolves it through `eslint-import-resolver-typescript`. SCSS files use relative `@use "../../sassStyles/variables" as vars;` (and `mixins`).
+- All imports from `src/` use the `@/*` alias, never relative paths, including same-folder files and stylesheets (e.g. `@/App`, `@/components/Canvas/TextArea/TextArea.scss`). ESLint resolves it through `eslint-import-resolver-typescript`. SCSS files use relative `@use "../../sassStyles/variables" as vars;` (and `mixins`).
 - Each component lives in its own folder with a co-located `.scss` file imported as a plain side-effect import (`import "./X.scss"`) using BEM-ish global class names. `vite-plugin-sass-dts` generates `*.scss.d.ts` files (gitignored) — don't edit or commit them.
 
 ## Git

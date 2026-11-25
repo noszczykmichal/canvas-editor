@@ -1,4 +1,5 @@
 import { useContext } from "react";
+import clsx from "clsx";
 
 import CanvasContext from "@/store/context";
 import { textAreaFontColors } from "@/utils/config";
@@ -12,16 +13,18 @@ const ColorPalette = () => {
 
   return (
     <div className="color__palette">
-      {textAreaFontColors.map((color) => (
+      {textAreaFontColors.map(({ value, label }) => (
         <button
-          aria-label={`text ${color}`}
+          aria-label={`text ${label}`}
           type="button"
-          key={color}
-          className={`color__button${
-            textColor === color ? " color__button--focused" : ""
-          }`}
-          onClick={handleColorChange(color)}
-          style={{ backgroundColor: color }}
+          key={value}
+          className={clsx(
+            "color__button",
+            textColor === value && "color__button--focused",
+          )}
+          onClick={handleColorChange(value)}
+          style={{ backgroundColor: value }}
+          aria-pressed={textColor === value}
         />
       ))}
     </div>
