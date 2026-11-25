@@ -12,15 +12,15 @@ const ColorPalette = () => {
   };
 
   return (
-    <div className="color__palette">
+    <div className="color__palette" role="group" aria-label="Text color">
       {textAreaFontColors.map(({ value, label }) => (
         <button
-          aria-label={`text ${label}`}
+          aria-label={label}
           type="button"
           key={value}
           className={clsx(
             "color__button",
-            textColor === value && "color__button--focused",
+            textColor === value && "color__button--selected",
           )}
           onClick={handleColorChange(value)}
           style={{ backgroundColor: value }}

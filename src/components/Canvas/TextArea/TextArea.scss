@@ -23,6 +23,14 @@
     border: none;
     border-radius: 50%;
     z-index: 300;
+    cursor: pointer;
+
+    // Keyboard focus: purple ring with a white gap, visible on any background.
+    &:focus-visible {
+      outline: 2px solid vars.$primary-75;
+      outline-offset: 6px;
+      box-shadow: 0 0 0 6px white;
+    }
   }
 
   .delete-icon {
@@ -79,30 +87,42 @@
     }
   }
 
-  .text-area--focused {
+  // :focus-visible keeps the ring for keyboard focus even if the isFocused
+  // state is ever out of sync.
+  .text-area--focused,
+  .text-area:focus-visible {
     outline: 2px solid vars.$primary-75;
   }
 
   .color__palette {
     position: absolute;
-    bottom: -25px;
+    bottom: -32px;
     left: 0;
     display: flex;
     justify-content: center;
-    gap: 5px;
+    gap: 10px;
     margin-top: 10px;
 
     .color__button {
       width: 24px;
       height: 24px;
       border-radius: 50%;
-      border: none;
+      // Edge so light swatches (white) stay visible on light backgrounds.
+      // 45% black on white is ~3.4:1, above the WCAG 1.4.11 minimum of 3:1.
+      border: 1px solid rgba(0, 0, 0, 0.45);
       cursor: pointer;
+
+      // Keyboard focus, drawn outside the selection ring so both show.
+      &:focus-visible {
+        outline: 2px solid vars.$primary-75;
+        outline-offset: 4px;
+      }
     }
 
-    .color__button--focused {
-      outline: 2px solid white;
-      outline-offset: 2px;
+    // Selected color: white ring with a thin dark edge so it also shows on
+    // light backgrounds. Uses box-shadow to leave outline free for focus.
+    .color__button--selected {
+      box-shadow: 0 0 0 2px white, 0 0 0 3px rgba(0, 0, 0, 0.45);
     }
   }
 }
