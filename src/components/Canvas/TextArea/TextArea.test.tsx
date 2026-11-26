@@ -91,6 +91,14 @@ describe("TextArea", () => {
     expect(addTextButton).toBeEnabled();
   });
 
+  it("moves focus to the text control after being deleted", async () => {
+    const { user, addTextButton, deleteButton } = await setup();
+
+    await user.click(deleteButton);
+
+    expect(addTextButton).toHaveFocus();
+  });
+
   it("labels its action buttons and hides the icons from screen readers", async () => {
     const { deleteButton, moveButton, resizeButton } = await setup();
 

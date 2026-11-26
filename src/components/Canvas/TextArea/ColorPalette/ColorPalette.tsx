@@ -1,11 +1,12 @@
 import clsx from "clsx";
 
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
-import { selectTextColor, setTextColor } from "@/store/textColorSlice";
 import { textAreaFontColors } from "@/utils/config";
+import { uiSliceActions } from "@/store/uiSlice";
 
-const ColorPalette = () => {
-  const textColor = useAppSelector(selectTextColor);
+export default function ColorPalette() {
+  const textColor = useAppSelector((store) => store.ui.textColor);
+  const { setTextColor } = uiSliceActions;
   const dispatch = useAppDispatch();
 
   const handleColorChange = (color: string) => () => {
@@ -30,6 +31,4 @@ const ColorPalette = () => {
       ))}
     </div>
   );
-};
-
-export default ColorPalette;
+}

@@ -4,22 +4,25 @@ import useFocusBack from "@/hooks/useFocusBack";
 import CanvasContext from "@/store/context";
 import ImageBox from "@/components/Canvas/ImageBox/ImageBox";
 import TextArea from "@/components/Canvas/TextArea/TextArea";
+import { useAppSelector, useAppDispatch } from "@/store/hooks";
+import { uiSliceActions } from "@/store/uiSlice";
 import "./Canvas.scss";
 
-const Canvas = () => {
+export default function Canvas() {
   const {
     fileInputRef,
     canvasContainerRef,
-    backgroundImage,
-    setBackgroundImage,
     setIsBackdropOpen,
     isTextFieldAdded,
-    setImageBoxBackground,
-    imageBoxBackground,
   } = useContext(CanvasContext);
+  const { setBackgroundImage, setImageBoxBackground } = uiSliceActions;
+  const backgroundImage = useAppSelector((state) => state.ui.backgroundImage);
+  const imageBoxBackground = useAppSelector(
+    (state) => state.ui.imageBoxBackground,
+  );
+  const dispatch = useAppDispatch();
 
   const { handleFocusBack, addWindowListener } = useFocusBack();
-
   /* when the input is clicked programmatically, an event listener is added to the window object, as this is the only way to 
   determine if the user aborted adding the image; thanks to this, it is possible to close the overlay when the window object 
   regains focus  */
@@ -33,11 +36,11 @@ const Canvas = () => {
       const reader = new FileReader();
       reader.onload = (e) => {
         if (clickSource === "imageBox") {
-          setImageBoxBackground(e.target?.result as string);
+          dispatch(setImageBoxBackground(e.target?.result as string));
           return;
         }
 
-        setBackgroundImage(e.target?.result as string);
+        dispatch(setBackgroundImage(e.target?.result as string));
       };
       reader.readAsDataURL(file);
     }
@@ -79,6 +82,4 @@ const Canvas = () => {
       </div>
     </>
   );
-};
-
-export default Canvas;
+}

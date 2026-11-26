@@ -1,53 +1,87 @@
-import { useContext, useEffect, useRef } from "react";
+import clsx from "clsx";
 
 import TrashIcon from "@/icons/TrashIcon";
 import Atom from "@/icons/Atom";
 import Move from "@/icons/Move";
-import CanvasContext from "@/store/context";
-import useResize from "@/hooks/useResize";
-import useMove from "@/hooks/useMove";
+import Button from "@/components/ui/Button/Button";
+import { useAppSelector, useAppDispatch } from "@/store/hooks";
+import { uiSliceActions } from "@/store/uiSlice";
 import "./ImageBox.scss";
+import useCanvasBox from "@/hooks/useCanvasBox";
 
-const ImageBox = () => {
-  const { imageBoxBackground, setImageBoxBackground } =
-    useContext(CanvasContext);
-  const resizeHandle = useRef<SVGSVGElement | null>(null);
-  const size = useResize(resizeHandle, "image");
-  const wrapperRef = useRef<HTMLDivElement>(null);
-  const moveHandleRef = useRef<SVGSVGElement>(null);
-  const position = useMove(moveHandleRef);
-
-  useEffect(() => {
-    wrapperRef.current?.focus();
-  }, []);
+export default function ImageBox() {
+  const imageBoxBackground = useAppSelector(
+    (state) => state.ui.imageBoxBackground,
+  );
+  const {
+    isSelected,
+    resizeHandleRef,
+    size,
+    wrapperRef,
+    moveHandleRef,
+    position,
+    onWrapperBlur,
+    onWrapperFocus,
+  } = useCanvasBox("image");
+  const { setImageBoxBackground } = uiSliceActions;
+  const dispatch = useAppDispatch();
 
   const onTrashIconClick = () => {
-    setImageBoxBackground("");
+    dispatch(setImageBoxBackground(""));
   };
 
   return (
     <div
       className="wrapper"
-      tabIndex={-1}
       ref={wrapperRef}
+      onFocus={onWrapperFocus}
+      onBlur={onWrapperBlur}
       style={{
         width: size.width,
         height: size.height,
         transform: `translate(${position.x}px, ${position.y}px)`,
       }}
     >
-      <TrashIcon className="icon delete-icon" onClick={onTrashIconClick} />
-      <Move className="icon move-icon" ref={moveHandleRef} />
-      <Atom className="icon resize-icon" ref={resizeHandle} />
+      <Button
+        className={clsx(
+          isSelected ? "action-button--focused" : "action-button",
+          "delete-icon",
+        )}
+        onClick={onTrashIconClick}
+        ariaLabel="Delete Image"
+      >
+        <TrashIcon />
+      </Button>
+      <Button
+        className={clsx(
+          isSelected ? "action-button--focused" : "action-button",
+          "move-icon",
+        )}
+        ref={moveHandleRef}
+        ariaLabel="Move Image"
+      >
+        <Move />
+      </Button>
+      <Button
+        className={clsx(
+          isSelected ? "action-button--focused" : "action-button",
+          "resize-icon",
+        )}
+        ref={resizeHandleRef}
+        ariaLabel="Resize Image"
+      >
+        <Atom />
+      </Button>
 
       <img
         src={imageBoxBackground}
-        className="image-content"
+        className={clsx(
+          "image-content",
+          isSelected && "image-content--selected",
+        )}
         style={{ width: size.width, height: size.height }}
         alt=""
       />
     </div>
   );
-};
-
-export default ImageBox;
+}

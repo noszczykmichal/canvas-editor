@@ -2,16 +2,18 @@ import { useContext } from "react";
 
 import CanvasContext from "@/store/context";
 import RefreshIcon from "@/icons/RefreshIcon";
+import { useAppSelector } from "@/store/hooks";
 import "./ResetButton.scss";
 
-const ResetButton = () => {
-  const {
-    isTextFieldAdded,
-    imageBoxBackground,
-    backgroundImage,
-    setIsBackdropOpen,
-    setIsModalOpen,
-  } = useContext(CanvasContext);
+export default function ResetButton() {
+  const { isTextFieldAdded, setIsBackdropOpen, setIsModalOpen } =
+    useContext(CanvasContext);
+
+  const imageBoxBackground = useAppSelector(
+    (state) => state.ui.imageBoxBackground,
+  );
+
+  const backgroundImage = useAppSelector((state) => state.ui.backgroundImage);
 
   const onResetButtonClick = () => {
     setIsBackdropOpen(true);
@@ -35,6 +37,4 @@ const ResetButton = () => {
       <RefreshIcon />
     </button>
   );
-};
-
-export default ResetButton;
+}

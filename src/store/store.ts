@@ -1,8 +1,8 @@
 import { combineSlices, configureStore } from "@reduxjs/toolkit";
 
-import textColorSlice from "@/store/textColorSlice";
+import uiSlice from "@/store/uiSlice";
 
-const rootReducer = combineSlices(textColorSlice);
+const rootReducer = combineSlices(uiSlice);
 
 export type RootState = ReturnType<typeof rootReducer>;
 

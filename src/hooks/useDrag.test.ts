@@ -5,7 +5,7 @@ import useMove from "@/hooks/useMove";
 import useResize from "@/hooks/useResize";
 
 const createHandle = () => {
-  const handle = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+  const handle = document.createElement("button");
   // jsdom doesn't implement pointer capture.
   handle.setPointerCapture = () => {};
   document.body.appendChild(handle);

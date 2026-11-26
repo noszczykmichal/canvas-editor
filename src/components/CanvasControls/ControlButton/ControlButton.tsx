@@ -1,19 +1,24 @@
-import { FC, useContext } from "react";
+import { useContext } from "react";
 
 import { ControlData } from "@/utils/types";
 import ControlIcon from "@/components/CanvasControls/ControlButton/ControlIcon/ControlIcon";
 import CanvasContext from "@/store/context";
+import { useAppSelector } from "@/store/hooks";
 import "./ControlButton.scss";
 
-const ControlButton: FC<ControlData> = ({ label, icon }) => {
+export default function ControlButton({ label, icon }: ControlData) {
   const {
     fileInputRef,
     isTextFieldAdded,
-    imageBoxBackground,
-    backgroundImage,
+    addTextButtonRef,
     setIsBackdropOpen,
     setIsTextFieldAdded,
   } = useContext(CanvasContext);
+
+  const backgroundImage = useAppSelector((state) => state.ui.backgroundImage);
+  const imageBoxBackground = useAppSelector(
+    (state) => state.ui.imageBoxBackground,
+  );
 
   const textAreaHandler = () => {
     setIsTextFieldAdded(true);
@@ -54,6 +59,8 @@ const ControlButton: FC<ControlData> = ({ label, icon }) => {
     <button
       type="button"
       className="control-button"
+      // TextArea moves focus here after it is deleted.
+      ref={icon === "textArea" ? addTextButtonRef : undefined}
       onClick={onClickHandler}
       disabled={isDisabled}
     >
@@ -61,6 +68,4 @@ const ControlButton: FC<ControlData> = ({ label, icon }) => {
       {label}
     </button>
   );
-};
-
-export default ControlButton;
+}

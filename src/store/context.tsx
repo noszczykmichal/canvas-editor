@@ -13,19 +13,19 @@ interface CanvasContextProps {
   canvasContainerRef: RefObject<HTMLDivElement | null>;
   textAreaRef: RefObject<HTMLTextAreaElement | null>;
   textAreaDivCloneRef: RefObject<HTMLDivElement | null>;
-  backgroundImage: string;
+  addTextButtonRef: RefObject<HTMLButtonElement | null>;
+  // backgroundImage: string;
   isBackdropOpen: boolean;
   isModalOpen: boolean;
   isTextFieldAdded: boolean;
-  imageBoxBackground: string;
 }
 
 interface CanvasContextActions {
-  setBackgroundImage: (url: string) => void;
+  // setBackgroundImage: (url: string) => void;
   setIsBackdropOpen: (val: boolean) => void;
   setIsModalOpen: (val: boolean) => void;
   setIsTextFieldAdded: (val: boolean) => void;
-  setImageBoxBackground: (val: string) => void;
+  // setImageBoxBackground: (val: string) => void;
 }
 
 const CanvasContext = createContext<CanvasContextProps & CanvasContextActions>({
@@ -33,16 +33,17 @@ const CanvasContext = createContext<CanvasContextProps & CanvasContextActions>({
   canvasContainerRef: { current: null } as RefObject<HTMLDivElement | null>,
   textAreaRef: { current: null } as RefObject<HTMLTextAreaElement | null>,
   textAreaDivCloneRef: { current: null } as RefObject<HTMLDivElement | null>,
-  backgroundImage: "",
+  addTextButtonRef: { current: null } as RefObject<HTMLButtonElement | null>,
+  // backgroundImage: "",
   isBackdropOpen: false,
   isModalOpen: false,
   isTextFieldAdded: false,
-  imageBoxBackground: "",
-  setBackgroundImage: (_txt: string) => {},
+  // imageBoxBackground: "",
+  // setBackgroundImage: (_txt: string) => {},
   setIsBackdropOpen: () => {},
   setIsModalOpen: () => {},
   setIsTextFieldAdded: () => {},
-  setImageBoxBackground: () => {},
+  // setImageBoxBackground: () => {},
 });
 
 interface CanvasContextProviderProps {
@@ -56,11 +57,12 @@ export const CanvasContextProvider: FC<CanvasContextProviderProps> = ({
   const canvasContainerRef = useRef<HTMLDivElement>(null);
   const textAreaRef = useRef<HTMLTextAreaElement>(null);
   const textAreaDivCloneRef = useRef<HTMLDivElement>(null);
-  const [backgroundImage, setBackgroundImage] = useState("");
+  const addTextButtonRef = useRef<HTMLButtonElement>(null);
+  // const [backgroundImage, setBackgroundImage] = useState("");
   const [isBackdropOpen, setIsBackdropOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isTextFieldAdded, setIsTextFieldAdded] = useState(false);
-  const [imageBoxBackground, setImageBoxBackground] = useState("");
+  // const [imageBoxBackground, setImageBoxBackground] = useState("");
 
   const context = useMemo(
     () => ({
@@ -68,22 +70,23 @@ export const CanvasContextProvider: FC<CanvasContextProviderProps> = ({
       canvasContainerRef,
       textAreaRef,
       textAreaDivCloneRef,
-      backgroundImage,
+      addTextButtonRef,
+      // backgroundImage,
       isBackdropOpen,
       isModalOpen,
       isTextFieldAdded,
-      imageBoxBackground,
-      setBackgroundImage,
+      // imageBoxBackground,
+      // setBackgroundImage,
       setIsBackdropOpen,
       setIsModalOpen,
       setIsTextFieldAdded,
-      setImageBoxBackground,
+      // setImageBoxBackground,
     }),
     [
-      backgroundImage,
+      // backgroundImage,
       canvasContainerRef,
       fileInputRef,
-      imageBoxBackground,
+      // imageBoxBackground,
       isBackdropOpen,
       isModalOpen,
       isTextFieldAdded,
