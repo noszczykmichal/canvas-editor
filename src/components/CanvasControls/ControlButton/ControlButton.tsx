@@ -1,6 +1,6 @@
-import { useContext } from "react";
+import { RefObject, useContext } from "react";
 
-import { ControlData } from "@/utils/types";
+import type { ControlData, ControlsIcons } from "@/utils/types";
 import ControlIcon from "@/components/CanvasControls/ControlButton/ControlIcon/ControlIcon";
 import CanvasContext from "@/store/context";
 import { useAppSelector } from "@/store/hooks";
@@ -11,6 +11,7 @@ export default function ControlButton({ label, icon }: ControlData) {
     fileInputRef,
     isTextFieldAdded,
     addTextButtonRef,
+    addImageButtonRef,
     setIsBackdropOpen,
     setIsTextFieldAdded,
   } = useContext(CanvasContext);
@@ -36,33 +37,40 @@ export default function ControlButton({ label, icon }: ControlData) {
     fileInputRef?.current?.setAttribute("data-source", "background");
   };
 
-  let onClickHandler;
-  if (icon === "textArea") {
-    onClickHandler = textAreaHandler;
-  } else if (icon === "image") {
-    onClickHandler = imageHandler;
-  } else {
-    onClickHandler = backgroundHandler;
-  }
-
-  let isDisabled;
-
-  if (icon === "textArea") {
-    isDisabled = isTextFieldAdded;
-  } else if (icon === "image") {
-    isDisabled = !!imageBoxBackground;
-  } else {
-    isDisabled = !!backgroundImage;
-  }
+  // Each control is disabled while its element is on the canvas. TextArea and
+  // ImageBox focus their control through the ref after being deleted.
+  const controls: Record<
+    ControlsIcons,
+    {
+      onClick: () => void;
+      isDisabled: boolean;
+      ref?: RefObject<HTMLButtonElement | null>;
+    }
+  > = {
+    textArea: {
+      onClick: textAreaHandler,
+      isDisabled: isTextFieldAdded,
+      ref: addTextButtonRef,
+    },
+    image: {
+      onClick: imageHandler,
+      isDisabled: !!imageBoxBackground,
+      ref: addImageButtonRef,
+    },
+    background: {
+      onClick: backgroundHandler,
+      isDisabled: !!backgroundImage,
+    },
+  };
+  const control = controls[icon];
 
   return (
     <button
       type="button"
       className="control-button"
-      // TextArea moves focus here after it is deleted.
-      ref={icon === "textArea" ? addTextButtonRef : undefined}
-      onClick={onClickHandler}
-      disabled={isDisabled}
+      ref={control.ref}
+      onClick={control.onClick}
+      disabled={control.isDisabled}
     >
       <ControlIcon iconType={icon} />
       {label}

@@ -1,4 +1,6 @@
+import { useContext } from "react";
 import clsx from "clsx";
+import { flushSync } from "react-dom";
 
 import TrashIcon from "@/icons/TrashIcon";
 import Atom from "@/icons/Atom";
@@ -6,10 +8,12 @@ import Move from "@/icons/Move";
 import Button from "@/components/ui/Button/Button";
 import { useAppSelector, useAppDispatch } from "@/store/hooks";
 import { uiSliceActions } from "@/store/uiSlice";
+import CanvasContext from "@/store/context";
 import "./ImageBox.scss";
 import useCanvasBox from "@/hooks/useCanvasBox";
 
 export default function ImageBox() {
+  const { addImageButtonRef } = useContext(CanvasContext);
   const imageBoxBackground = useAppSelector(
     (state) => state.ui.imageBoxBackground,
   );
@@ -27,7 +31,8 @@ export default function ImageBox() {
   const dispatch = useAppDispatch();
 
   const onTrashIconClick = () => {
-    dispatch(setImageBoxBackground(""));
+    flushSync(() => dispatch(setImageBoxBackground("")));
+    addImageButtonRef.current?.focus();
   };
 
   return (
