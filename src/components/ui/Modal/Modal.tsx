@@ -4,6 +4,8 @@ import { CSSTransition } from "react-transition-group";
 import CanvasContext from "@/store/context";
 import Warning from "@/icons/Warning";
 import CloseIcon from "@/icons/CloseIcon";
+import { uiSliceActions } from "@/store/uiSlice";
+import { useAppDispatch } from "@/store/hooks";
 import "./Modal.scss";
 
 const Modal = () => {
@@ -11,11 +13,11 @@ const Modal = () => {
     isModalOpen,
     setIsBackdropOpen,
     setIsModalOpen,
-    setBackgroundImage,
     setIsTextFieldAdded,
-    setImageBoxBackground,
   } = useContext(CanvasContext);
   const nodeRef = useRef(null);
+  const { setBackgroundImage, setImageBoxBackground } = uiSliceActions;
+  const dispatch = useAppDispatch();
 
   const onCancelHandler = () => {
     setIsBackdropOpen(false);
@@ -24,8 +26,8 @@ const Modal = () => {
 
   const onResetHandler = () => {
     setIsTextFieldAdded(false);
-    setImageBoxBackground("");
-    setBackgroundImage("");
+    dispatch(setImageBoxBackground(""));
+    dispatch(setBackgroundImage(""));
     onCancelHandler();
   };
 

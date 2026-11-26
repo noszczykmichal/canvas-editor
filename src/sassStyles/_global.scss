@@ -1,3 +1,5 @@
+@use "./variables" as vars;
+
 * {
   box-sizing: border-box;
 }
@@ -17,4 +19,64 @@ body {
   height: 100vh;
   width: 100vw;
   display: flex;
+}
+
+/* Resize boxes */
+
+.action-button {
+  display: none;
+}
+
+.action-button--focused {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: white;
+  height: 28px;
+  width: 28px;
+  padding: 2px;
+  border: none;
+  border-radius: 50%;
+  z-index: 300;
+  cursor: pointer;
+
+  // Keyboard focus: purple ring with a white gap, visible on any background.
+  &:focus-visible {
+    outline: 2px solid vars.$primary-75;
+    outline-offset: 6px;
+    box-shadow: 0 0 0 6px white;
+  }
+}
+
+.delete-icon {
+  top: -12px;
+  right: -12px;
+
+  svg {
+    height: 20px;
+    width: 20px;
+    fill: vars.$red-100;
+  }
+}
+
+.move-icon {
+  top: -12px;
+  left: -12px;
+
+  svg {
+    height: 28px;
+    width: 28px;
+    fill: vars.$primary-75;
+  }
+}
+
+.resize-icon {
+  bottom: -8px;
+  right: -10px;
+  cursor: nwse-resize;
+
+  svg {
+    fill: vars.$primary-75;
+  }
 }

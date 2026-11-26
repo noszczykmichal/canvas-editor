@@ -1,93 +1,71 @@
-import { useState, useRef, useContext, useEffect } from "react";
+import { useContext } from "react";
+import { flushSync } from "react-dom";
 
 import TrashIcon from "@/icons/TrashIcon";
 import Atom from "@/icons/Atom";
 import Move from "@/icons/Move";
 import CanvasContext from "@/store/context";
-import useResize from "@/hooks/useResize";
-import useMove from "@/hooks/useMove";
+import { useAppSelector } from "@/store/hooks";
 import ColorPalette from "@/components/Canvas/TextArea/ColorPalette/ColorPalette";
-import "./TextArea.scss";
+import Button from "@/components/ui/Button/Button";
+import clsx from "clsx";
+import useCanvasBox from "@/hooks/useCanvasBox";
+import "@/components/Canvas/TextArea/TextArea.scss";
 
-const TextArea = () => {
-  const [isFocused, setIsFocused] = useState(true);
+export default function TextArea() {
+  const textColor = useAppSelector((state) => state.ui.textColor);
   const {
     setIsTextFieldAdded,
-    textColor,
-    canvasContainerRef,
     textAreaRef,
     textAreaDivCloneRef,
+    addTextButtonRef,
   } = useContext(CanvasContext);
-  const resizeHandle = useRef<SVGSVGElement>(null);
-  const wrapperRef = useRef<HTMLDivElement>(null);
-  const moveHandleRef = useRef<SVGSVGElement>(null);
-  const position = useMove(moveHandleRef);
-  const size = useResize(resizeHandle, "textarea");
+  const {
+    wrapperRef,
+    onWrapperBlur,
+    onWrapperFocus,
+    size,
+    position,
+    isSelected,
+    moveHandleRef,
+    resizeHandleRef,
+  } = useCanvasBox("textarea");
 
-  const handleBlurAndFocus = (event: MouseEvent) => {
-    if (
-      wrapperRef.current &&
-      !wrapperRef.current.contains(event.target as Node)
-    ) {
-      setIsFocused(false);
-      return;
-    }
-    setIsFocused(true);
-  };
-
-  useEffect(() => {
-    const canvasContainer = canvasContainerRef?.current;
-
-    if (!canvasContainer) return undefined;
-
-    canvasContainer.addEventListener("mousedown", handleBlurAndFocus);
-
-    return () =>
-      canvasContainer?.removeEventListener("mousedown", handleBlurAndFocus);
-  }, [canvasContainerRef]);
-
+  // The focused delete button disappears with the text box, which would drop
+  // focus to <body>. Hand it to the "text" control instead. flushSync applies
+  // the state change right away: the control is disabled until then, and a
+  // disabled button can't take focus.
   const onTrashIconClick = () => {
-    setIsTextFieldAdded(false);
+    flushSync(() => setIsTextFieldAdded(false));
+    addTextButtonRef.current?.focus();
   };
 
   return (
     <div
       className="wrapper"
       ref={wrapperRef}
+      onFocus={onWrapperFocus}
+      onBlur={onWrapperBlur}
       style={{
         width: size.width,
         height: size.height,
         transform: `translate(${position.x}px, ${position.y}px)`,
       }}
     >
-      <TrashIcon
-        className={`${
-          isFocused === true ? "icon--focused" : "icon"
-        } delete-icon`}
-        onClick={onTrashIconClick}
-      />
-      <Move
-        className={`${isFocused === true ? "icon--focused" : "icon"} move-icon`}
-        ref={moveHandleRef}
-      />
-      <Atom
-        className={`${
-          isFocused === true ? "icon--focused" : "icon"
-        } resize-icon`}
-        ref={resizeHandle}
-      />
+      {/* The text field comes first so Tab moves from it to its actions. */}
       <textarea
-        className={`text-area${isFocused ? " text-area--focused" : ""}`}
+        className={`text-area${isSelected ? " text-area--focused" : ""}`}
         style={{
           color: `${textColor}`,
           fontSize: `${Math.max(32, size.height * 0.2)}px`,
         }}
         placeholder="Type your text here"
         ref={textAreaRef}
+        aria-label="Type your text here"
       />
 
       <div
-        className={`text-area${isFocused ? " text-area--focused" : ""}`}
+        className={`text-area${isSelected ? " text-area--focused" : ""}`}
         style={{
           color: `${textColor}`,
           fontSize: `${Math.max(32, size.height * 0.2)}px`,
@@ -95,9 +73,40 @@ const TextArea = () => {
         }}
         ref={textAreaDivCloneRef}
       />
-      {isFocused && <ColorPalette />}
+
+      <Button
+        className={clsx(
+          isSelected ? "action-button--focused" : "action-button",
+          "delete-icon",
+        )}
+        onClick={onTrashIconClick}
+        ariaLabel="Delete text box"
+      >
+        <TrashIcon />
+      </Button>
+      <Button
+        className={clsx(
+          isSelected ? "action-button--focused" : "action-button",
+          "move-icon",
+        )}
+        ref={moveHandleRef}
+        ariaLabel="Move text box"
+      >
+        <Move />
+      </Button>
+
+      <Button
+        className={clsx(
+          isSelected ? "action-button--focused" : "action-button",
+          "resize-icon",
+        )}
+        ref={resizeHandleRef}
+        ariaLabel="Resize text box"
+      >
+        <Atom />
+      </Button>
+
+      {isSelected && <ColorPalette />}
     </div>
   );
-};
-
-export default TextArea;
+}

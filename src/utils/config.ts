@@ -1,11 +1,11 @@
 import { ControlData } from "@/utils/types";
 
 export const textAreaFontColors = [
-  "#353535",
-  "#FFFFFF",
-  "#cb0000",
-  "#0055ff",
-  "#00DA16",
+  { value: "#353535", label: "black" },
+  { value: "#FFFFFF", label: "white" },
+  { value: "#cb0000", label: "red" },
+  { value: "#0055ff", label: "blue" },
+  { value: "#00DA16", label: "green" },
 ];
 
 export const controlsConfig: ControlData[] = [

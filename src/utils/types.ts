@@ -8,4 +8,4 @@ export interface SVGPropsInterface {
   classNames: string;
 }
 
-export type WrapperContentType = "text" | "image";
+export type CanvasBoxType = "image" | "textarea";

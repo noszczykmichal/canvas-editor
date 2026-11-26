@@ -9,7 +9,7 @@ const move = (start: Position, dx: number, dy: number): Position => ({
   y: start.y + dy,
 });
 
-const useMove = (moveHandle: RefObject<SVGSVGElement | null>) =>
+const useMove = (moveHandle: RefObject<HTMLButtonElement | null>) =>
   useDrag(moveHandle, { x: 0, y: 0 }, move);
 
 export default useMove;

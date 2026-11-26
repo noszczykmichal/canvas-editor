@@ -6,24 +6,28 @@ import ResetButton from "@/components/CanvasControls/ResetButton/ResetButton";
 import Controls from "@/components/CanvasControls/Controls/Controls";
 import CanvasContext from "@/store/context";
 import useFocusBack from "@/hooks/useFocusBack";
+import { useAppSelector } from "@/store/hooks";
 import "./CanvasControls.scss";
 
-const CanvasControls = () => {
+export default function CanvasControls() {
   const {
     isTextFieldAdded,
-    imageBoxBackground,
-    backgroundImage,
     canvasContainerRef,
     textAreaRef,
     textAreaDivCloneRef,
   } = useContext(CanvasContext);
+
+  const { addWindowListener, handleFocusBack } = useFocusBack();
+  const imageBoxBackground = useAppSelector(
+    (state) => state.ui.imageBoxBackground,
+  );
+  const backgroundImage = useAppSelector((state) => state.ui.backgroundImage);
+
   const isExportDisabled = !(
     isTextFieldAdded ||
     !!imageBoxBackground ||
     !!backgroundImage
   );
-  const { addWindowListener, handleFocusBack } = useFocusBack();
-
   const saveImage = async (blob: Blob) => {
     try {
       /* If the 'showSaveFilePicker' method on window object does not exist than fallback will download to the standard system location */
@@ -136,6 +140,4 @@ const CanvasControls = () => {
       </button>
     </div>
   );
-};
-
-export default CanvasControls;
+}

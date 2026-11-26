@@ -1,6 +1,7 @@
 import { RefObject } from "react";
 
 import useDrag from "@/hooks/useDrag";
+import type { CanvasBoxType } from "@/utils/types";
 
 type Size = { width: number; height: number };
 
@@ -18,8 +19,8 @@ const resize = (start: Size, dx: number, dy: number): Size => ({
 });
 
 const useResize = (
-  resizeHandle: RefObject<SVGSVGElement | null>,
-  resizedElementType: "image" | "textarea",
+  resizeHandle: RefObject<HTMLButtonElement | null>,
+  resizedElementType: CanvasBoxType,
 ) => useDrag(resizeHandle, INITIAL_SIZE[resizedElementType], resize);
 
 export default useResize;
