@@ -15,6 +15,9 @@ Package manager is **pnpm**.
 - `pnpm run build` — `tsc` type-check, then `vite build` into `build/` (not `dist/`)
 - `pnpm run serve` — preview the production build
 - `pnpm run lint` / `pnpm run lint:fix` — ESLint (airbnb + airbnb-typescript + prettier)
+- `pnpm run typecheck` — `tsc --noEmit`
+
+CI ([.github/workflows/ci.yml](.github/workflows/ci.yml)) runs lint, typecheck, tests and build on every PR to `main` and every push to `main`. PRs then deploy to a temporary Firebase preview channel (URL posted as a PR comment); pushes to `main` deploy to the live site. Both deploys use the `FIREBASE_SERVICE_ACCOUNT_CANVAS_EDITOR_44294` repository secret, created by `firebase init hosting:github`.
 
 - `pnpm test` — Vitest in watch mode; `pnpm run test:run` for a single run
 - Single file / single test: `pnpm exec vitest run src/App.test.tsx` / `pnpm exec vitest run -t "test name"`
