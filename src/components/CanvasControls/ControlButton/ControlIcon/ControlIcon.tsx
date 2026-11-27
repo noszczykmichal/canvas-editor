@@ -1,5 +1,3 @@
-import { FC } from "react";
-
 import { ControlsIcons } from "@/utils/types";
 import TextIcon from "@/icons/TextIcon";
 import ImageField from "@/icons/ImageField";
@@ -10,7 +8,7 @@ interface ControlIconProps {
   iconType: ControlsIcons;
 }
 
-const ControlIcon: FC<ControlIconProps> = ({ iconType }) => {
+export default function ControlIcon({ iconType }: ControlIconProps) {
   let content;
 
   switch (iconType) {
@@ -28,6 +26,4 @@ const ControlIcon: FC<ControlIconProps> = ({ iconType }) => {
   }
 
   return content;
-};
-
-export default ControlIcon;
+}

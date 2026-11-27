@@ -2,7 +2,7 @@ import { useContext } from "react";
 
 import CanvasContext from "@/store/context";
 
-const useFocusBack = () => {
+export default function useFocusBack() {
   const { setIsBackdropOpen } = useContext(CanvasContext);
 
   const handleFocusBack = () => {
@@ -16,6 +16,4 @@ const useFocusBack = () => {
   };
 
   return { handleFocusBack, addWindowListener };
-};
-
-export default useFocusBack;
+}

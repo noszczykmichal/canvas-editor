@@ -1,11 +1,11 @@
-import { FC, ReactNode } from "react";
+import { ReactNode } from "react";
 import { createPortal } from "react-dom";
 
 import Backdrop from "@/components/ui/Backdrop/Backdrop";
 import Modal from "@/components/ui/Modal/Modal";
 import "@/components/Layout/Layout.scss";
 
-const Layout: FC<{ children: ReactNode }> = ({ children }) => {
+export default function Layout({ children }: { children: ReactNode }) {
   return (
     <>
       {createPortal(
@@ -15,6 +15,4 @@ const Layout: FC<{ children: ReactNode }> = ({ children }) => {
       <main>{children}</main>
     </>
   );
-};
-
-export default Layout;
+}
