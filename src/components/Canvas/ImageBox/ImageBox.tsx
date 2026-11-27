@@ -1,16 +1,16 @@
 import { useContext } from "react";
-import clsx from "clsx";
 import { flushSync } from "react-dom";
+import clsx from "clsx";
 
 import TrashIcon from "@/icons/TrashIcon";
 import Atom from "@/icons/Atom";
 import Move from "@/icons/Move";
 import Button from "@/components/ui/Button/Button";
+import CanvasContext from "@/store/context";
 import { useAppSelector, useAppDispatch } from "@/store/hooks";
 import { uiSliceActions } from "@/store/uiSlice";
-import CanvasContext from "@/store/context";
-import "@/components/Canvas/ImageBox/ImageBox.scss";
 import useCanvasBox from "@/hooks/useCanvasBox";
+import "@/components/Canvas/ImageBox/ImageBox.scss";
 
 export default function ImageBox() {
   const { addImageButtonRef } = useContext(CanvasContext);
@@ -49,31 +49,31 @@ export default function ImageBox() {
     >
       <Button
         className={clsx(
-          isSelected ? "action-button--focused" : "action-button",
           "delete-icon",
+          isSelected ? "action-button--focused" : "action-button",
         )}
         onClick={onTrashIconClick}
-        ariaLabel="Delete Image"
+        ariaLabel="Delete image box"
       >
         <TrashIcon />
       </Button>
       <Button
         className={clsx(
-          isSelected ? "action-button--focused" : "action-button",
           "move-icon",
+          isSelected ? "action-button--focused" : "action-button",
         )}
         ref={moveHandleRef}
-        ariaLabel="Move Image"
+        ariaLabel="Move image box"
       >
         <Move />
       </Button>
       <Button
         className={clsx(
-          isSelected ? "action-button--focused" : "action-button",
           "resize-icon",
+          isSelected ? "action-button--focused" : "action-button",
         )}
         ref={resizeHandleRef}
-        ariaLabel="Resize Image"
+        ariaLabel="Resize image box"
       >
         <Atom />
       </Button>
