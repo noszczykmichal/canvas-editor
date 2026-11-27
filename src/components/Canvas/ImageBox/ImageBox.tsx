@@ -9,7 +9,7 @@ import Button from "@/components/ui/Button/Button";
 import { useAppSelector, useAppDispatch } from "@/store/hooks";
 import { uiSliceActions } from "@/store/uiSlice";
 import CanvasContext from "@/store/context";
-import "./ImageBox.scss";
+import "@/components/Canvas/ImageBox/ImageBox.scss";
 import useCanvasBox from "@/hooks/useCanvasBox";
 
 export default function ImageBox() {

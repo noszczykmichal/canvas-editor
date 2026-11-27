@@ -6,7 +6,7 @@ import Warning from "@/icons/Warning";
 import CloseIcon from "@/icons/CloseIcon";
 import { uiSliceActions } from "@/store/uiSlice";
 import { useAppDispatch } from "@/store/hooks";
-import "./Modal.scss";
+import "@/components/ui/Modal/Modal.scss";
 
 const Modal = () => {
   const {

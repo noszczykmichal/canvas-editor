@@ -4,7 +4,7 @@ import { useContext, useRef } from "react";
 import { CSSTransition } from "react-transition-group";
 
 import CanvasContext from "@/store/context";
-import "./Backdrop.scss";
+import "@/components/ui/Backdrop/Backdrop.scss";
 
 const Backdrop = () => {
   const { isBackdropOpen, setIsBackdropOpen, setIsModalOpen } =

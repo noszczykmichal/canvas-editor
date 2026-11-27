@@ -4,7 +4,7 @@ import { ControlsIcons } from "@/utils/types";
 import TextIcon from "@/icons/TextIcon";
 import ImageField from "@/icons/ImageField";
 import BackgroundImage from "@/icons/BackgroundImage";
-import "./ControlIcon.scss";
+import "@/components/CanvasControls/ControlButton/ControlIcon/ControlIcon.scss";
 
 interface ControlIconProps {
   iconType: ControlsIcons;

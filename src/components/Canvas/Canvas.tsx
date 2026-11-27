@@ -6,7 +6,7 @@ import ImageBox from "@/components/Canvas/ImageBox/ImageBox";
 import TextArea from "@/components/Canvas/TextArea/TextArea";
 import { useAppSelector, useAppDispatch } from "@/store/hooks";
 import { uiSliceActions } from "@/store/uiSlice";
-import "./Canvas.scss";
+import "@/components/Canvas/Canvas.scss";
 
 export default function Canvas() {
   const {
