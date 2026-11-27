@@ -1,6 +1,5 @@
 import {
   createContext,
-  FC,
   ReactNode,
   useState,
   RefObject,
@@ -45,9 +44,9 @@ interface CanvasContextProviderProps {
   children: ReactNode;
 }
 
-export const CanvasContextProvider: FC<CanvasContextProviderProps> = ({
+export function CanvasContextProvider({
   children,
-}) => {
+}: CanvasContextProviderProps) {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const canvasContainerRef = useRef<HTMLDivElement>(null);
   const textAreaRef = useRef<HTMLTextAreaElement>(null);
@@ -85,6 +84,6 @@ export const CanvasContextProvider: FC<CanvasContextProviderProps> = ({
   return (
     <CanvasContext.Provider value={context}>{children}</CanvasContext.Provider>
   );
-};
+}
 
 export default CanvasContext;

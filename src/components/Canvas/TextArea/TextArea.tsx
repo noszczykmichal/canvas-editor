@@ -1,14 +1,14 @@
 import { useContext } from "react";
 import { flushSync } from "react-dom";
+import clsx from "clsx";
 
 import TrashIcon from "@/icons/TrashIcon";
 import Atom from "@/icons/Atom";
 import Move from "@/icons/Move";
-import CanvasContext from "@/store/context";
-import { useAppSelector } from "@/store/hooks";
 import ColorPalette from "@/components/Canvas/TextArea/ColorPalette/ColorPalette";
 import Button from "@/components/ui/Button/Button";
-import clsx from "clsx";
+import CanvasContext from "@/store/context";
+import { useAppSelector } from "@/store/hooks";
 import useCanvasBox from "@/hooks/useCanvasBox";
 import "@/components/Canvas/TextArea/TextArea.scss";
 
@@ -54,9 +54,9 @@ export default function TextArea() {
     >
       {/* The text field comes first so Tab moves from it to its actions. */}
       <textarea
-        className={`text-area${isSelected ? " text-area--focused" : ""}`}
+        className={clsx("text-area", isSelected && "text-area--selected")}
         style={{
-          color: `${textColor}`,
+          color: textColor,
           fontSize: `${Math.max(32, size.height * 0.2)}px`,
         }}
         placeholder="Type your text here"
@@ -65,9 +65,9 @@ export default function TextArea() {
       />
 
       <div
-        className={`text-area${isSelected ? " text-area--focused" : ""}`}
+        className={clsx("text-area", isSelected && "text-area--selected")}
         style={{
-          color: `${textColor}`,
+          color: textColor,
           fontSize: `${Math.max(32, size.height * 0.2)}px`,
           display: "none",
         }}
@@ -76,8 +76,8 @@ export default function TextArea() {
 
       <Button
         className={clsx(
-          isSelected ? "action-button--focused" : "action-button",
           "delete-icon",
+          isSelected ? "action-button--selected" : "action-button",
         )}
         onClick={onTrashIconClick}
         ariaLabel="Delete text box"
@@ -86,19 +86,18 @@ export default function TextArea() {
       </Button>
       <Button
         className={clsx(
-          isSelected ? "action-button--focused" : "action-button",
           "move-icon",
+          isSelected ? "action-button--selected" : "action-button",
         )}
         ref={moveHandleRef}
         ariaLabel="Move text box"
       >
         <Move />
       </Button>
-
       <Button
         className={clsx(
-          isSelected ? "action-button--focused" : "action-button",
           "resize-icon",
+          isSelected ? "action-button--selected" : "action-button",
         )}
         ref={resizeHandleRef}
         ariaLabel="Resize text box"

@@ -1,8 +1,8 @@
 import { controlsConfig } from "@/utils/config";
 import ControlButton from "@/components/CanvasControls/ControlButton/ControlButton";
-import "./Controls.scss";
+import "@/components/CanvasControls/Controls/Controls.scss";
 
-const Controls = () => {
+export default function Controls() {
   return (
     <div className="controls">
       {controlsConfig.map((button) => (
@@ -14,6 +14,4 @@ const Controls = () => {
       ))}
     </div>
   );
-};
-
-export default Controls;
+}

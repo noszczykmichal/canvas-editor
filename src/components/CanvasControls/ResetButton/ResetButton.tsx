@@ -3,7 +3,7 @@ import { useContext } from "react";
 import CanvasContext from "@/store/context";
 import RefreshIcon from "@/icons/RefreshIcon";
 import { useAppSelector } from "@/store/hooks";
-import "./ResetButton.scss";
+import "@/components/CanvasControls/ResetButton/ResetButton.scss";
 
 export default function ResetButton() {
   const { isTextFieldAdded, setIsBackdropOpen, setIsModalOpen } =

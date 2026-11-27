@@ -18,9 +18,9 @@ const resize = (start: Size, dx: number, dy: number): Size => ({
   height: Math.max(MIN_HEIGHT, start.height + dy),
 });
 
-const useResize = (
+export default function useResize(
   resizeHandle: RefObject<HTMLButtonElement | null>,
   resizedElementType: CanvasBoxType,
-) => useDrag(resizeHandle, INITIAL_SIZE[resizedElementType], resize);
-
-export default useResize;
+) {
+  return useDrag(resizeHandle, INITIAL_SIZE[resizedElementType], resize);
+}

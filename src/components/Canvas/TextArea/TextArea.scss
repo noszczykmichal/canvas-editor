@@ -31,7 +31,7 @@
 
   // :focus-visible keeps the ring for keyboard focus even if the isSelected
   // state is ever out of sync.
-  .text-area--focused,
+  .text-area--selected,
   .text-area:focus-visible {
     outline: 2px solid vars.$primary-75;
   }

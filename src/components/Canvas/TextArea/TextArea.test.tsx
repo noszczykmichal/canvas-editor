@@ -53,7 +53,7 @@ const setup = async () => {
 // jsdom, so visibility is checked through the class).
 const expectControlsShown = (...buttons: HTMLElement[]) => {
   buttons.forEach((button) =>
-    expect(button).toHaveClass("action-button--focused"),
+    expect(button).toHaveClass("action-button--selected"),
   );
   expect(within(queryPalette()!).getAllByRole("button")).toHaveLength(5);
 };
@@ -61,7 +61,7 @@ const expectControlsShown = (...buttons: HTMLElement[]) => {
 const expectControlsHidden = (...buttons: HTMLElement[]) => {
   buttons.forEach((button) => {
     expect(button).toHaveClass("action-button");
-    expect(button).not.toHaveClass("action-button--focused");
+    expect(button).not.toHaveClass("action-button--selected");
   });
   expect(queryPalette()).not.toBeInTheDocument();
 };
@@ -111,18 +111,18 @@ describe("TextArea", () => {
     });
   });
 
-  describe("focus", () => {
-    it("starts focused, with its controls shown", async () => {
+  describe("selection", () => {
+    it("starts selected, with its controls shown", async () => {
       const { textArea, deleteButton, moveButton, resizeButton } =
         await setup();
 
-      expect(textArea).toHaveClass("text-area text-area--focused", {
+      expect(textArea).toHaveClass("text-area text-area--selected", {
         exact: true,
       });
       expectControlsShown(deleteButton, moveButton, resizeButton);
     });
 
-    it("unfocuses on mousedown elsewhere in the canvas and refocuses on mousedown inside", async () => {
+    it("is deselected on mousedown elsewhere and selected again on mousedown inside", async () => {
       const { canvas, textArea, deleteButton, moveButton } = await setup();
 
       fireEvent.mouseDown(canvas);
@@ -132,7 +132,7 @@ describe("TextArea", () => {
 
       fireEvent.mouseDown(textArea);
 
-      expect(textArea).toHaveClass("text-area--focused");
+      expect(textArea).toHaveClass("text-area--selected");
       expectControlsShown(deleteButton, moveButton);
     });
 
@@ -191,13 +191,14 @@ describe("TextArea", () => {
       expectControlsShown(deleteButton, moveButton);
     });
 
-    it("removes its canvas mousedown listener when removed", async () => {
-      const { user, canvas, deleteButton } = await setup();
-      const removeSpy = vi.spyOn(canvas, "removeEventListener");
+    it("removes its window mousedown listener when removed", async () => {
+      const { user, deleteButton } = await setup();
+      const removeSpy = vi.spyOn(window, "removeEventListener");
 
       await user.click(deleteButton);
 
       expect(removeSpy).toHaveBeenCalledWith("mousedown", expect.any(Function));
+      removeSpy.mockRestore();
     });
   });
 

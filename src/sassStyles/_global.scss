@@ -23,11 +23,16 @@ body {
 
 /* Resize boxes */
 
+// Inactive boxes hide their buttons visually but keep them focusable, so
+// Tab can still reach the box and select it again (display: none would
+// take them out of the tab order).
 .action-button {
-  display: none;
+  opacity: 0;
+  pointer-events: none;
 }
 
-.action-button--focused {
+.action-button,
+.action-button--selected {
   position: absolute;
   display: flex;
   align-items: center;

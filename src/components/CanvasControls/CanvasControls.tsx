@@ -7,7 +7,7 @@ import Controls from "@/components/CanvasControls/Controls/Controls";
 import CanvasContext from "@/store/context";
 import useFocusBack from "@/hooks/useFocusBack";
 import { useAppSelector } from "@/store/hooks";
-import "./CanvasControls.scss";
+import "@/components/CanvasControls/CanvasControls.scss";
 
 export default function CanvasControls() {
   const {

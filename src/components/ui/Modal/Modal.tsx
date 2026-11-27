@@ -6,9 +6,9 @@ import Warning from "@/icons/Warning";
 import CloseIcon from "@/icons/CloseIcon";
 import { uiSliceActions } from "@/store/uiSlice";
 import { useAppDispatch } from "@/store/hooks";
-import "./Modal.scss";
+import "@/components/ui/Modal/Modal.scss";
 
-const Modal = () => {
+export default function Modal() {
   const {
     isModalOpen,
     setIsBackdropOpen,
@@ -76,6 +76,4 @@ const Modal = () => {
       </div>
     </CSSTransition>
   );
-};
-
-export default Modal;
+}

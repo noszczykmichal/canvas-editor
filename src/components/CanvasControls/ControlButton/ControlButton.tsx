@@ -4,7 +4,7 @@ import type { ControlData, ControlsIcons } from "@/utils/types";
 import ControlIcon from "@/components/CanvasControls/ControlButton/ControlIcon/ControlIcon";
 import CanvasContext from "@/store/context";
 import { useAppSelector } from "@/store/hooks";
-import "./ControlButton.scss";
+import "@/components/CanvasControls/ControlButton/ControlButton.scss";
 
 export default function ControlButton({ label, icon }: ControlData) {
   const {

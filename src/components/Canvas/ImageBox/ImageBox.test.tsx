@@ -12,7 +12,7 @@ import App from "@/App";
 // to the "image" control in the sidebar.
 const setup = () => {
   const user = userEvent.setup();
-  render(
+  const { container } = render(
     <Provider
       store={makeStore({
         ui: {
@@ -30,6 +30,7 @@ const setup = () => {
 
   return {
     user,
+    canvas: container.querySelector(".canvas-container") as HTMLElement,
     addImageButton: screen.getByRole("button", { name: "image" }),
     deleteButton: screen.getByRole("button", { name: /delete image/i }),
   };
@@ -50,5 +51,22 @@ describe("ImageBox", () => {
     expect(deleteButton).not.toBeInTheDocument();
     expect(addImageButton).toBeEnabled();
     expect(addImageButton).toHaveFocus();
+  });
+
+  // jsdom doesn't load SCSS, so this covers the selection logic only. The
+  // buttons must also stay focusable in CSS (no display: none) while hidden.
+  it("is selected again when Tab reaches it after being deselected", async () => {
+    const { user, canvas, deleteButton } = setup();
+
+    await user.pointer({ keys: "[MouseLeft]", target: canvas });
+    expect(deleteButton).not.toHaveClass("action-button--selected");
+
+    for (let i = 0; i < 20 && document.activeElement !== deleteButton; i += 1) {
+      // eslint-disable-next-line no-await-in-loop
+      await user.tab();
+    }
+
+    expect(deleteButton).toHaveFocus();
+    expect(deleteButton).toHaveClass("action-button--selected");
   });
 });
