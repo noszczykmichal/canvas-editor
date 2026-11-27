@@ -54,7 +54,7 @@ export default function TextArea() {
     >
       {/* The text field comes first so Tab moves from it to its actions. */}
       <textarea
-        className={clsx("text-area", isSelected && "text-area--focused")}
+        className={clsx("text-area", isSelected && "text-area--selected")}
         style={{
           color: textColor,
           fontSize: `${Math.max(32, size.height * 0.2)}px`,
@@ -65,7 +65,7 @@ export default function TextArea() {
       />
 
       <div
-        className={clsx("text-area", isSelected && "text-area--focused")}
+        className={clsx("text-area", isSelected && "text-area--selected")}
         style={{
           color: textColor,
           fontSize: `${Math.max(32, size.height * 0.2)}px`,
@@ -77,7 +77,7 @@ export default function TextArea() {
       <Button
         className={clsx(
           "delete-icon",
-          isSelected ? "action-button--focused" : "action-button",
+          isSelected ? "action-button--selected" : "action-button",
         )}
         onClick={onTrashIconClick}
         ariaLabel="Delete text box"
@@ -87,7 +87,7 @@ export default function TextArea() {
       <Button
         className={clsx(
           "move-icon",
-          isSelected ? "action-button--focused" : "action-button",
+          isSelected ? "action-button--selected" : "action-button",
         )}
         ref={moveHandleRef}
         ariaLabel="Move text box"
@@ -97,7 +97,7 @@ export default function TextArea() {
       <Button
         className={clsx(
           "resize-icon",
-          isSelected ? "action-button--focused" : "action-button",
+          isSelected ? "action-button--selected" : "action-button",
         )}
         ref={resizeHandleRef}
         ariaLabel="Resize text box"

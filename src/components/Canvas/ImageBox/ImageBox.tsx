@@ -50,7 +50,7 @@ export default function ImageBox() {
       <Button
         className={clsx(
           "delete-icon",
-          isSelected ? "action-button--focused" : "action-button",
+          isSelected ? "action-button--selected" : "action-button",
         )}
         onClick={onTrashIconClick}
         ariaLabel="Delete image box"
@@ -60,7 +60,7 @@ export default function ImageBox() {
       <Button
         className={clsx(
           "move-icon",
-          isSelected ? "action-button--focused" : "action-button",
+          isSelected ? "action-button--selected" : "action-button",
         )}
         ref={moveHandleRef}
         ariaLabel="Move image box"
@@ -70,7 +70,7 @@ export default function ImageBox() {
       <Button
         className={clsx(
           "resize-icon",
-          isSelected ? "action-button--focused" : "action-button",
+          isSelected ? "action-button--selected" : "action-button",
         )}
         ref={resizeHandleRef}
         ariaLabel="Resize image box"

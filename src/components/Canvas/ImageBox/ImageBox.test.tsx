@@ -59,7 +59,7 @@ describe("ImageBox", () => {
     const { user, canvas, deleteButton } = setup();
 
     await user.pointer({ keys: "[MouseLeft]", target: canvas });
-    expect(deleteButton).not.toHaveClass("action-button--focused");
+    expect(deleteButton).not.toHaveClass("action-button--selected");
 
     for (let i = 0; i < 20 && document.activeElement !== deleteButton; i += 1) {
       // eslint-disable-next-line no-await-in-loop
@@ -67,6 +67,6 @@ describe("ImageBox", () => {
     }
 
     expect(deleteButton).toHaveFocus();
-    expect(deleteButton).toHaveClass("action-button--focused");
+    expect(deleteButton).toHaveClass("action-button--selected");
   });
 });
