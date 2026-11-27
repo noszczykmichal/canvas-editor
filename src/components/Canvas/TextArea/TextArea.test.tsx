@@ -191,13 +191,14 @@ describe("TextArea", () => {
       expectControlsShown(deleteButton, moveButton);
     });
 
-    it("removes its canvas mousedown listener when removed", async () => {
-      const { user, canvas, deleteButton } = await setup();
-      const removeSpy = vi.spyOn(canvas, "removeEventListener");
+    it("removes its window mousedown listener when removed", async () => {
+      const { user, deleteButton } = await setup();
+      const removeSpy = vi.spyOn(window, "removeEventListener");
 
       await user.click(deleteButton);
 
       expect(removeSpy).toHaveBeenCalledWith("mousedown", expect.any(Function));
+      removeSpy.mockRestore();
     });
   });
 
