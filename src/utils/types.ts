@@ -5,7 +5,7 @@ export interface ControlData {
 }
 
 export interface SVGPropsInterface {
-  classNames: string;
+  className: string;
 }
 
 export type CanvasBoxType = "image" | "textarea";

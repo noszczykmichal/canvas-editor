@@ -13,13 +13,13 @@ export default function ControlIcon({ iconType }: ControlIconProps) {
 
   switch (iconType) {
     case "textArea":
-      content = <TextIcon classNames="control-svg" />;
+      content = <TextIcon className="control-svg" />;
       break;
     case "image":
-      content = <ImageField classNames="control-svg" />;
+      content = <ImageField className="control-svg" />;
       break;
     case "background":
-      content = <BackgroundImage classNames="control-svg" />;
+      content = <BackgroundImage className="control-svg" />;
       break;
     default:
       content = null;
