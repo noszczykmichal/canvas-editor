@@ -19,6 +19,9 @@ const setup = () => {
           textColor: "#353535",
           backgroundImage: "",
           imageBoxBackground: "data:image/png;base64,AAAA",
+          isTextFieldAdded: false,
+          isBackdropOpen: false,
+          isModalOpen: false,
         },
       })}
     >

@@ -3,36 +3,34 @@ import { RefObject, useContext } from "react";
 import type { ControlData, ControlsIcons } from "@/utils/types";
 import ControlIcon from "@/components/CanvasControls/ControlButton/ControlIcon/ControlIcon";
 import CanvasContext from "@/store/context";
-import { useAppSelector } from "@/store/hooks";
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
+import { uiSliceActions } from "@/store/uiSlice";
 import "@/components/CanvasControls/ControlButton/ControlButton.scss";
 
 export default function ControlButton({ label, icon }: ControlData) {
-  const {
-    fileInputRef,
-    isTextFieldAdded,
-    addTextButtonRef,
-    addImageButtonRef,
-    setIsBackdropOpen,
-    setIsTextFieldAdded,
-  } = useContext(CanvasContext);
+  const { fileInputRef, addTextButtonRef, addImageButtonRef } =
+    useContext(CanvasContext);
+  const { setIsBackdropOpen, setIsTextFieldAdded } = uiSliceActions;
+  const dispatch = useAppDispatch();
 
+  const isTextFieldAdded = useAppSelector((state) => state.ui.isTextFieldAdded);
   const backgroundImage = useAppSelector((state) => state.ui.backgroundImage);
   const imageBoxBackground = useAppSelector(
     (state) => state.ui.imageBoxBackground,
   );
 
   const textAreaHandler = () => {
-    setIsTextFieldAdded(true);
+    dispatch(setIsTextFieldAdded(true));
   };
 
   const imageHandler = () => {
-    setIsBackdropOpen(true);
+    dispatch(setIsBackdropOpen(true));
     fileInputRef?.current?.click();
     fileInputRef?.current?.setAttribute("data-source", "imageBox");
   };
 
   const backgroundHandler = () => {
-    setIsBackdropOpen(true);
+    dispatch(setIsBackdropOpen(true));
     fileInputRef?.current?.click();
     fileInputRef?.current?.setAttribute("data-source", "background");
   };

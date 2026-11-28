@@ -1,31 +1,31 @@
-import { useContext, useRef } from "react";
+import { useRef } from "react";
 import { CSSTransition } from "react-transition-group";
 
-import CanvasContext from "@/store/context";
 import Warning from "@/icons/Warning";
 import CloseIcon from "@/icons/CloseIcon";
 import { uiSliceActions } from "@/store/uiSlice";
-import { useAppDispatch } from "@/store/hooks";
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import "@/components/ui/Modal/Modal.scss";
 
 export default function Modal() {
+  const isModalOpen = useAppSelector((state) => state.ui.isModalOpen);
+  const nodeRef = useRef(null);
   const {
-    isModalOpen,
+    setBackgroundImage,
+    setImageBoxBackground,
     setIsBackdropOpen,
     setIsModalOpen,
     setIsTextFieldAdded,
-  } = useContext(CanvasContext);
-  const nodeRef = useRef(null);
-  const { setBackgroundImage, setImageBoxBackground } = uiSliceActions;
+  } = uiSliceActions;
   const dispatch = useAppDispatch();
 
   const onCancelHandler = () => {
-    setIsBackdropOpen(false);
-    setIsModalOpen(false);
+    dispatch(setIsBackdropOpen(false));
+    dispatch(setIsModalOpen(false));
   };
 
   const onResetHandler = () => {
-    setIsTextFieldAdded(false);
+    dispatch(setIsTextFieldAdded(false));
     dispatch(setImageBoxBackground(""));
     dispatch(setBackgroundImage(""));
     onCancelHandler();

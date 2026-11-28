@@ -1,12 +1,8 @@
-import {
-  createContext,
-  ReactNode,
-  useState,
-  RefObject,
-  useMemo,
-  useRef,
-} from "react";
+import { createContext, ReactNode, RefObject, useMemo, useRef } from "react";
 
+// Shared DOM refs only. UI state lives in Redux (uiSlice): refs aren't
+// serializable, and keeping state out of here means the context value never
+// changes, so reading a ref never re-renders a component.
 interface CanvasContextProps {
   fileInputRef: RefObject<HTMLInputElement | null>;
   canvasContainerRef: RefObject<HTMLDivElement | null>;
@@ -14,30 +10,15 @@ interface CanvasContextProps {
   textAreaDivCloneRef: RefObject<HTMLDivElement | null>;
   addTextButtonRef: RefObject<HTMLButtonElement | null>;
   addImageButtonRef: RefObject<HTMLButtonElement | null>;
-  isBackdropOpen: boolean;
-  isModalOpen: boolean;
-  isTextFieldAdded: boolean;
 }
 
-interface CanvasContextActions {
-  setIsBackdropOpen: (val: boolean) => void;
-  setIsModalOpen: (val: boolean) => void;
-  setIsTextFieldAdded: (val: boolean) => void;
-}
-
-const CanvasContext = createContext<CanvasContextProps & CanvasContextActions>({
+const CanvasContext = createContext<CanvasContextProps>({
   fileInputRef: { current: null } as RefObject<HTMLInputElement | null>,
   canvasContainerRef: { current: null } as RefObject<HTMLDivElement | null>,
   textAreaRef: { current: null } as RefObject<HTMLTextAreaElement | null>,
   textAreaDivCloneRef: { current: null } as RefObject<HTMLDivElement | null>,
   addTextButtonRef: { current: null } as RefObject<HTMLButtonElement | null>,
   addImageButtonRef: { current: null } as RefObject<HTMLButtonElement | null>,
-  isBackdropOpen: false,
-  isModalOpen: false,
-  isTextFieldAdded: false,
-  setIsBackdropOpen: () => {},
-  setIsModalOpen: () => {},
-  setIsTextFieldAdded: () => {},
 });
 
 interface CanvasContextProviderProps {
@@ -53,9 +34,6 @@ export function CanvasContextProvider({
   const textAreaDivCloneRef = useRef<HTMLDivElement>(null);
   const addTextButtonRef = useRef<HTMLButtonElement>(null);
   const addImageButtonRef = useRef<HTMLButtonElement>(null);
-  const [isBackdropOpen, setIsBackdropOpen] = useState(false);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isTextFieldAdded, setIsTextFieldAdded] = useState(false);
 
   const context = useMemo(
     () => ({
@@ -65,20 +43,8 @@ export function CanvasContextProvider({
       textAreaDivCloneRef,
       addTextButtonRef,
       addImageButtonRef,
-      isBackdropOpen,
-      isModalOpen,
-      isTextFieldAdded,
-      setIsBackdropOpen,
-      setIsModalOpen,
-      setIsTextFieldAdded,
     }),
-    [
-      canvasContainerRef,
-      fileInputRef,
-      isBackdropOpen,
-      isModalOpen,
-      isTextFieldAdded,
-    ],
+    [],
   );
 
   return (

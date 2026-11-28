@@ -10,14 +10,11 @@ import { useAppSelector } from "@/store/hooks";
 import "@/components/CanvasControls/CanvasControls.scss";
 
 export default function CanvasControls() {
-  const {
-    isTextFieldAdded,
-    canvasContainerRef,
-    textAreaRef,
-    textAreaDivCloneRef,
-  } = useContext(CanvasContext);
+  const { canvasContainerRef, textAreaRef, textAreaDivCloneRef } =
+    useContext(CanvasContext);
 
   const { addWindowListener, handleFocusBack } = useFocusBack();
+  const isTextFieldAdded = useAppSelector((state) => state.ui.isTextFieldAdded);
   const imageBoxBackground = useAppSelector(
     (state) => state.ui.imageBoxBackground,
   );

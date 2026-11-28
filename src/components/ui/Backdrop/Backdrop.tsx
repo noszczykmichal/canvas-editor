@@ -1,19 +1,21 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-import { useContext, useRef } from "react";
+import { useRef } from "react";
 import { CSSTransition } from "react-transition-group";
 
-import CanvasContext from "@/store/context";
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
+import { uiSliceActions } from "@/store/uiSlice";
 import "@/components/ui/Backdrop/Backdrop.scss";
 
 export default function Backdrop() {
-  const { isBackdropOpen, setIsBackdropOpen, setIsModalOpen } =
-    useContext(CanvasContext);
+  const isBackdropOpen = useAppSelector((state) => state.ui.isBackdropOpen);
+  const { setIsBackdropOpen, setIsModalOpen } = uiSliceActions;
+  const dispatch = useAppDispatch();
   const nodeRef = useRef<HTMLDivElement>(null);
 
   const onBackdropClick = () => {
-    setIsBackdropOpen(false);
-    setIsModalOpen(false);
+    dispatch(setIsBackdropOpen(false));
+    dispatch(setIsModalOpen(false));
   };
 
   return (

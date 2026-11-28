@@ -8,18 +8,17 @@ import Move from "@/icons/Move";
 import ColorPalette from "@/components/Canvas/TextArea/ColorPalette/ColorPalette";
 import Button from "@/components/ui/Button/Button";
 import CanvasContext from "@/store/context";
-import { useAppSelector } from "@/store/hooks";
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
+import { uiSliceActions } from "@/store/uiSlice";
 import useCanvasBox from "@/hooks/useCanvasBox";
 import "@/components/Canvas/TextArea/TextArea.scss";
 
 export default function TextArea() {
   const textColor = useAppSelector((state) => state.ui.textColor);
-  const {
-    setIsTextFieldAdded,
-    textAreaRef,
-    textAreaDivCloneRef,
-    addTextButtonRef,
-  } = useContext(CanvasContext);
+  const { textAreaRef, textAreaDivCloneRef, addTextButtonRef } =
+    useContext(CanvasContext);
+  const { setIsTextFieldAdded } = uiSliceActions;
+  const dispatch = useAppDispatch();
   const {
     wrapperRef,
     onWrapperBlur,
@@ -36,7 +35,7 @@ export default function TextArea() {
   // the state change right away: the control is disabled until then, and a
   // disabled button can't take focus.
   const onTrashIconClick = () => {
-    flushSync(() => setIsTextFieldAdded(false));
+    flushSync(() => dispatch(setIsTextFieldAdded(false)));
     addTextButtonRef.current?.focus();
   };
 

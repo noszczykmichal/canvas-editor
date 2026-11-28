@@ -9,13 +9,10 @@ import { uiSliceActions } from "@/store/uiSlice";
 import "@/components/Canvas/Canvas.scss";
 
 export default function Canvas() {
-  const {
-    fileInputRef,
-    canvasContainerRef,
-    setIsBackdropOpen,
-    isTextFieldAdded,
-  } = useContext(CanvasContext);
-  const { setBackgroundImage, setImageBoxBackground } = uiSliceActions;
+  const { fileInputRef, canvasContainerRef } = useContext(CanvasContext);
+  const { setBackgroundImage, setImageBoxBackground, setIsBackdropOpen } =
+    uiSliceActions;
+  const isTextFieldAdded = useAppSelector((state) => state.ui.isTextFieldAdded);
   const backgroundImage = useAppSelector((state) => state.ui.backgroundImage);
   const imageBoxBackground = useAppSelector(
     (state) => state.ui.imageBoxBackground,
@@ -49,10 +46,10 @@ export default function Canvas() {
   useEffect(() => {
     if (fileInputRef.current) {
       fileInputRef.current?.addEventListener("focusout", () =>
-        setIsBackdropOpen(false),
+        dispatch(setIsBackdropOpen(false)),
       );
     }
-  }, [setIsBackdropOpen, fileInputRef]);
+  }, [dispatch, setIsBackdropOpen, fileInputRef]);
 
   return (
     <>

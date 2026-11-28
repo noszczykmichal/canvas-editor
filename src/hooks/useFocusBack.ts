@@ -1,17 +1,17 @@
-import { useContext } from "react";
-
-import CanvasContext from "@/store/context";
+import { useAppDispatch } from "@/store/hooks";
+import { uiSliceActions } from "@/store/uiSlice";
 
 export default function useFocusBack() {
-  const { setIsBackdropOpen } = useContext(CanvasContext);
+  const dispatch = useAppDispatch();
+  const { setIsBackdropOpen } = uiSliceActions;
 
   const handleFocusBack = () => {
-    setIsBackdropOpen(false);
+    dispatch(setIsBackdropOpen(false));
     window.removeEventListener("focus", handleFocusBack);
   };
 
   const addWindowListener = () => {
-    setIsBackdropOpen(true);
+    dispatch(setIsBackdropOpen(true));
     window.addEventListener("focus", handleFocusBack);
   };
 
